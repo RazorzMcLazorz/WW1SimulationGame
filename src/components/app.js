@@ -6,8 +6,8 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        <h1>{this.props.testValue}</h1>
-        <h2>React Redux Router</h2>
+        <h2>Welcome to Mr. Harrison's</h2>
+        <h1>WW1 Simulation Game</h1>
       </div>
     );
   }
