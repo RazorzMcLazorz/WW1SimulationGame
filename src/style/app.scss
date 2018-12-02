@@ -5,4 +5,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        width: 120px;
+        background-color: whitesmoke;
+        border-radius: 10px;
+        outline: none;
+        text-decoration: none;
+        color: black;
+    }
+    .buttons:hover {
+        background-color: rgb(182, 182, 182);
+        cursor:pointer;
+    }
+    #newGame {
+        margin-bottom: 25px;
+    }
+    #loadGame {
+        border-radius: 10px;
+    }
 }
