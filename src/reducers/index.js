@@ -3,7 +3,14 @@ import { ADD_ARTICLE, CHANGE_STATE } from "./constants/action-types";
 
 // Redux Store
 const initialState = {
-
+    countryBoard : {
+        'G' : 1,
+        'R' : 2,
+        'F' : 3,
+        'A' : 4,
+        'O' : 5,
+        'I' : 6,
+    }
 }
 
 const rootReducer = (state = initialState, action) => {

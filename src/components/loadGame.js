@@ -5,11 +5,22 @@ import Footer from './footer';
 
 class LoadGame extends Component {
 
+    gameCodeLoad() {
+        let code = `${document.getElementById('loadcode').value}`;
+        console.log(`code entered: ${code}`);
+        code = code.split('');
+        console.log(`whats in the array: ${code}`);
+        console.log(`length of array is: ${code.length}`);
+    }
+
   render() {
     return (
       <div className='loadGame'>
         <div>
-            
+            <input id="loadcode"></input>
+            <button onClick={() => this.gameCodeLoad()}>
+                grab info
+            </button>
         </div>
         <Footer />
       </div>
