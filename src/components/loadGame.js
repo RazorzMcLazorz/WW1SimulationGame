@@ -18,12 +18,15 @@ class LoadGame extends Component {
     return (
       <div className='loadGame'>
         <div>
+          Enter code given when you saved the game
+          <div>
             <input id="loadcode"></input>
             <button onClick={() => this.gameCodeLoad()}>
                 <Link to="/game">
                   grab info
                 </Link>
             </button>
+          </div>
         </div>
         <Footer />
       </div>
