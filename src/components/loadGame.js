@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../reducers/actions';
 import Footer from './footer';
+import { Link } from 'react-router-dom';
 
 class LoadGame extends Component {
 
@@ -19,7 +20,7 @@ class LoadGame extends Component {
         <div>
             <input id="loadcode"></input>
             <button onClick={() => this.gameCodeLoad()}>
-                <Link to="/new">
+                <Link to="/game">
                   grab info
                 </Link>
             </button>

@@ -20,7 +20,7 @@ class App extends Component {
       <div className='app'>
         <h2>Welcome to Mr. Harrison's</h2>
         <h1>WW1 Simulation Game</h1>
-            <Link to="/" className="buttons" id="newGame" onClick={() => this.newGame()}>
+            <Link to="/game" className="buttons" id="newGame" onClick={() => this.newGame()}>
                 {ContainedButtons('New Game')}
             </Link>
             <Link to="/load" className="buttons" id="loadGame" onClick={() => this.loadGame()}>
