@@ -10,17 +10,13 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 45px;
-        width: 120px;
-        background-color: whitesmoke;
-        border-radius: 10px;
         outline: none;
         text-decoration: none;
-        color: black;
     }
     .buttons:hover {
-        background-color: rgb(182, 182, 182);
         cursor:pointer;
+        outline: none;
+        text-decoration: none;
     }
     #newGame {
         margin-bottom: 25px;

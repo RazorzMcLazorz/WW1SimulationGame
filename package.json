@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/bottega-code-school/js-builder",
   "dependencies": {
+    "@material-ui/core": "^3.6.2",
     "ajv": "^5.5.2",
     "autoprefixer": "^9.1.0",
     "babel-cli": "^6.26.0",

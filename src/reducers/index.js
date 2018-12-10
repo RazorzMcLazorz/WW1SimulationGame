@@ -10,9 +10,16 @@ const initialState = {
         'A' : 4,
         'O' : 5,
         'I' : 6,
+    },
+    countryPoints : {
+      'G' : 1500,
+      'R' : 1400,
+      'F' : 1300,
+      'A' : 1200,
+      'O' : 1100,
+      'I' : 1000,
     }
 }
-
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
       case ADD_ARTICLE:

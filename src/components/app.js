@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../reducers/actions';
 import Footer from './footer';
 import { Link } from 'react-router-dom';
+import ContainedButtons from '../components/button';
 
 class App extends Component {
 
@@ -20,10 +21,10 @@ class App extends Component {
         <h2>Welcome to Mr. Harrison's</h2>
         <h1>WW1 Simulation Game</h1>
             <Link to="/" className="buttons" id="newGame" onClick={() => this.newGame()}>
-                New Game
+                {ContainedButtons('New Game')}
             </Link>
             <Link to="/load" className="buttons" id="loadGame" onClick={() => this.loadGame()}>
-                Load Game
+                {ContainedButtons('Load Game')}
             </Link>
             <Footer />
       </div>
