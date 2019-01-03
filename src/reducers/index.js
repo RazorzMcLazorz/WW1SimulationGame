@@ -3,6 +3,7 @@ import { ADD_ARTICLE, CHANGE_STATE } from "./constants/action-types";
 
 // Redux Store
 const initialState = {
+// the base values are default in new games
     countryBoard : {
         'G' : 1,
         'R' : 2,
@@ -18,7 +19,14 @@ const initialState = {
       'A' : 1200,
       'O' : 1100,
       'I' : 1000,
-    }
+    },
+// the country array collects who is part of each country
+    germany: [],
+    russia: [],
+    france: [],
+    austria: [],
+    ottoman : [],
+    italy: [],
 }
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {

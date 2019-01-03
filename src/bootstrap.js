@@ -8,6 +8,7 @@ import reducers from './reducers';
 import App from './components/app';
 import LoadGame from './components/loadGame';
 import Game from './components/game';
+import New from './components/newGame';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
@@ -22,7 +23,8 @@ function main() {
             <Route exact path="/" component={App} />
             <Route exact path="/load" component={LoadGame} />
             <Route exact path="/game" component={Game} />
-        </Switch>
+            <Route exact path="/new" component={New}/>
+         </Switch>
       </BrowserRouter>
     </Provider>
     , document.querySelector('.app-wrapper'));

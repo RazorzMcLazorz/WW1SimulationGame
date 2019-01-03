@@ -1,0 +1,15 @@
+.saveButtonBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
+  border-color: white;
+  background-color: white;
+  text-decoration: none;
+  outline: none;
+  .saveButton {
+    font-size: 25px;
+  }
+}
+.saveButtonBox:hover {
+  background-color: whitesmoke;
+}

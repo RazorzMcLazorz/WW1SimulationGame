@@ -9,14 +9,17 @@ class Game extends Component {
   render() {
     return (
       <div>
-
+        <div>
+          
+        </div>
+        <Footer />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-    return state
+  return state
 }
 
 Game = connect(mapStateToProps, actions)(Game);
