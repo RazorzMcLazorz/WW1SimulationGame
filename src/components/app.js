@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../reducers/actions';
-import Footer from './footer';
+import Footer from './parts/footer';
 import { Link } from 'react-router-dom';
-import ContainedButtons from '../components/button';
+import ContainedButtons from '../components/parts/button';
 
 class App extends Component {
 

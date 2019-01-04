@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../reducers/actions';
-import Footer from './footer';
+import Footer from './parts/footer';
 import { Link } from 'react-router-dom';
 
 class Game extends Component {

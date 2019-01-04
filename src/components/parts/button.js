@@ -7,6 +7,7 @@ import { WithStyles, createStyles } from '@material-ui/core';
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
+    color: '#2a5aa8'
   },
   input: {
     display: 'none',
