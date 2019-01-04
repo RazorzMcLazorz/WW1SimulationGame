@@ -11,8 +11,15 @@ class New extends Component {
   }
 
   saveValue(country) {
-    this.setState({ saved : 'saved ' + country + ' // ' + document.getElementById(country).value});
+    let x = document.getElementById(country).value;
+    this.setState({ saved : 'saved ' + country + ' // ' + x});
     console.log(country);
+    let a = this.props.countryPlayers;
+    a[country] = x;
+    a[country] = a[country].split(" ");
+    console.log(a[country]);
+    this.props.changeState({ countryPlayers : a });
+    console.log(this.props.countryPlayers[country] + ' ' + this.props.countryPlayers[country][0]);
   }
 
   render() {
@@ -25,7 +32,7 @@ class New extends Component {
               Add Each Player to their specific country
             </div>
             <div>
-              Seperate each name with a comma: ,
+              Seperate each name with a "space"
             </div>
             <div>
               {this.state.saved}
