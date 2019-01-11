@@ -9,6 +9,7 @@ import App from './components/app';
 import LoadGame from './components/loadGame';
 import Game from './components/game';
 import New from './components/newGame';
+import Login from './components/login';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
@@ -24,6 +25,7 @@ function main() {
             <Route exact path="/load" component={LoadGame} />
             <Route exact path="/game" component={Game} />
             <Route exact path="/new" component={New}/>
+            <Route exact path="/login" component={Login}/>
          </Switch>
       </BrowserRouter>
     </Provider>
