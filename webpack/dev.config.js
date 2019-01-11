@@ -12,6 +12,10 @@ const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlug
 
 module.exports = webpackMerge(webpackCommon, {
 
+  node: {
+    fs: 'empty'
+  },
+
   devtool: 'inline-source-map',
   mode: 'development',
   output: {
