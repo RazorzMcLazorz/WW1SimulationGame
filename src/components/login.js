@@ -5,17 +5,19 @@ import Footer from './parts/footer';
 import { Link } from 'react-router-dom';
 import ContainedButtons from '../components/parts/button';
 
+const link = 'https://ww1simdatabase.herokuapp.com';
+// const link = 'http://localhost:5000';
+
 class Login extends Component {
 
   state = {
     mysqlDB : [],
     user : {
       user_id: '',
-      user_fname: '',
-      user_lname: '',
+      user_username: '',
       user_password: '',
-      user_code: '',
-      user_username: ''
+      user_fname: '',
+      user_lname: ''
     }
   }
 
@@ -24,20 +26,20 @@ class Login extends Component {
   }
 
   getProducts = _ => {
-    fetch('https://ww1simdb.herokuapp.com/user')
+    fetch(`${link}/user`)
     .then(response => response.json())
     .then(response => this.setState({ mysqlDB : response.data }))
     .catch(err => console.error(err))
   }
 
-  addProduct = _ => {
-    const { product } = this.state;
-    fetch(`https://ww1simdb.herokuapp.com/login/add?name=${this.state.users.name}&price=${this.state.users.password}`)
-    .then(this.getProducts)
-    .catch(err => console.error(err))
-  }
+  // addProduct = _ => {
+  //   const { product } = this.state;
+  //   fetch(`${link}/login/add?name=${this.state.users.name}&price=${this.state.users.password}`)
+  //   .then(this.getProducts)
+  //   .catch(err => console.error(err))
+  // }
 
-  renderProduct = ({user_id, user_fname, user_lname, user_password, user_code, user_username}) => <div key={user_id}>{`${user_id} ${user_fname} ${user_lname} ${user_password} ${user_code} ${user_username}`}</div>
+  renderProduct = ({user_id, user_username, user_password, user_fname, user_lname}) => <div key={user_id}>{`${user_id} ${user_username} ${user_password} ${user_fname} ${user_lname}`}</div>
 
   render() {
     return (
