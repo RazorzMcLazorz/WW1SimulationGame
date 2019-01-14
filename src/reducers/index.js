@@ -3,6 +3,13 @@ import { ADD_ARTICLE, CHANGE_STATE } from "./constants/action-types";
 
 // Redux Store
 const initialState = {
+  // link : 'https://ww1simdatabase.herokuapp.com',
+  link : 'http://localhost:5000',
+  login : false,
+  username : '',
+  password : '',
+  fname: '',
+  lname: '',
 // the base values are default in new games
   countryBoard : {
       'G' : 1,
