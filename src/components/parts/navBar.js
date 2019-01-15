@@ -11,7 +11,6 @@ class NavBar extends Component {
 
   componentDidMount() {
     this.getConnection();
-    
   }
 
   getConnection () {
