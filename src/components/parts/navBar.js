@@ -5,31 +5,22 @@ import { Link } from 'react-router-dom';
 import ContainedButtons from './button';
 
 class NavBar extends Component {
-  state = {
-    DB : false,
-  }
 
   componentDidMount() {
-    this.getConnection();
   }
 
-  getConnection () {
-    fetch(`${this.props.link}/`)
-    .then(response => response.json())
-    .then(response => this.setState({ DB : response.data }))
-    .catch(err => console.error(err))
+  getConnection = async () => {
+    try {
+      const res = await fetch(`${this.props.link}/`)
+      const json = await res.json()
+    }catch(err) {
+      alert(err);
+    }
   }
 
   render() {
     return(
       <div className="navBar">
-          {this.state.DB ?
-          <div id="connected" className="DBConnection" backgroundcolor="#3f51b5">
-            DB CON
-          </div>:
-          <div id="disconnected" className="DBConnection" onClick={console.log(this.state.DB)}>
-            DB DIS
-          </div>}
           {this.props.login ?
           <Link to='/' className="buttons" id="accountButton">
             {ContainedButtons(`${this.props.fname}`)}

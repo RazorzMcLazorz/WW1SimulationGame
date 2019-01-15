@@ -20,7 +20,6 @@ class Login extends Component {
     }
 
   componentDidMount() {
-    // this.getProducts();
   }
 
   getProducts = async (username) => {
@@ -41,7 +40,7 @@ class Login extends Component {
 
   login = async () => {
     // this.state.mysqlDB.map(this.renderProduct)
-    const uname = document.getElementById('custom-css-standard-input').value;
+    const uname = document.getElementById('usernameInput').value;
     const data = await this.getProducts(uname);
     this.setState({mysqlDB: data})
     const pass = document.getElementById('adornment-password').value;
@@ -76,7 +75,7 @@ class Login extends Component {
     return (
       <div className='login'>
       <NavBar />
-        <CustomizedInputs label="UserName" />
+        <CustomizedInputs ids="usernameInput" label="UserName" />
         <InputAdornments />
         <div className="buttons" onClick={() => this.login()}>
           {ContainedButtons('Login')}

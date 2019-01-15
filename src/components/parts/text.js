@@ -73,7 +73,7 @@ function CustomizedInputs(props) {
           {props.label}
         </InputLabel>
         <Input
-          id="custom-css-standard-input"
+          id={props.ids}
           classes={{
             underline: classes.cssUnderline,
           }}
@@ -85,7 +85,8 @@ function CustomizedInputs(props) {
 
 CustomizedInputs.propTypes = {
   classes: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  ids: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(CustomizedInputs);
