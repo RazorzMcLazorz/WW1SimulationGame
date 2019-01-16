@@ -29,13 +29,16 @@ class New extends Component {
     },
   }
 
-  saveGameID = async (save_name, save_count, save_username) => {
-    const res = await fetch(`${this.props.link}/user/single?save_name=${save_name}&save_count=${save_count}&save_username=${save_username}`)
-    const json = await res.json()
-    // .then(response => response.json())
-    // .then(response => this.setState({ mysqlDB : response.data }))
-    // .catch(err => console.error(err))
+  saveGameNameNotSame = async (save_name, save_username) => {
+    const res = await fetch(`${this.props.link}/save/find?name=${save_name}&username=${save_username}`)
+    const json = await res.json();
     return json.data;
+  }
+
+  saveGameID = async (save_name, save_count, save_username) => {
+    const res = await fetch(`${this.props.link}/save/add?save_name=${save_name}&save_count=${save_count}&save_username=${save_username}`)
+    const json = await res.json()
+    return json;
   }
 
   add(country) {
@@ -213,25 +216,36 @@ class New extends Component {
       </div> )
   }
 
-  gameSettings() {
+  gameSettings = async () => {
     if (this.props.login === true) {
-    const gn = document.getElementById("gameName").value;
-    const cc = document.getElementById("countryCount").value;
-    const x = confirm(`Are sure you want "${gn}" to be the name, with ${cc} countries? You wont be able to change this after its submitted!`);
-    if (x === true) {
-      this.setState({countryCounting: false});
+      const gn = document.getElementById("gameName").value;
+      const g = await this.saveGameNameNotSame(gn, this.props.username);
+      console.log(g)
+      try {
+        console.log(g[0]['save_username'])
+        this.props.history.push("/new");
+        console.log('Game already has the same name')
+      }
+      catch(err) {
+        const cc = document.getElementById("countryCount").value;
+        const x = confirm(`Are sure you want "${gn}" to be the name, with ${cc} countries? You wont be able to change this after its submitted!`);
+        if (x === true) {
+          this.setState({countryCounting: false});
+        }
+        this.setState({
+          gameName: gn,
+          gameSize: cc,
+        });
+        this.saveGameID(gn, cc, this.props.username);
+      }
     }
-    this.setState({
-      gameName: gn,
-      gameSize: cc,
-    });}
     else {
       console.log('user not logged in');
       this.props.history.push("/login");
     }
   }
 
-  saveGame() {
+  saveGame = async () => {
     if (this.props.login === true) {
 
     }
