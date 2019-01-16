@@ -6,7 +6,7 @@ import NavBar from './parts/navBar';
 import { Link } from 'react-router-dom';
 import CustomizedInputs from './parts/text';
 import ContainedButtons from './parts/button';
-import FontAwesome from './parts/playerAddButton';
+import IconButtons from './parts/playerAddButton';
 import SimpleSelect from './parts/countryInput';
 
 class New extends Component {
@@ -16,75 +16,205 @@ class New extends Component {
     countryCounting: true,
     gameName: '',
     gameSize: null,
+    gamePlayers: {
+      'germany' : [],
+      'russia' : [],
+      'britain' : [],
+      'france' : [],
+      'usa' : [],
+      'austria' : [],
+      'ottoman' : [],
+      'italy' : [],
+      'serbia' : []
+    },
   }
 
-  addPlayer(count, country) {
-    
+  saveGameID = async (save_name, save_count, save_username) => {
+    const res = await fetch(`${this.props.link}/user/single?save_name=${save_name}&save_count=${save_count}&save_username=${save_username}`)
+    const json = await res.json()
+    // .then(response => response.json())
+    // .then(response => this.setState({ mysqlDB : response.data }))
+    // .catch(err => console.error(err))
+    return json.data;
+  }
+
+  add(country) {
+    if (this.state.gamePlayers[country].length >= 10) {
+      console.log('Max')
+    }
+    else {
+      this.setState({
+        gamePlayers: {
+          ...this.state.gamePlayers,
+          [country]: [...this.state.gamePlayers[country], country]
+        }
+      })
+    }
   }
 
   gameSetup() {
     return  (       
       <div id="newGameDetails">
         <div>
+{/* Germany */}
           {this.state.gameSize == 7 || this.state.gameSize == 8 || this.state.gameSize == 9 ?
           <div>
             Germany Players
-            <textarea id="Germany"/>
-            <FontAwesome/>
+            <div onClick={() => this.add('germany')}>
+              <IconButtons/>
+            </div>
+            <div>
+              {
+                this.state.gamePlayers['germany'].map((country, i) => 
+                  <div key={i}>
+                    <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                  </div>
+                )
+              }
+            </div>
           </div>:''}
+{/* Russia */}
           {this.state.gameSize == 7 || this.state.gameSize == 8 || this.state.gameSize == 9 ?
           <div>
-            Russia Players
-            <textarea id="Russia"/>
-            <FontAwesome/>
+          Russia Players
+          <div onClick={() => this.add('russia')}>
+            <IconButtons/>
+          </div>
+          <div>
+            {
+              this.state.gamePlayers['russia'].map((country, i) => 
+                <div key={i}>
+                  <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                </div>
+              )
+            }
+          </div>
           </div>:''}
+{/* Britain */}
           {this.state.gameSize == 7 || this.state.gameSize == 8 || this.state.gameSize == 9 ?
           <div>
-            Britain Players
-            <textarea id="France"/>
-            <FontAwesome/>
+          Britain Players
+          <div onClick={() => this.add('britain')}>
+            <IconButtons/>
+          </div>
+          <div>
+            {
+              this.state.gamePlayers['britain'].map((country, i) => 
+                <div key={i}>
+                  <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                </div>
+              )
+            }
+          </div>
           </div>:''}
+{/* France */}
           {this.state.gameSize == 7 || this.state.gameSize == 8 || this.state.gameSize == 9 ?
           <div>
-            France Players
-            <textarea id="France"/>
-            <FontAwesome/>
+          France Players
+          <div onClick={() => this.add('france')}>
+            <IconButtons/>
+          </div>
+          <div>
+            {
+              this.state.gamePlayers['france'].map((country, i) => 
+                <div key={i}>
+                  <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                </div>
+              )
+            }
+          </div>
           </div>:''}
+{/* United States Players */}
           {this.state.gameSize == 9 ?
           <div>
-            United States Players
-            <textarea id="France"/>
-            <FontAwesome/>
+          United States Players
+          <div onClick={() => this.add('usa')}>
+            <IconButtons/>
+          </div>
+          <div>
+            {
+              this.state.gamePlayers['usa'].map((country, i) => 
+                <div key={i}>
+                  <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                </div>
+              )
+            }
+          </div>
           </div>:''}
+{/* Austria */}
           {this.state.gameSize == 7 || this.state.gameSize == 8 || this.state.gameSize == 9 ?
           <div>
             Austria Players
-            <textarea id="Austria"/>
-            <FontAwesome/>
+          <div onClick={() => this.add('austria')}>
+            <IconButtons/>
+          </div>
+          <div>
+            {
+              this.state.gamePlayers['austria'].map((country, i) => 
+                <div key={i}>
+                  <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                </div>
+              )
+            }
+          </div>
           </div>:''}
+{/* Ottoman */}
           {this.state.gameSize == 7 || this.state.gameSize == 8 || this.state.gameSize == 9 ?
           <div>
-            Ottoman Players
-            <textarea id="Ottoman"/>
-            <FontAwesome/>
+          Ottoman Empire Players
+          <div onClick={() => this.add('ottoman')}>
+            <IconButtons/>
+          </div>
+          <div>
+            {
+              this.state.gamePlayers['ottoman'].map((country, i) => 
+                <div key={i}>
+                  <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                </div>
+              )
+            }
+          </div>
           </div>:''}
+{/* Italy */}
           {this.state.gameSize == 7 || this.state.gameSize == 8 || this.state.gameSize == 9 ?
           <div>
-            Italy Players
-            <textarea id="Italy"/>
-            <FontAwesome/>
+          Italy Players
+          <div onClick={() => this.add('italy')}>
+            <IconButtons/>
+          </div>
+          <div>
+            {
+              this.state.gamePlayers['italy'].map((country, i) => 
+                <div key={i}>
+                  <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                </div>
+              )
+            }
+          </div>
           </div>:''}
+{/* Serbia */}
           {this.state.gameSize == 8 || this.state.gameSize == 9 ?
           <div>
-            Serbia Players
-            <textarea id="France"/>
-            <FontAwesome/>
+          Serbia Players
+          <div onClick={() => this.add('serbia')}>
+            <IconButtons/>
+          </div>
+          <div>
+            {
+              this.state.gamePlayers['serbia'].map((country, i) => 
+                <div key={i}>
+                  <CustomizedInputs ids={`${country}player${i+1}`} label={`player${i+1}`}/>
+                </div>
+              )
+            }
+          </div>
           </div>:''}
         </div>
       </div> )
   }
 
   gameSettings() {
+    if (this.props.login === true) {
     const gn = document.getElementById("gameName").value;
     const cc = document.getElementById("countryCount").value;
     const x = confirm(`Are sure you want "${gn}" to be the name, with ${cc} countries? You wont be able to change this after its submitted!`);
@@ -94,7 +224,21 @@ class New extends Component {
     this.setState({
       gameName: gn,
       gameSize: cc,
-    });
+    });}
+    else {
+      console.log('user not logged in');
+      this.props.history.push("/login");
+    }
+  }
+
+  saveGame() {
+    if (this.props.login === true) {
+
+    }
+    else {
+      console.log('user not logged in');
+      this.props.history.push("/login");
+    }
   }
 
   render() {
@@ -111,7 +255,14 @@ class New extends Component {
               {ContainedButtons('Next')}
             </div>
         </div> : 
-          this.gameSetup()}
+          <div id="gameset">
+          {this.gameSetup()}
+          <div id='savegameset'>
+            <div onClick={() => this.saveGame()}>
+              {ContainedButtons('Save and Start')}
+            </div>
+          </div>
+          </div>}
         <Footer />
       </div>
     );

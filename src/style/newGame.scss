@@ -4,13 +4,20 @@
             margin-left: 100px;
         }
     }
+    #gameset {
+        margin-bottom: 50px;
+        #savegameset {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
 }
 #newGameDetails {
     div {
         div {
             display: flex;
-            div {
-            }
+            justify-content: flex-start;
+            align-items: center;
         }
     }
 }
