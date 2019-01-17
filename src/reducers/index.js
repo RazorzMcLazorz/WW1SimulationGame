@@ -10,6 +10,7 @@ const initialState = {
   password : '',
   fname: '',
   lname: '',
+  loadGames : [],
 // the base values are default in new games
   countryBoard : {
       'G' : 1,

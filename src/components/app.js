@@ -8,13 +8,22 @@ import ContainedButtons from '../components/parts/button';
 
 class App extends Component {
 
-    newGame() {
-        console.log('new');
-    }
+  userSavedGames = async ( username ) => {
+    const res = await fetch(`${this.props.link}/save/games?username=${username}`)
+    const json = await res.json()
+    return json.data
+  }
 
-    loadGame() {
-        console.log('load')
-    }
+  newGame() {
+    console.log('new');
+  }
+
+  loadGame = async () => {
+    const x = await this.userSavedGames(this.props.username);
+    await this.props.changeState({loadGames : x})
+    await console.log(this.props.loadGames)
+    console.log('load')
+  }
 
   render() {
     return (
