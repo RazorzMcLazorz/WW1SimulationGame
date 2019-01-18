@@ -18,7 +18,7 @@ class LoadGame extends Component {
 
   displayGameSave(name, count) {
     return (
-      <Link to="/" className={`load`}>
+      <Link to="/game" className={`load`} >
         <div className="loadTitle">{name}</div>
         <div className="loadCount">{count}</div>
       </Link>

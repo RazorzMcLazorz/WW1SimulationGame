@@ -9,6 +9,77 @@ import ContainedButtons from './parts/button';
 import IconButtons from './parts/playerAddButton';
 import SimpleSelect from './parts/countryInput';
 
+export const countryMoney = 20000;
+
+export const gameSize7 = {
+  countryBoard : {
+    'germany' : 1,
+    'russia' : 2,
+    'britain' : 3,
+    'france' : 4,
+    'austria' : 5,
+    'ottoman' : 6,
+    'italy' : 7,
+  },
+  countryPowerPoints : {
+    'germany' : 1500,
+    'russia' : 1400,
+    'britain' : 1100,
+    'france' : 1000,
+    'austria' : 800,
+    'ottoman' : 700,
+    'italy' : 600,
+  }
+}
+
+export const gameSize8 = {
+  countryBoard : {
+    'germany' : 1,
+    'russia' : 2,
+    'britain' : 3,
+    'france' : 4,
+    'austria' : 5,
+    'ottoman' : 6,
+    'italy' : 7,
+    'serbia' : 8,
+  },
+  countryPowerPoints : {
+    'germany' : 1600,
+    'russia' : 1500,
+    'britain' : 1300,
+    'france' : 1200,
+    'austria' : 1000,
+    'ottoman' : 800,
+    'italy' : 700,
+    'serbia' : 600,
+  }
+}
+
+export const gameSize9 = {
+  countryBoard : {
+    'germany' : 1,
+    'russia' : 2,
+    'britain' : 3,
+    'france' : 4,
+    'usa' : 5,
+    'austria' : 6,
+    'ottoman' : 7,
+    'italy' : 8,
+    'serbia' : 9,
+  },
+  countryPowerPoints : {
+    'germany' : 1800,
+    'russia' : 1700,
+    'britain' : 1500,
+    'france' : 1400,
+    'usa' : 1200,
+    'austria' : 1000,
+    'ottoman' : 800,
+    'italy' : 700,
+    'serbia' : 600,
+  }
+}
+
 class New extends Component {
 
   state = {
@@ -36,9 +107,7 @@ class New extends Component {
   }
 
   saveGameID = async (save_name, save_count, save_username) => {
-    const res = await fetch(`${this.props.link}/save/add?save_name=${save_name}&save_count=${save_count}&save_username=${save_username}`)
-    const json = await res.json()
-    return json;
+    const res = await fetch(`${this.props.link}/save/add?save_name=${save_name}&save_count=${save_count}&save_username=${save_username}`);
   }
 
   add(country) {
@@ -229,7 +298,7 @@ class New extends Component {
       catch(err) {
         const cc = document.getElementById("countryCount").value;
         const x = confirm(`Are sure you want "${gn}" to be the name, with ${cc} countries? You wont be able to change this after its submitted!`);
-        if (x === true) {
+        if (x) {
           this.setState({countryCounting: false});
         }
         this.setState({
@@ -245,9 +314,76 @@ class New extends Component {
     }
   }
 
+  saveErrorCatch(country, count) {
+    let x = '';
+    try {
+      x = document.getElementById(`${country}player${count}`).value;
+    }
+    catch(err) {
+      x = '';
+    }
+    return x
+  }
+
+  savePlayers = async (country) => {
+    const p1 = this.saveErrorCatch(country, 1);
+    const p2 = this.saveErrorCatch(country, 2);
+    const p3 = this.saveErrorCatch(country, 3);
+    const p4 = this.saveErrorCatch(country, 4);
+    const p5 = this.saveErrorCatch(country, 5);
+    const p6 = this.saveErrorCatch(country, 6);
+    const p7 = this.saveErrorCatch(country, 7);
+    const p8 = this.saveErrorCatch(country, 8);
+    const p9 = this.saveErrorCatch(country, 9);
+    const p10 = this.saveErrorCatch(country, 10);
+    await fetch(`
+    ${this.props.link}/players/add?user=${this.props.username}
+    &save=${this.state.gameName}
+    &country=${country}
+    &count=${this.state.gamePlayers[country].length}
+    &p1=${p1}
+    &p2=${p2}
+    &p3=${p3}
+    &p4=${p4}
+    &p5=${p5}
+    &p6=${p6}
+    &p7=${p7}
+    &p8=${p8}
+    &p9=${p9}
+    &p10=${p10}
+    `);
+    console.log(this.state.gamePlayers)
+  }
+
+  gatherDataSetup= async () => {
+
+  }
+
   saveGame = async () => {
     if (this.props.login === true) {
-
+      const g = confirm(`By accepting this you will have created a new game with the settings you set.`);
+      if(g) {
+        const rc = this.state.gamePlayers['russia' ].length;
+        const bc = this.state.gamePlayers['britain'].length;
+        const fc = this.state.gamePlayers['france' ].length;
+        const uc = this.state.gamePlayers['usa'    ].length;
+        const ac = this.state.gamePlayers['austria'].length;
+        const oc = this.state.gamePlayers['ottoman'].length;
+        const ic = this.state.gamePlayers['italy'  ].length;
+        const sc = this.state.gamePlayers['serbia' ].length;
+        await this.savePlayers('germany');
+        await this.savePlayers('britain');
+        await this.savePlayers('france');
+        await this.savePlayers('usa');
+        await this.savePlayers('austria');
+        await this.savePlayers('ottoman');
+        await this.savePlayers('italy');
+        await this.savePlayers('serbia');
+        // Gathers data for the new game and saves it just incase so that it has defaults to load
+        await this.gatherDataSetup();
+        this.props.history.push("/game");
+        // /players/add?user=Razorz&save=Game%20Test&country=germany&count=2&p1=nate&p2=kit&p3=logi&p4=&p5=&p6=&p7=&p8=&p9=&p10=
+      }
     }
     else {
       console.log('user not logged in');
