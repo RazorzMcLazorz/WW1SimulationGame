@@ -1,3 +1,83 @@
 #gamebody {
-    
+    #roundNumber {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 40px;
+        background-color: #3d51b5;
+        color: white;
+        border-radius: 3px;
+        margin-left: 3px;
+    }
+    #gameRender {
+        .countryTab {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 80vw;
+            height: 60px;
+            background-color: white;
+            margin-top: 10px;
+            margin-left: 15px;
+            border-color: #3d51b5;
+            border-style: solid;
+            border-width: 1px;
+
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            .countryCount {
+                width: 20px;
+                margin-left: 5px;
+            }
+            .countryName {
+                color: #3d51b5;
+                font-size: 20px;
+                width: 150px;
+            }
+            .countryRadio {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 150px;
+                color: white;
+            }
+        }
+        .additional {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 80vw;
+            height: 60px;
+            background-color: white;
+            margin-left: 15px;
+            border-color: #3d51b5;
+            border-style: solid;
+            border-width: 0px;
+
+            border-right-width: 1px;
+            border-left-width: 1px;
+            border-bottom-width: 1px;
+
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            .name {
+                margin-left: 3px;
+            }
+            .checkBoxs {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-left: 5px;
+                margin-top: 8px;
+            }
+        }
+    }
+    #gamebottom {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 5px;
+        margin-bottom: 25px;
+    }
 }

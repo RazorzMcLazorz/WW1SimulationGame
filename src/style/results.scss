@@ -1,0 +1,65 @@
+#resultsBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    #roundNumber {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 40px;
+        background-color: #3d51b5;
+        color: white;
+        border-radius: 3px;
+        margin-left: 3px;
+    }
+    .result {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40vw;
+        height: 60px;
+        background-color: white;
+        margin-top: 10px;
+        margin-left: 15px;
+        border-color: #3d51b5;
+        border-style: solid;
+        border-width: 1px;
+
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        .resultpos {
+            margin-left: 3px;
+            margin-right: 5px;
+        }
+        .resultTitle {
+            margin-right: 35px;
+            color: #3d51b5;
+            font-size: 20px;
+        }
+        .resultPowerPoints {
+            display: flex;
+            margin-right: 35px;
+            div {
+                margin-left: 5px;
+                color: red;
+            }
+        }
+        .resultGold {
+            display: flex;
+            margin-right: 5px;
+            div {
+                margin-left: 5px;
+                color: rgb(248, 219, 54);
+            }
+        }
+    }
+    #resultbottom {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 5px;
+    }
+}

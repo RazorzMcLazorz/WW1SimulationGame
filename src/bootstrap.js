@@ -10,6 +10,8 @@ import LoadGame from './components/loadGame';
 import Game from './components/game';
 import New from './components/newGame';
 import Login from './components/login';
+import GamePowerPoints from './components/gamePowerPoints';
+import Results from './components/results';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
@@ -26,6 +28,8 @@ function main() {
             <Route exact path="/game" component={Game} />
             <Route exact path="/new" component={New}/>
             <Route exact path="/login" component={Login}/>
+            <Route exact path="/powerpoints" component={GamePowerPoints}/>
+            <Route exact path="/results" component={Results}/>
          </Switch>
       </BrowserRouter>
     </Provider>
