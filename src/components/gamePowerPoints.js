@@ -18,62 +18,126 @@ class GamePowerPoints extends Component {
   attacking(country, label) {
     return (
       <div className={`${label}PP`}>
-        {this.props.PowerPoints[country][label][0] ? 
-        country == 'germany' ? '' :
+        {this.props.PowerPoints[country][label]['germany'] == true? 
+        
         <div>
           <CustomizedInputs label='Germany' ids={`${country}${label}PPSharegermany`}/> 
         </div>
         : ''}
-        {this.props.PowerPoints[country][label][1] ?
-          country == 'russia' ? '' :
+        {this.props.PowerPoints[country][label]['russia'] == true?
+        
         <div>
           <CustomizedInputs label='Russia' ids={`${country}${label}PPSharerussia`}/> 
         </div>
         : ''}
-        {this.props.PowerPoints[country][label][2] ?
-          country == 'britain' ? '' :
+        {this.props.PowerPoints[country][label]['britain'] == true?
+          
         <div>
           <CustomizedInputs label='Britain' ids={`${country}${label}PPSharebritain`}/> 
         </div>
         : ''}
-        {this.props.PowerPoints[country][label][3] ?
-          country == 'france' ? '' :
+        {this.props.PowerPoints[country][label]['france'] == true?
+        
         <div>
           <CustomizedInputs label='France' ids={`${country}${label}PPSharefrance`}/> 
         </div>
         : ''}
-        {this.props.PowerPoints[country][label][4] ?
-          country == 'usa' ? '' :
+        {this.props.PowerPoints[country][label]['usa'] == true?
+  
         <div>
           <CustomizedInputs label='United States' ids={`${country}${label}PPShareusa`}/> 
         </div>
         : ''}
-        {this.props.PowerPoints[country][label][5] ?
-          country == 'austria' ? '' :
+        {this.props.PowerPoints[country][label]['austria'] == true?
+          
         <div>
           <CustomizedInputs label='Austria' ids={`${country}${label}PPShareaustria`}/> 
         </div>
         : ''}
-        {this.props.PowerPoints[country][label][6] ?
-          country == 'ottoman' ? '' :
+        {this.props.PowerPoints[country][label]['ottoman'] == true?
+          
         <div>
           <CustomizedInputs label='Ottoman Empire' ids={`${country}${label}PPShareottoman`}/> 
         </div>
         : ''}
-        {this.props.PowerPoints[country][label][7] ?
-          country == 'italy' ? '' :
+        {this.props.PowerPoints[country][label]['italy'] == true?
+      
         <div>
           <CustomizedInputs label='Italy' ids={`${country}${label}PPShareitaly`}/> 
         </div>
         : ''}
-        {this.props.PowerPoints[country][label][8] ?
-          country == 'serbia' ? '' :
+        {this.props.PowerPoints[country][label]['serbia'] == true?
+        
         <div>
           <CustomizedInputs label='Serbia' ids={`${country}${label}PPShareserbia`}/> 
         </div>
         : ''}
       </div>
     );
+  }
+
+  pos = async (country, label, pos) => {
+    try {
+    let x = document.getElementById(`${country}${label}PPShare${pos}`).value
+    // x = await parseInt(x)
+    console.log('id ' + x)
+    return x
+    }
+    catch(err) {
+      return 0
+    }
+  }
+
+  whosAttacking = async (country, label) => {
+    let x = 0;
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPSharegermany`).value);
+    }
+    catch(err) {}
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPSharerussia`).value);
+  }
+  catch(err) {}
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPSharebritain`).value);
+  }
+  catch(err) {}
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPSharefrance`).value);
+  }
+  catch(err) {}
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPShareusa`).value);
+  }
+  catch(err) {}
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPShareaustria`).value);
+  }
+  catch(err) {}
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPShareottoman`).value);
+  }
+  catch(err) {}
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPShareitaly`).value);
+  }
+  catch(err) {}
+    try {
+    x = x + parseInt(document.getElementById(`${country}${label}PPShareserbia`).value);
+  }
+  catch(err) {}
+    await console.log(x)
+    return x;
+  }
+
+  isitwar = async (country) => {
+    return
+  }
+
+  getResults = async () => {
+    let x = '';
+    x = this.isitwar(this.props.countryOrder[1])
+    this.whosAttacking('germany', 'attacking')
   }
 
   render() {
@@ -237,7 +301,7 @@ class GamePowerPoints extends Component {
           </div>
           : ''}
           <div id="resultsButton">
-            <Link to="/results">
+            <Link to="/results" onClick={() => this.getResults()}>
                 {ContainedButtons('Results')}
             </Link>
           </div>

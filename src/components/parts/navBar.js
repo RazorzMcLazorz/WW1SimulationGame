@@ -23,7 +23,7 @@ class NavBar extends Component {
       <div className="navBar">
           {this.props.login ?
           <Link to='/' className="buttons" id="accountButton">
-            {ContainedButtons(`${this.props.fname}`)}
+            {ContainedButtons(`${this.props.lname}`)}
           </Link> :
           <Link to='/login' className="buttons" id="accountButton">
             {ContainedButtons('Guest')}

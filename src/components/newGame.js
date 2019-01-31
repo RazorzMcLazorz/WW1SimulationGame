@@ -288,6 +288,7 @@ class New extends Component {
   gameSettings = async () => {
     if (this.props.login === true) {
       const gn = document.getElementById("gameName").value;
+      const cc = document.getElementById("countryCount").value;
       const g = await this.saveGameNameNotSame(gn, this.props.username);
       console.log(g)
       try {
@@ -296,16 +297,21 @@ class New extends Component {
         console.log('Game already has the same name')
       }
       catch(err) {
-        const cc = document.getElementById("countryCount").value;
         const x = confirm(`Are sure you want "${gn}" to be the name, with ${cc} countries? You wont be able to change this after its submitted!`);
         if (x) {
           this.setState({countryCounting: false});
+          
+          await this.setState({
+            gameName: gn,
+            gameSize: cc,
+          });
+          await this.props.changeState({
+            countryCount: cc,
+            gameName: gn,
+          });
+          console.log(this.props.countryCount);
+          this.saveGameID(gn, cc, this.props.username);
         }
-        this.setState({
-          gameName: gn,
-          gameSize: cc,
-        });
-        this.saveGameID(gn, cc, this.props.username);
       }
     }
     else {
@@ -354,9 +360,51 @@ class New extends Component {
     `);
     console.log(this.state.gamePlayers)
   }
-
-  gatherDataSetup= async () => {
-
+  countryDataSetup = async (user, save, name, rank, gold, pp, round) => {
+    await fetch(`${this.props.link}/current/add?user=${this.props.username}&save=${save}&name=${name}&rank=${rank}&gold=${gold}&pp=${pp}&round=${round}`);
+    await fetch(`${this.props.link}/past/add?user=${this.props.username}&save=${save}&name=${name}&rank=${rank}&gold=${gold}&pp=${pp}&round=${round}`);
+    await this.props.changeState({
+      countryOrder: {
+        ...this.props.countryOrder,
+        [name]: rank
+      }
+    });
+  }
+  // connecting save with data
+  gatherDataSetup = async (user, savename) => {
+    if (this.props.countryCount == 7) {
+    await this.countryDataSetup(`${user}`, `${savename}`, 'germany', 1, 20000, this.props.sevenPowerPoints[1], 1);
+    await this.countryDataSetup(`${user}`, `${savename}`, 'russia', 2, 20000, this.props.sevenPowerPoints[2], 1);
+    await this.countryDataSetup(`${user}`, `${savename}`, 'britain', 3, 20000, this.props.sevenPowerPoints[3], 1);
+    await this.countryDataSetup(`${user}`, `${savename}`, 'france', 4, 20000, this.props.sevenPowerPoints[4], 1);
+    await this.countryDataSetup(`${user}`, `${savename}`, 'austria', 5, 20000, this.props.sevenPowerPoints[5], 1);
+    await this.countryDataSetup(`${user}`, `${savename}`, 'ottoman', 6, 20000, this.props.sevenPowerPoints[6], 1);
+    await this.countryDataSetup(`${user}`, `${savename}`, 'italy', 7, 20000, this.props.sevenPowerPoints[7], 1);
+    }
+    else if (this.props.countryCount == 8) {
+      await this.countryDataSetup(`${user}`, `${savename}`, 'germany', 1, 20000, this.props.eightPowerPoints[1], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'russia', 2, 20000, this.props.eightPowerPoints[2], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'britain', 3, 20000, this.props.eightPowerPoints[3], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'france', 4, 20000, this.props.eightPowerPoints[4], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'austria', 5, 20000, this.props.eightPowerPoints[5], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'ottoman', 6, 20000, this.props.eightPowerPoints[6], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'italy', 7, 20000, this.props.eightPowerPoints[7], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'serbia', 8, 20000, this.props.eightPowerPoints[8], 1);
+    }
+    else if (this.props.countryCount == 9) {
+      await this.countryDataSetup(`${user}`, `${savename}`, 'germany', 1, 20000, this.props.ninePowerPoints[1], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'russia', 2, 20000, this.props.ninePowerPoints[2], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'britain', 3, 20000, this.props.ninePowerPoints[3], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'france', 4, 20000, this.props.ninePowerPoints[4], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'usa', 5, 20000, this.props.ninePowerPoints[5], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'austria', 6, 20000, this.props.ninePowerPoints[6], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'ottoman', 7, 20000, this.props.ninePowerPoints[7], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'italy', 8, 20000, this.props.ninePowerPoints[8], 1);
+      await this.countryDataSetup(`${user}`, `${savename}`, 'serbia', 9, 20000, this.props.ninePowerPoints[9], 1);
+    }
+    else {
+      console.log('Failed to Save')
+    }
   }
 
   saveGame = async () => {
@@ -380,7 +428,7 @@ class New extends Component {
         await this.savePlayers('italy');
         await this.savePlayers('serbia');
         // Gathers data for the new game and saves it just incase so that it has defaults to load
-        await this.gatherDataSetup();
+        await this.gatherDataSetup(this.props.username, this.state.gameName);
         this.props.history.push("/game");
         // /players/add?user=Razorz&save=Game%20Test&country=germany&count=2&p1=nate&p2=kit&p3=logi&p4=&p5=&p6=&p7=&p8=&p9=&p10=
       }

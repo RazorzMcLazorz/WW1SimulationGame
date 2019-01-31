@@ -16,48 +16,48 @@ import CustomizedInputs from './parts/text';
 class Game extends Component {
   state = {
     countryAttacking : {
-      'germany' : false,
-      'russia' : false,
-      'britain' : false,
-      'france' : false,
-      'usa' : false,
-      'austria' : false,
-      'ottoman' : false,
-      'italy' : false,
-      'serbia' : false,
+      'germany' : true,
+      'russia' : true,
+      'britain' : true,
+      'france' : true,
+      'usa' : true,
+      'austria' : true,
+      'ottoman' : true,
+      'italy' : true,
+      'serbia' : true,
     },
     countryAtk : {
-      'germany' : false,
-      'russia' : false,
-      'britain' : false,
-      'france' : false,
-      'usa' : false,
-      'austria' : false,
-      'ottoman' : false,
-      'italy' : false,
-      'serbia' : false,
+      'germany' : true,
+      'russia' : true,
+      'britain' : true,
+      'france' : true,
+      'usa' : true,
+      'austria' : true,
+      'ottoman' : true,
+      'italy' : true,
+      'serbia' : true,
     },
     countryDef : {
-      'germany' : false,
-      'russia' : false,
-      'britain' : false,
-      'france' : false,
-      'usa' : false,
-      'austria' : false,
-      'ottoman' : false,
-      'italy' : false,
-      'serbia' : false,
+      'germany' : true,
+      'russia' : true,
+      'britain' : true,
+      'france' : true,
+      'usa' : true,
+      'austria' : true,
+      'ottoman' : true,
+      'italy' : true,
+      'serbia' : true,
     },
     trading : {
-      'germany' : false,
-      'russia' : false,
-      'britain' : false,
-      'france' : false,
-      'usa' : false,
-      'austria' : false,
-      'ottoman' : false,
-      'italy' : false,
-      'serbia' : false,
+      'germany' : true,
+      'russia' : true,
+      'britain' : true,
+      'france' : true,
+      'usa' : true,
+      'austria' : true,
+      'ottoman' : true,
+      'italy' : true,
+      'serbia' : true,
     }
   }
 
@@ -143,25 +143,26 @@ class Game extends Component {
     }
   }
 
-  gameinterior(country, count) {
+  gameinterior(country) {
     let gamingName = this.gameNaming(country)
     return(
       <div>
         <div className="countryTab">
-          <div className="countryCount">{count}</div>
+          <div className="countryCount">{this.props.countrySetupOrder[country]}</div>
+          {/* {console.log(this.props.countrySetupOrder[country])} */}
           <div className="countryName">{gamingName}</div>
           <div className="countryRadio"><WarPeace label={country}/></div>
-          <div onClick={() => this.attackCountry(country)}>{ContainedButtons('Attacking')}</div>
+          {/* <div onClick={() => this.attackCountry(country)}>{ContainedButtons('Attacking')}</div>
           <div onClick={() => this.countryAtkAlly(country)}>{ContainedButtons('Attack Alliance')}</div>
           <div onClick={() => this.countryDefAlly(country)}>{ContainedButtons('Defence Alliance')}</div>
-          <div onClick={() => this.trading(country)}>{ContainedButtons('Trade')}</div>
-          <div><CustomizedInputs label="Gold" ids={`${country}Gold`}/></div>
+          <div onClick={() => this.trading(country)}>{ContainedButtons('Trade')}</div> */}
+          <div><CustomizedInputs label="Gold" ids={`${country}Gold`} value={this.props.countryGold[country]}/></div>
         </div>
         { this.state.countryAttacking[country]?
         <div className="additional">
           <div className="name">Attacking</div>
           <div className="checkBoxs">
-          <Attacking count={this.props.countryCount} ids={`${country}Attacking`} country={country}/>
+          <Attacking count={this.props.countryCount} ids={`${country}Attacking`} country={country} label='attacking'/>
           </div>
         </div>
         : ''}
@@ -169,7 +170,7 @@ class Game extends Component {
         <div className="additional">
           <div className="name">Attack Alliance</div>
           <div className="checkBoxs">
-          <Attacking count={this.props.countryCount} ids={`${country}AttackAlliance`} country={country}/>
+          <Attacking count={this.props.countryCount} ids={`${country}AttackAlliance`} country={country} label='attack'/>
           </div>
         </div>
         : ''}
@@ -177,7 +178,7 @@ class Game extends Component {
         <div className="additional">
           <div className="name">Defence Alliance</div>
           <div className="checkBoxs">
-          <Attacking count={this.props.countryCount} ids={`${country}DefenceAlliance`} country={country}/>
+          <Attacking count={this.props.countryCount} ids={`${country}DefenceAlliance`} country={country} label='defence'/>
           </div>
         </div>
         : ''}
@@ -185,7 +186,7 @@ class Game extends Component {
         <div className="additional">
           <div className="name">Trading</div>
           <div className="checkBoxs">
-          <Attacking count={this.props.countryCount} ids={`${country}Trade`} country={country}/>
+          <Attacking count={this.props.countryCount} ids={`${country}Trade`} country={country} label='trading'/>
           </div>
         </div>
         : ''}
@@ -197,8 +198,24 @@ class Game extends Component {
 
   }
 
+  swaptoPP = async (country, label, pos, ID) => {
+    await this.props.changeState({
+      PowerPoints : {
+        ...this.props.PowerPoints, [country] : {
+          ...this.props.PowerPoints[country], [label] : {
+            ...this.props.PowerPoints[country][label], [pos] : document.getElementById(`${country}${ID}${pos}`).value
+          }
+        }
+      }
+    });
+    await console.log('swap' + this.props.PowerPoints[country][label][country] + ' ' + document.getElementById(`${country}${ID}${pos}`).value);
+  }
+
   saveAndContinue = async () => {
-    console.log('Save and Continue');
+    // await this.swaptoPP('germany', 'attacking', 'russia', 'Attacking');
+    // await this.swaptoPP('germany', 'attacking', 'britain',  'Attacking');
+    await console.log('Continue');
+    await this.props.history.push("/powerpoints");
   }
 
   render() {
@@ -210,20 +227,20 @@ class Game extends Component {
             Round {this.props.round}
           </div>
           <div id="gameRender">
-            {this.gameinterior('germany',1)}
-            {this.gameinterior('russia',2 )}
-            {this.gameinterior('britain',3)}
-            {this.gameinterior('france',4 )}
-            {this.gameinterior('usa',5    )}
-            {this.gameinterior('austria',6)}
-            {this.gameinterior('ottoman',7)}
-            {this.gameinterior('italy',8  )}
-            {this.gameinterior('serbia',9 )}
+            {this.gameinterior('germany')}
+            {this.gameinterior('russia')}
+            {this.gameinterior('britain')}
+            {this.gameinterior('france')}
+            {this.props.countryCount >= 9 ? this.gameinterior('usa'): ''}
+            {this.gameinterior('austria')}
+            {this.gameinterior('ottoman')}
+            {this.gameinterior('italy')}
+            {this.props.countryCount >= 8 ? this.gameinterior('serbia'): ''}
           </div>
           <div id='gamebottom'>
-            <Link to="/powerpoints" onClick={() => this.saveAndContinue()}>
-              {ContainedButtons('Save and Continue')}
-            </Link>
+            <div to="/powerpoints" onClick={() => this.saveAndContinue()}>
+              {ContainedButtons('Continue')}
+            </div>
           </div>
         </div>
         <Footer />
