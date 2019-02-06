@@ -13,6 +13,45 @@ class GamePowerPoints extends Component {
 
   state = {
     Germany : 20000,
+    AttackOrder : [],
+    Order : {
+      'germany' : {
+        Win : null,
+        Loss : null,
+      },
+      'russia' : {
+        Win : null,
+        Loss : null,
+      },
+      'britain' : {
+        Win : null,
+        Loss : null,
+      },
+      'france' : {
+        Win : null,
+        Loss : null,
+      },
+      'usa' : {
+        Win : null,
+        Loss : null,
+      },
+      'austria' : {
+        Win : null,
+        Loss : null,
+      },
+      'ottoman' : {
+        Win : null,
+        Loss : null,
+      },
+      'italy' : {
+        Win : null,
+        Loss : null,
+      },
+      'serbia' : {
+        Win : null,
+        Loss : null,
+      },
+    }
   }
 
   attacking(country, label) {
@@ -76,6 +115,61 @@ class GamePowerPoints extends Component {
     );
   }
 
+  defend(country) {
+    let A = false;
+    let B = false;
+    let C = false;
+    let D = false;
+    let E = false;
+    let F = false;
+    let G = false;
+    let H = false;
+    let I = false;
+    if (this.props.PowerPoints['germany']['attacking'][country]) {
+      A = true;
+    }
+    if (this.props.PowerPoints['russia']['attacking'][country]) {
+      B = true;
+    }
+    if (this.props.PowerPoints['britain']['attacking'][country]) {
+      C = true;
+    }
+    if (this.props.PowerPoints['france']['attacking'][country]) {
+      D = true;
+    }
+    if (this.props.PowerPoints['usa']['attacking'][country]) {
+      E = true;
+    }
+    if (this.props.PowerPoints['austria']['attacking'][country]) {
+      F = true;
+    }
+    if (this.props.PowerPoints['ottoman']['attacking'][country]) {
+      G = true;
+    }
+    if (this.props.PowerPoints['italy']['attacking'][country]) {
+      H = true;
+    }
+    if (this.props.PowerPoints['serbia']['attacking'][country]) {
+      I = true;
+    }
+    
+
+
+    return (
+      <div className="DefencePoints">
+        {A?<CustomizedInputs label={'Germany Defence'} ids={`${country}Defendergermany`}/>: ''}
+        {B?<CustomizedInputs label={'Russia Defence'} ids={`${country}Defenderrussia`}/>: ''}
+        {C?<CustomizedInputs label={'Britain Defence'} ids={`${country}Defenderbritain`}/>: ''}
+        {D?<CustomizedInputs label={'Austria Defence'} ids={`${country}Defenderaustria`}/>: ''}
+        {E?<CustomizedInputs label={'France Defence'} ids={`${country}Defenderfrance`}/>: ''}
+        {F?<CustomizedInputs label={'USA Defence'} ids={`${country}Defenderusa`}/>: ''}
+        {G?<CustomizedInputs label={'Ottoman Defence'} ids={`${country}Defenderottoman`}/>: ''}
+        {H?<CustomizedInputs label={'Italy Defence'} ids={`${country}Defenderitaly`}/>: ''}
+        {I?<CustomizedInputs label={'Serbia Defence'} ids={`${country}Defenderserbia`}/>: ''}
+      </div>
+    );
+  }
+
   pos = async (country, label, pos) => {
     try {
     let x = document.getElementById(`${country}${label}PPShare${pos}`).value
@@ -88,56 +182,168 @@ class GamePowerPoints extends Component {
     }
   }
 
-  whosAttacking = async (country, label) => {
-    let x = 0;
+  whosAttacking = async (label, pos) => {
+    let x = null;
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPSharegermany`).value);
+      x = x + parseInt(document.getElementById(`germany${label}PPShare${pos}`).value);
     }
     catch(err) {}
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPSharerussia`).value);
-  }
-  catch(err) {}
+      x = x + parseInt(document.getElementById(`russia${label}PPShare${pos}`).value);
+    }
+    catch(err) {}
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPSharebritain`).value);
-  }
-  catch(err) {}
+      x = x + parseInt(document.getElementById(`britain${label}PPShare${pos}`).value);
+    }
+    catch(err) {}
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPSharefrance`).value);
-  }
-  catch(err) {}
+      x = x + parseInt(document.getElementById(`france${label}PPShare${pos}`).value);
+    }
+    catch(err) {}
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPShareusa`).value);
-  }
-  catch(err) {}
+      x = x + parseInt(document.getElementById(`usa${label}PPShare${pos}`).value);
+    }
+    catch(err) {}
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPShareaustria`).value);
-  }
-  catch(err) {}
+      x = x + parseInt(document.getElementById(`austria${label}PPShare${pos}`).value);
+    }
+    catch(err) {}
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPShareottoman`).value);
-  }
-  catch(err) {}
+      x = x + parseInt(document.getElementById(`ottoman${label}PPShare${pos}`).value);
+    }
+    catch(err) {}
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPShareitaly`).value);
-  }
-  catch(err) {}
+      x = x + parseInt(document.getElementById(`italy${label}PPShare${pos}`).value);
+    }
+    catch(err) {}
     try {
-    x = x + parseInt(document.getElementById(`${country}${label}PPShareserbia`).value);
+      x = x + parseInt(document.getElementById(`serbia${label}PPShare${pos}`).value);
+    }
+    catch(err) {}
+    return x;
   }
-  catch(err) {}
-    await console.log(x)
+  whosDefending = async (pos) => {
+    let x = null;
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defendergermany`).value);
+    }
+    catch(err) {}
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defenderrussia`).value);
+    }
+    catch(err) {}
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defenderbritain`).value);
+    }
+    catch(err) {}
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defenderfrance`).value);
+    }
+    catch(err) {}
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defenderusa`).value);
+    }
+    catch(err) {}
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defenderaustria`).value);
+    }
+    catch(err) {}
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defenderottoman`).value);
+    }
+    catch(err) {}
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defenderitaly`).value);
+    }
+    catch(err) {}
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defenderserbia`).value);
+    }
+    catch(err) {}
+    return x;
+  }
+  grab = async (detail) => {
+    let x = null;
+    try {
+      x = x + parseInt(document.getElementById(`${pos}Defendergermany`).value);
+    }
+    catch(err) {}
     return x;
   }
 
   isitwar = async (country) => {
-    return
+    let x = [];
+    x.push(this.props.PowerPoints[country]['attacking']['germany'])
+    x.push(this.props.PowerPoints[country]['attacking']['russia'])
+    x.push(this.props.PowerPoints[country]['attacking']['britain'])
+    x.push(this.props.PowerPoints[country]['attacking']['france'])
+    x.push(this.props.PowerPoints[country]['attacking']['usa'])
+    x.push(this.props.PowerPoints[country]['attacking']['austria'])
+    x.push(this.props.PowerPoints[country]['attacking']['ottoman'])
+    x.push(this.props.PowerPoints[country]['attacking']['italy'])
+    x.push(this.props.PowerPoints[country]['attacking']['serbia'])
+    let a = [];
+    if (x[0] === true) {
+      a.push('germany')
+    }
+    if (x[1] === true) {
+      a.push('russia')
+    }
+    if (x[2] === true) {
+      a.push('britain')
+    }
+    if (x[3] === true) {
+      a.push('france')
+    }
+    if (x[4] === true) {
+      a.push('usa')
+    }
+    if (x[5] === true) {
+      a.push('austria')
+    }
+    if (x[6] === true) {
+      a.push('ottoman')
+    }
+    if (x[7] === true) {
+      a.push('italy')
+    }
+    if (x[8] === true) {
+      a.push('serbia')
+    }
+    return a
+  }
+
+  battle = async (country1, country2) => {
+    const x = await this.whosAttacking('attack', country1);
+    const a = await this.whosAttacking('defence', country2)
+    console.log(x);
+    console.log(a);
+    await this.props.history.push("/results");
+  }
+
+  warfinalbattle = async (country) => {
+    let a = this.isitwar(country);
+    this.battle(country, 'russia')
+  }
+
+  startOrg = async (list, country) => {
+    for (let i = 0; list.length >= i; i++) {
+      await console.log(list)
+    }
   }
 
   getResults = async () => {
-    let x = '';
-    x = this.isitwar(this.props.countryOrder[1])
-    this.whosAttacking('germany', 'attacking')
+    this.startOrg(await this.isitwar('germany'), 'germany')
+    this.startOrg(await this.isitwar('russia'), 'russia')
+    this.startOrg(await this.isitwar('britain'), 'britain')
+    this.startOrg(await this.isitwar('france'), 'france')
+    this.startOrg(await this.isitwar('usa'), 'usa')
+    this.startOrg(await this.isitwar('austria'), 'austria')
+    this.startOrg(await this.isitwar('ottoman'), 'ottoman')
+    this.startOrg(await this.isitwar('italy'), 'italy')
+    this.startOrg(await this.isitwar('serbia'), 'serbia')
+    // this.whosAttacking('germany', 'attacking')
+    // this.warfinalbattle('germany')
   }
 
   render() {
@@ -152,6 +358,7 @@ class GamePowerPoints extends Component {
           <div className="countryPP">
             <div className="countryTitle">Germany</div>
             <div className="countryPowerP">{this.state.Germany} Power Points Available</div>
+            <div>{this.defend('germany')}</div>
           </div>
           <div className="countryPPAttacking">
             <div>Attacking</div>
@@ -168,6 +375,7 @@ class GamePowerPoints extends Component {
 
           <div className="countryPP">
             <div className="countryTitle">Russia</div>
+            <div>{this.defend('russia')}</div>
           </div>
           <div className="countryPPAttacking">
             <div>Attacking</div>
@@ -184,6 +392,7 @@ class GamePowerPoints extends Component {
 
           <div className="countryPP">
             <div className="countryTitle">Britain</div>
+            <div>{this.defend('britain')}</div>
           </div>
           <div className="countryPPAttacking">
             <div>Attacking</div>
@@ -200,6 +409,7 @@ class GamePowerPoints extends Component {
 
           <div className="countryPP">
             <div className="countryTitle">France</div>
+            <div>{this.defend('france')}</div>
           </div>
           <div className="countryPPAttacking">
             <div>Attacking</div>
@@ -218,6 +428,7 @@ class GamePowerPoints extends Component {
           <div>
             <div className="countryPP">
               <div className="countryTitle">United States</div>
+              <div>{this.defend('usa')}</div>
             </div>
             <div className="countryPPAttacking">
               <div>Attacking</div>
@@ -235,6 +446,7 @@ class GamePowerPoints extends Component {
 
           <div className="countryPP">
             <div className="countryTitle">Austria</div>
+            <div>{this.defend('austria')}</div>
           </div>
           <div className="countryPPAttacking">
             <div>Attacking</div>
@@ -251,6 +463,7 @@ class GamePowerPoints extends Component {
 
           <div className="countryPP">
             <div className="countryTitle">Ottoman Empire</div>
+            <div>{this.defend('ottoman')}</div>
           </div>
           <div className="countryPPAttacking">
             <div>Attacking</div>
@@ -267,6 +480,7 @@ class GamePowerPoints extends Component {
 
           <div className="countryPP">
             <div className="countryTitle">Italy</div>
+            <div>{this.defend('italy')}</div>
           </div>
           <div className="countryPPAttacking">
             <div>Attacking</div>
@@ -285,6 +499,7 @@ class GamePowerPoints extends Component {
           <div>
             <div className="countryPP">
               <div className="countryTitle">Serbia</div>
+              <div>{this.defend('serbia')}</div>
             </div>
             <div className="countryPPAttacking">
               <div>Attacking</div>
@@ -301,9 +516,9 @@ class GamePowerPoints extends Component {
           </div>
           : ''}
           <div id="resultsButton">
-            <Link to="/results" onClick={() => this.getResults()}>
+            <div to="/results" onClick={() => this.getResults()}>
                 {ContainedButtons('Results')}
-            </Link>
+            </div>
           </div>
         </div>
         <Footer/>

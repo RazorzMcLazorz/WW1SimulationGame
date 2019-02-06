@@ -39,7 +39,7 @@ class Attacking extends React.Component {
   };
 
   Swap = async (check, country, pos) => {
-    if (check) {
+    if (check == true) {
       await this.props.changeState({
         PowerPoints : {
           ...this.props.PowerPoints, [country] : {
@@ -50,7 +50,7 @@ class Attacking extends React.Component {
         }
       });
     }
-    else {
+    else if (check == false) {
     await this.props.changeState({
       PowerPoints : {
         ...this.props.PowerPoints, [country] : {
@@ -60,8 +60,19 @@ class Attacking extends React.Component {
         }
       }
     });
-    
     }
+    else {
+      await this.props.changeState({
+        PowerPoints : {
+          ...this.props.PowerPoints, [country] : {
+            ...this.props.PowerPoints[country], [this.props.label] : {
+              ...this.props.PowerPoints[country][this.props.label], [pos] : true
+            }
+          }
+        }
+      });
+      
+      }
     console.log(this.props.PowerPoints[country]['attacking'])
     console.log('Material UI' + this.props.username)
   }
@@ -76,7 +87,7 @@ class Attacking extends React.Component {
     return (
       <FormGroup row>
       {this.props.country == 'germany' ? '' :
-        <FormControlLabel onClick={() => this.Swap(this.state.checkedI, this.props.country, 'germany')}
+        <FormControlLabel onClick={() => this.Swap(this.state.checkedA, this.props.country, 'germany')}
           control={
             <Checkbox
               checked={this.state.checkedA}
@@ -89,7 +100,7 @@ class Attacking extends React.Component {
           label="Germany"
         />}
         {this.props.country == 'russia' ? '' :
-        <FormControlLabel onClick={() => this.Swap(this.state.checkedI, this.props.country, 'russia')}
+        <FormControlLabel onClick={() => this.Swap(this.state.checkedB, this.props.country, 'russia')}
           control={
             <Checkbox
               checked={this.state.checkedB}
@@ -102,7 +113,7 @@ class Attacking extends React.Component {
           label="Russia"
         />}
         {this.props.country == 'britain' ? '' :
-        <FormControlLabel onClick={() => this.Swap(this.state.checkedI, this.props.country, 'britain')}
+        <FormControlLabel onClick={() => this.Swap(this.state.checkedC, this.props.country, 'britain')}
           control={
             <Checkbox
               checked={this.state.checkedC}
@@ -115,7 +126,7 @@ class Attacking extends React.Component {
           label="Britain"
         />}
         {this.props.country == 'france' ? '' :
-        <FormControlLabel onClick={() => this.Swap(this.state.checkedI, this.props.country, 'france')}
+        <FormControlLabel onClick={() => this.Swap(this.state.checkedD, this.props.country, 'france')}
           control={
             <Checkbox
               checked={this.state.checkedD}
@@ -129,7 +140,7 @@ class Attacking extends React.Component {
         />}
         {this.props.country == 'usa' ? '' :
         this.state.count >= 9 ?
-        <FormControlLabel onClick={() => this.Swap(this.state.checkedI, this.props.country, 'usa')}
+        <FormControlLabel onClick={() => this.Swap(this.state.checkedE, this.props.country, 'usa')}
           control={
             <Checkbox
               checked={this.state.checkedE}
@@ -142,7 +153,7 @@ class Attacking extends React.Component {
           label="United States"
         />: ''}
         {this.props.country == 'austria' ? '' :
-        <FormControlLabel onClick={() => this.Swap(this.state.checkedI, this.props.country, 'austria')}
+        <FormControlLabel onClick={() => this.Swap(this.state.checkedF, this.props.country, 'austria')}
           control={
             <Checkbox
               checked={this.state.checkedF}
@@ -155,7 +166,7 @@ class Attacking extends React.Component {
           label="Austria"
         />}
         {this.props.country == 'ottoman' ? '' :
-        <FormControlLabel onClick={() => this.Swap(this.state.checkedI, this.props.country, 'ottoman')}
+        <FormControlLabel onClick={() => this.Swap(this.state.checkedG, this.props.country, 'ottoman')}
           control={
             <Checkbox
               checked={this.state.checkedG}
@@ -168,7 +179,7 @@ class Attacking extends React.Component {
           label="Ottoman Empire"
         />}
         {this.props.country == 'italy' ? '' :
-        <FormControlLabel onClick={() => this.Swap(this.state.checkedI, this.props.country, 'italy')}
+        <FormControlLabel onClick={() => this.Swap(this.state.checkedH, this.props.country, 'italy')}
           control={
             <Checkbox
               checked={this.state.checkedH}
