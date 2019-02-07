@@ -184,80 +184,101 @@ class GamePowerPoints extends Component {
 
   whosAttacking = async (label, pos) => {
     let x = null;
+    let a = null;
     try {
-      x = x + parseInt(document.getElementById(`germany${label}PPShare${pos}`).value);
+      a = +document.getElementById(`germany${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`russia${label}PPShare${pos}`).value);
+      a = +document.getElementById(`russia${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`britain${label}PPShare${pos}`).value);
+      a = +document.getElementById(`britain${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`france${label}PPShare${pos}`).value);
+      a = +document.getElementById(`france${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`usa${label}PPShare${pos}`).value);
+      a = +document.getElementById(`usa${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`austria${label}PPShare${pos}`).value);
+      a = +document.getElementById(`austria${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`ottoman${label}PPShare${pos}`).value);
+      a = +document.getElementById(`ottoman${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`italy${label}PPShare${pos}`).value);
+      a = +document.getElementById(`italy${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`serbia${label}PPShare${pos}`).value);
+      a = +document.getElementById(`serbia${label}PPShare${pos}`).value;
+      x = x + a;
     }
     catch(err) {}
-    return x;
+    console.log(x);
+    return ;
   }
   whosDefending = async (pos) => {
     let x = null;
+    let a = null;
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defendergermany`).value);
+      a = +document.getElementById(`${pos}Defendergermany`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defenderrussia`).value);
+      a = +document.getElementById(`${pos}Defenderrussia`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defenderbritain`).value);
+      a = +document.getElementById(`${pos}Defenderbritain`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defenderfrance`).value);
+      a = +document.getElementById(`${pos}Defenderfrance`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defenderusa`).value);
+      a = +document.getElementById(`${pos}Defenderusa`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defenderaustria`).value);
+      a = +document.getElementById(`${pos}Defenderaustria`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defenderottoman`).value);
+      a = +document.getElementById(`${pos}Defenderottoman`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defenderitaly`).value);
+      a = +document.getElementById(`${pos}Defenderitaly`).value;
+      x = x + a;
     }
     catch(err) {}
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defenderserbia`).value);
+      a = +document.getElementById(`${pos}Defenderserbia`).value;
+      x = x + a;
     }
     catch(err) {}
     return x;
@@ -265,7 +286,8 @@ class GamePowerPoints extends Component {
   grab = async (detail) => {
     let x = null;
     try {
-      x = x + parseInt(document.getElementById(`${pos}Defendergermany`).value);
+      a = +document.getElementById(`${pos}Defendergermany`).value;
+      x = x + a;
     }
     catch(err) {}
     return x;
@@ -328,20 +350,29 @@ class GamePowerPoints extends Component {
 
   startOrg = async (list, country) => {
     for (let i = 0; list.length >= i; i++) {
-      await console.log(list)
+      let Atk = list[i];
+      if (Atk) {
+        console.log(Atk)
+        let x = await this.whosAttacking('attack', country)
+        
+        let d = await this.whosAttacking('defence', Atk)
+        console.log(d)
+        d = d + await this.whosDefending(Atk)
+        console.log(d)
+      }
     }
   }
 
   getResults = async () => {
     this.startOrg(await this.isitwar('germany'), 'germany')
-    this.startOrg(await this.isitwar('russia'), 'russia')
+    this.startOrg(await this.isitwar('russia'),  'russia')
     this.startOrg(await this.isitwar('britain'), 'britain')
-    this.startOrg(await this.isitwar('france'), 'france')
-    this.startOrg(await this.isitwar('usa'), 'usa')
+    this.startOrg(await this.isitwar('france'),  'france')
+    this.startOrg(await this.isitwar('usa'),     'usa')
     this.startOrg(await this.isitwar('austria'), 'austria')
     this.startOrg(await this.isitwar('ottoman'), 'ottoman')
-    this.startOrg(await this.isitwar('italy'), 'italy')
-    this.startOrg(await this.isitwar('serbia'), 'serbia')
+    this.startOrg(await this.isitwar('italy'),   'italy')
+    this.startOrg(await this.isitwar('serbia'),  'serbia')
     // this.whosAttacking('germany', 'attacking')
     // this.warfinalbattle('germany')
   }
