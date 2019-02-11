@@ -12,6 +12,17 @@ const initialState = {
   lname: '',
   loadGames : [],
   round: 0,
+  countryPast : {
+    'germany': 1,
+    'russia': 2,
+    'britain': 3,
+    'france': 4,
+    'usa': 5,
+    'austria': 6,
+    'ottoman': 7,
+    'italy': 8,
+    'serbia': 9,
+  },
 countryOrder : {
     1: 'germany',
     2: 'russia',

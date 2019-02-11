@@ -14,42 +14,54 @@ class GamePowerPoints extends Component {
   state = {
     Germany : 20000,
     AttackOrder : [],
+    posit : 1,
+    rank : {
+      1 : null,
+      2 : null,
+      3 : null,
+      4 : null,
+      5 : null,
+      6 : null,
+      7 : null,
+      8 : null,
+      9 : null,
+    },
     Order : {
       'germany' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
       'russia' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
       'britain' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
       'france' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
       'usa' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
       'austria' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
       'ottoman' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
       'italy' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
       'serbia' : {
-        Win : null,
-        Loss : null,
+        'Win' : 0,
+        'Loss' : 0,
       },
     }
   }
@@ -183,8 +195,8 @@ class GamePowerPoints extends Component {
   }
 
   whosAttacking = async (label, pos) => {
-    let x = null;
-    let a = null;
+    let x = 0;
+    let a = 0;
     try {
       a = +document.getElementById(`germany${label}PPShare${pos}`).value;
       x = x + a;
@@ -231,7 +243,7 @@ class GamePowerPoints extends Component {
     }
     catch(err) {}
     console.log(x);
-    return ;
+    return x;
   }
   whosDefending = async (pos) => {
     let x = null;
@@ -343,6 +355,19 @@ class GamePowerPoints extends Component {
     await this.props.history.push("/results");
   }
 
+  Attacker = async (country, attacking) => {
+    let x = 0
+    console.log(country)
+    console.log(attacking)
+    try {
+    let a = +document.getElementById(`${country}attackingPPShare${attacking}`).value
+    console.log(a)
+    x = x + a;
+    }
+    catch(err) {}
+    return x
+  }
+
   warfinalbattle = async (country) => {
     let a = this.isitwar(country);
     this.battle(country, 'russia')
@@ -352,15 +377,130 @@ class GamePowerPoints extends Component {
     for (let i = 0; list.length >= i; i++) {
       let Atk = list[i];
       if (Atk) {
+        console.log(country)
         console.log(Atk)
         let x = await this.whosAttacking('attack', country)
-        
+        await console.log(x)
+        x = x + await this.Attacker(country, Atk)
+        await console.log(x)
         let d = await this.whosAttacking('defence', Atk)
-        console.log(d)
+        await console.log(d)
         d = d + await this.whosDefending(Atk)
-        console.log(d)
+        await console.log(d)
+        if (x > d) {
+          console.log('attacking win')
+          this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
+          console.log(this.state.Order[country]['Win'])
+          this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Loss']: this.state.Order[Atk]['Loss'] + 1 } } })
+          console.log(this.state.Order[Atk]['Loss'])
+        }
+        else if (d > x) {
+          console.log('defence win')
+          this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Win']: this.state.Order[Atk]['Win'] + 1 } } })
+          console.log(this.state.Order[Atk]['Win'])
+          this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Loss']: this.state.Order[country]['Loss'] + 1 } } })
+          console.log(this.state.Order[country]['Loss'])
+        }
+        else if (d == x) {
+          console.log('Tie')
+          if (this.props.countryPast[country] < this.props.countryPast[Atk]) {
+            console.log('attacking win')
+            this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
+            console.log(this.state.Order[country]['Win'])
+            this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Loss']: this.state.Order[Atk]['Loss'] + 1 } } })
+            console.log(this.state.Order[Atk]['Loss'])
+          }
+          else if (this.props.countryPast[country] > this.props.countryPast[Atk]) {
+            console.log('defence win')
+            this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Win']: this.state.Order[Atk]['Win'] + 1 } } })
+            console.log(this.state.Order[Atk]['Win'])
+            this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Loss']: this.state.Order[country]['Loss'] + 1 } } })
+            console.log(this.state.Order[country]['Loss'])
+          }
+          else {
+            console.log('failed')
+          }
+        }
+        else {
+          console.log('failed')
+        }
       }
     }
+  }
+
+  noLoss = async () => {
+    let a = [];
+    let x = [];
+    if (this.state.Order['germany']['Loss'] == 0) {
+      a.push('germany');
+      x.push(this.state.Order['germany']['Win'])
+      console.log('g')
+    }
+    if (this.state.Order['russia']['Loss'] == 0) {
+      a.push('russia');
+      x.push(this.state.Order['russia']['Win'])
+      console.log('r')
+    }
+    if (this.state.Order['britain']['Loss'] == 0) {
+      a.push('britain');
+      x.push(this.state.Order['britain']['Win'])
+      console.log('b')
+    }
+    if (this.state.Order['france']['Loss'] == 0) {
+      a.push('france');
+      x.push(this.state.Order['france']['Win'])
+      console.log('f')
+    }
+    if (this.state.Order['usa']['Loss'] == 0) {
+      a.push('usa');
+      x.push(this.state.Order['usa']['Win'])
+      console.log('u')
+    }
+    if (this.state.Order['austria']['Loss'] == 0) {
+      a.push('austria');
+      x.push(this.state.Order['austria']['Win'])
+      console.log('a')
+    }
+    if (this.state.Order['ottoman']['Loss'] == 0) {
+      a.push('ottoman');
+      x.push(this.state.Order['ottoman']['Win'])
+      console.log('o')
+    }
+    if (this.state.Order['italy']['Loss'] == 0) {
+      a.push('italy');
+      x.push(this.state.Order['italy']['Win'])
+      console.log('i')
+    }
+    if (this.state.Order['serbia']['Loss'] == 0) {
+      a.push('serbia');
+      x.push(this.state.Order['serbia']['Win'])
+      console.log('s')
+    }
+    let tie = undefined;
+    let m = undefined;
+    for (let i = 0; a.length >= i; i++) {
+      try {
+      tie = a[i]
+      console.log(a)
+      console.log(tie)
+      console.log(x)
+      m = Math.max(...x)
+      console.log(m + " " + this.state.Order[tie]['Win'])
+      if (tie) {
+        if (this.state.Order[tie]['Win'] == m) {
+          console.log('first place' + tie)
+          await this.setState({rank: { ...this.state.rank, [this.state.posit]: tie } })
+          await this.setState({posit : this.state.posit + 1 })
+          console.log(tie + ' ' + m + ' ' + x)
+          x.splice( x.indexOf(m), 9 )
+          console.log(tie + ' ' + m + ' ' + x)
+        }
+      }
+      }
+      catch(err) {}
+    }
+    console.log(x)
+    console.log(this.state.Order)
   }
 
   getResults = async () => {
@@ -375,6 +515,8 @@ class GamePowerPoints extends Component {
     this.startOrg(await this.isitwar('serbia'),  'serbia')
     // this.whosAttacking('germany', 'attacking')
     // this.warfinalbattle('germany')
+    await this.noLoss()
+    console.log(this.state.rank)
   }
 
   render() {
