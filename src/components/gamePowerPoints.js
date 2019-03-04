@@ -561,6 +561,7 @@ class GamePowerPoints extends Component {
   }
 
   organizationofWins = async () => {
+    let countryList = ['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia']
     let noLoss = []
     let noILoss = []
     let Win = []
@@ -571,175 +572,28 @@ class GamePowerPoints extends Component {
     // 0 I losses
     // Most Wins
     // Most I Wins
-    if (this.state.Order['germany']['Loss'] == 0 ) {
-      await noLoss.push('germany')
-    }
-    if (this.state.Order['germany']['ILoss'] == 0) {
-      await noILoss.push('germany')
-    }
-    if (this.state.Order['germany']['Win'] > 0 ) {
-      await Win.push('germany')
-    }
-    if (this.state.Order['germany']['IWin'] > 0) {
-      await IWin.push('germany')
-    }
-    if (this.state.Order['germany']['Win'] == 0 ) {
-      await noWin.push('germany')
-    }
-    if (this.state.Order['germany']['IWin'] == 0) {
-      await noIWin.push('germany')
-    }
-
-    if (this.state.Order['russia']['Loss'] == 0 ) {
-      await noLoss.push('russia')
-    }
-    if (this.state.Order['russia']['ILoss'] == 0) {
-      await noILoss.push('russia')
-    }
-    if (this.state.Order['russia']['Win'] > 0 ) {
-      await Win.push('russia')
-    }
-    if (this.state.Order['russia']['IWin'] > 0) {
-      await IWin.push('russia')
-    }
-    if (this.state.Order['russia']['Win'] == 0 ) {
-      await noWin.push('russia')
-    }
-    if (this.state.Order['russia']['IWin'] == 0) {
-      await noIWin.push('russia')
-    }
-
-    if (this.state.Order['britain']['Loss'] == 0 ) {
-      await noLoss.push('britain')
-    }
-    if (this.state.Order['britain']['ILoss'] == 0) {
-      await noILoss.push('britain')
-    }
-    if (this.state.Order['britain']['Win'] > 0 ) {
-      await Win.push('britain')
-    }
-    if (this.state.Order['britain']['IWin'] > 0) {
-      await IWin.push('britain')
-    }
-    if (this.state.Order['britain']['Win'] == 0 ) {
-      await noWin.push('britain')
-    }
-    if (this.state.Order['britain']['IWin'] == 0) {
-      await noIWin.push('britain')
-    }
-
-    if (this.state.Order['france']['Loss'] == 0 ) {
-      await noLoss.push('france')
-    }
-    if (this.state.Order['france']['ILoss'] == 0) {
-      await noILoss.push('france')
-    }
-    if (this.state.Order['france']['Win'] > 0 ) {
-      await Win.push('france')
-    }
-    if (this.state.Order['france']['IWin'] > 0) {
-      await IWin.push('france')
-    }
-    if (this.state.Order['france']['Win'] == 0 ) {
-      await noWin.push('france')
-    }
-    if (this.state.Order['france']['IWin'] == 0) {
-      await noIWin.push('france')
-    }
-
-    if (this.state.Order['usa']['Loss'] == 0 ) {
-      await noLoss.push('usa')
-    }
-    if (this.state.Order['usa']['ILoss'] == 0) {
-      await noILoss.push('usa')
-    }
-    if (this.state.Order['usa']['Win'] > 0 ) {
-      await Win.push('usa')
-    }
-    if (this.state.Order['usa']['IWin'] > 0) {
-      await IWin.push('usa')
-    }
-    if (this.state.Order['usa']['Win'] == 0 ) {
-      await noWin.push('usa')
-    }
-    if (this.state.Order['usa']['IWin'] == 0) {
-      await noIWin.push('usa')
-    }
-
-    if (this.state.Order['austria']['Loss'] == 0 ) {
-      await noLoss.push('austria')
-    }
-    if (this.state.Order['austria']['ILoss'] == 0) {
-      await noILoss.push('austria')
-    }
-    if (this.state.Order['austria']['Win'] > 0 ) {
-      await Win.push('austria')
-    }
-    if (this.state.Order['austria']['IWin'] > 0) {
-      await IWin.push('austria')
-    }
-    if (this.state.Order['austria']['Win'] == 0 ) {
-      await noWin.push('austria')
-    }
-    if (this.state.Order['austria']['IWin'] == 0) {
-      await noIWin.push('austria')
-    }
-
-    if (this.state.Order['ottoman']['Loss'] == 0 ) {
-      await noLoss.push('ottoman')
-    }
-    if (this.state.Order['ottoman']['ILoss'] == 0) {
-      await noILoss.push('ottoman')
-    }
-    if (this.state.Order['ottoman']['Win'] > 0 ) {
-      await Win.push('ottoman')
-    }
-    if (this.state.Order['ottoman']['IWin'] > 0) {
-      await IWin.push('ottoman')
-    }
-    if (this.state.Order['ottoman']['Win'] == 0 ) {
-      await noWin.push('ottoman')
-    }
-    if (this.state.Order['ottoman']['IWin'] == 0) {
-      await noIWin.push('ottoman')
-    }
-
-    if (this.state.Order['italy']['Loss'] == 0 ) {
-      await noLoss.push('italy')
-    }
-    if (this.state.Order['italy']['ILoss'] == 0) {
-      await noILoss.push('italy')
-    }
-    if (this.state.Order['italy']['Win'] > 0 ) {
-      await Win.push('italy')
-    }
-    if (this.state.Order['italy']['IWin'] > 0) {
-      await IWin.push('italy')
-    }
-    if (this.state.Order['italy']['Win'] == 0 ) {
-      await noWin.push('italy')
-    }
-    if (this.state.Order['italy']['IWin'] == 0) {
-      await noIWin.push('italy')
-    }
-
-    if (this.state.Order['serbia']['Loss'] == 0 ) {
-      await noLoss.push('serbia')
-    }
-    if (this.state.Order['serbia']['ILoss'] == 0) {
-      await noILoss.push('serbia')
-    }
-    if (this.state.Order['serbia']['Win'] > 0 ) {
-      await Win.push('serbia')
-    }
-    if (this.state.Order['serbia']['IWin'] > 0) {
-      await IWin.push('serbia')
-    }
-    if (this.state.Order['serbia']['Win'] == 0 ) {
-      await noWin.push('serbia')
-    }
-    if (this.state.Order['serbia']['IWin'] == 0) {
-      await noIWin.push('serbia')
+    for (let i = 0; countryList.length < 0; i++) {
+      if (this.state.Order[countryList[i]]['Loss'] == 0 ) {
+        await noLoss.push(countryList[i])
+      }
+      if (this.state.Order[countryList[i]]['Loss'] == 0 ) {
+        await noLoss.push(countryList[i])
+      }
+      if (this.state.Order[countryList[i]]['ILoss'] == 0) {
+        await noILoss.push(countryList[i])
+      }
+      if (this.state.Order[countryList[i]]['Win'] > 0 ) {
+        await Win.push(countryList[i])
+      }
+      if (this.state.Order[countryList[i]]['IWin'] > 0) {
+        await IWin.push(countryList[i])
+      }
+      if (this.state.Order[countryList[i]]['Win'] == 0 ) {
+        await noWin.push(countryList[i])
+      }
+      if (this.state.Order[countryList[i]]['IWin'] == 0) {
+        await noIWin.push(countryList[i])
+      }
     }
   }
  
