@@ -565,106 +565,149 @@ class GamePowerPoints extends Component {
     console.log(this.state.Order)
   }
 
-  organizationofWins = async () => {
-    console.log('organization')
-    let rPosit = 1;
-    let countryList = ['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia']
-    let noLoss = []
-    let noILoss = []
-    let noLossILoss = []
-    let Win = []
-    let IWin = []
-    let noWin = []
-    let noIWin = []
-    let temp = undefined;
-    // 0 losses
-    // 0 I losses
-    // Most Wins
-    // Most I Wins
-    for (let i = 0; countryList.length > 0; i++) {
-      console.log(countryList.length)
-      try {
-        if (this.state.Order[countryList[i]]['Loss'] <= 0 ) {
-          await noLoss.push(countryList[i])
-          if (this.state.Order[countryList[i]]['ILoss'] <= 0) {
-            await noLossILoss.push(countryList[i])
-          }
-        }
-        if (this.state.Order[countryList[i]]['ILoss'] <= 0) {
-          await noILoss.push(countryList[i])
-        }
-        if (this.state.Order[countryList[i]]['Win'] > 0 ) {
-          await Win.push(countryList[i])
-        }
-        if (this.state.Order[countryList[i]]['IWin'] > 0) {
-          await IWin.push(countryList[i])
-        }
-        if (this.state.Order[countryList[i]]['Win'] <= 0 ) {
-          await noWin.push(countryList[i])
-        }
-        if (this.state.Order[countryList[i]]['IWin'] <= 0) {
-          await noIWin.push(countryList[i])
-        }
+  sort = async (countryList, Order) => {
+    let x = countryList[0]
+    countryList.forEach(entry => {
+      if (Order[x]['Loss'] < Order[entry]['Loss']) {
+        console.log(x)
+        x = x
+        console.log('x Greater than entry')
       }
-      catch(err) {break;}
-    }
-    // sorts through all no losses to order
-    console.log(noLossILoss.length)
-    while (noLossILoss >= 0) {
-      noLossILoss.forEach(entry => {
-        noLossILoss.forEach (compare => {
-          if (noLossILoss.length <= 1) {
-            console.log(entry)
-            temp = entry
-            console.log('no losses nor indirect losses')
+      else {
+        console.log('x = Comapare')
+        if ((Order[x]['ILoss'] < Order[entry]['ILoss'])) {
+          console.log(x)
+          x = x
+          console.log('x Greater than entry')
+        }
+        else {
+          console.log('x = entry')
+          console.log(Order[x]['IWin'] + " " + Order[entry]['IWin'])
+          if (Order[x]['Win'] > Order[entry]['Win']) {
+            x = x
           }
-
-          if (this.state.Order[entry]['Win'] > this.state.Order[compare]['Win']) {
-            console.log(entry)
-            temp = entry
-            console.log('Entry Greater than Compare')
-          }
-
-          else if ((this.state.Order[entry]['Win'] == this.state.Order[compare]['Win'])) {
-            console.log('Entry = Comapare')
-            console.log(this.state.Order[entry]['Win'] + " " + this.state.Order[compare]['Win'])
-            if ((this.state.Order[entry]['IWin'] > this.state.Order[compare]['IWin'])) {
-              console.log(entry)
-              temp = entry
-              console.log('Entry Greater than Compare')
+          else {
+            if (Order[x]['IWin'] > Order[entry]['IWin']) {
+              x = x
             }
-            
-            else if ((this.state.Order[entry]['IWin'] == this.state.Order[compare]['IWin'])) {
-              console.log('Entry = Comapare')
-              console.log(this.state.Order[entry]['IWin'] + " " + this.state.Order[compare]['IWin'])
-              if (this.props.countryPast[entry] < this.props.countryPast[compare]) {
-                console.log(entry)
-                temp = entry
-                console.log('Entry is Less than Comapare')
-                console.log(this.props.countryPast[entry] + " " + this.props.countryPast[compare])
+            else {
+              if (this.props.countryPast[x] < this.props.countryPast[entry]) {
+                console.log(x)
+                x = x
+                console.log('x is Less than entry')
+                console.log(this.props.countryPast[x] + " " + this.props.countryPast[entry])
               }
             }
           }
-        })
+        }
+      }
+      countryList.forEach (compare => {
+        if (Order[entry]['Loss'] < Order[compare]['Loss']) {
+          console.log(entry)
+          x = entry
+          console.log('Entry Greater than Compare')
+        }
+        else {
+          console.log('Entry = Comapare')
+          if ((Order[entry]['ILoss'] < Order[compare]['ILoss'])) {
+            console.log(entry)
+            x = entry
+            console.log('Entry Greater than Compare')
+          }
+          else {
+            console.log('Entry = Comapare')
+            console.log(Order[entry]['IWin'] + " " + Order[compare]['IWin'])
+            if (Order[entry]['Win'] > Order[compare]['Win']) {
+              x = entry
+            }
+            else {
+              if (Order[entry]['IWin'] > Order[compare]['IWin']) {
+                x = entry
+              }
+              else {
+                if (this.props.countryPast[entry] < this.props.countryPast[compare]) {
+                  console.log(entry)
+                  x = entry
+                  console.log('Entry is Less than Comapare')
+                  console.log(this.props.countryPast[entry] + " " + this.props.countryPast[compare])
+                }
+              }
+            }
+          }
+        }
       })
-      await this.setState({
-        rank : { ...this.state.rank, [this.state.rankPosit]: temp },
-        rankPosit : this.state.rankPosit + 1
-      })
-      rPosit = rPosit + 1
-      console.log(noLossILoss)
-      console.log(temp, this.state.rankPosit - 1)
-      noLossILoss.splice(temp, 1)
-      countryList.splice(temp, 1)
-      noLoss.splice(temp, 1)
-      noILoss.splice(temp, 1)
-      Win.splice(temp, 1)
-      IWin.splice(temp, 1)
-      noWin.splice(temp, 1)
-      noIWin.splice(temp, 1)
-      temp = undefined
-    }
-    console.log(this.state.rank)
+    })
+    return x
+  }
+
+  organizationofWins = async (countryList) => {
+    let rPosit = 1
+    countryList.forEach(() => {
+      const c = this.sort(countryList, this.state.Order)
+
+    })
+    
+    // let noLoss = []
+    // let noILoss = []
+    // let noLossILoss = []
+    // let Win = []
+    // let IWin = []
+    // let noWin = []
+    // let noIWin = []
+    // let temp = undefined;
+    // // 0 losses
+    // // 0 I losses
+    // // Most Wins
+    // // Most I Wins
+    // for (let i = 0; countryList.length > 0; i++) {
+    //   console.log(countryList.length)
+    //   try {
+    //     if (this.state.Order[countryList[i]]['Loss'] <= 0 ) {
+    //       await noLoss.push(countryList[i])
+    //       if (this.state.Order[countryList[i]]['ILoss'] <= 0) {
+    //         await noLossILoss.push(countryList[i])
+    //       }
+    //     }
+    //     if (this.state.Order[countryList[i]]['ILoss'] <= 0) {
+    //       await noILoss.push(countryList[i])
+    //     }
+    //     if (this.state.Order[countryList[i]]['Win'] > 0 ) {
+    //       await Win.push(countryList[i])
+    //     }
+    //     if (this.state.Order[countryList[i]]['IWin'] > 0) {
+    //       await IWin.push(countryList[i])
+    //     }
+    //     if (this.state.Order[countryList[i]]['Win'] <= 0 ) {
+    //       await noWin.push(countryList[i])
+    //     }
+    //     if (this.state.Order[countryList[i]]['IWin'] <= 0) {
+    //       await noIWin.push(countryList[i])
+    //     }
+    //   }
+    //   catch(err) {break;}
+    // }
+    // // sorts through all no losses to order
+    // console.log(countryList.length)
+    // while (countryList >= 0) {
+      
+    //   await this.setState({
+    //     rank : { ...this.state.rank, [this.state.rankPosit]: temp },
+    //     rankPosit : this.state.rankPosit + 1
+    //   })
+    //   rPosit = rPosit + 1
+    //   console.log(noLossILoss)
+    //   console.log(temp, this.state.rankPosit - 1)
+    //   noLossILoss.splice(temp, 1)
+    //   countryList.splice(temp, 1)
+    //   noLoss.splice(temp, 1)
+    //   noILoss.splice(temp, 1)
+    //   Win.splice(temp, 1)
+    //   IWin.splice(temp, 1)
+    //   noWin.splice(temp, 1)
+    //   noIWin.splice(temp, 1)
+    //   temp = undefined
+    // }
+    // console.log(this.state.rank)
   }
 
   getResults = async () => {
@@ -680,7 +723,7 @@ class GamePowerPoints extends Component {
     // this.whosAttacking('germany', 'attacking')
     // this.warfinalbattle('germany')
     // await this.noLoss()
-    await this.organizationofWins()
+    await this.organizationofWins(['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia'])
   }
 
   render() {
