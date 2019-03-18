@@ -213,8 +213,6 @@ class GamePowerPoints extends Component {
   pos = async (country, label, pos) => {
     try {
     let x = document.getElementById(`${country}${label}PPShare${pos}`).value
-    // x = await parseInt(x)
-    console.log('id ' + x)
     return x
     }
     catch(err) {
@@ -347,17 +345,8 @@ class GamePowerPoints extends Component {
     catch(err) {}
     return x;
   }
-  grab = async (detail) => {
-    let x = null;
-    try {
-      a = +document.getElementById(`${pos}Defendergermany`).value;
-      x = x + a;
-    }
-    catch(err) {}
-    return x;
-  }
 
-  isitwar = async (country) => {
+  isitwar (country) {
     const ppatk = this.props.PowerPoints[country]['attacking']
 
     const x = countryListGlobal.map(c => ppatk[c])
@@ -396,25 +385,20 @@ class GamePowerPoints extends Component {
   battle = async (country1, country2) => {
     const x = await this.whosAttacking('attack', country1);
     const a = await this.whosAttacking('defence', country2)
-    console.log(x);
-    console.log(a);
     await this.props.history.push("/results");
   }
 
-  Attacker = async (country, attacking) => {
+  Attacker (country, attacking) {
     let x = 0
-    console.log(country)
-    console.log(attacking)
     try {
     let a = +document.getElementById(`${country}attackingPPShare${attacking}`).value
-    console.log(a)
     x = x + a;
     }
     catch(err) {}
     return x
   }
 
-  warfinalbattle = async (country) => {
+  warfinalbattle (country) {
     let a = this.isitwar(country);
     this.battle(country, 'russia')
   }
@@ -426,19 +410,12 @@ class GamePowerPoints extends Component {
         console.log(country)
         console.log(Atk)
         let x = await this.whosAttacking('attack', country)
-        await console.log(x)
         x = x + await this.Attacker(country, Atk)
-        await console.log(x)
         let d = await this.whosAttacking('defence', Atk)
-        await console.log(d)
         d = d + await this.whosDefending(Atk)
-        await console.log(d)
         if (x > d) {
-          console.log('attacking win')
           await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
-          console.log(this.state.Order[country]['Win'])
           await this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Loss']: this.state.Order[Atk]['Loss'] + 1 } } })
-          console.log(this.state.Order[Atk]['Loss'])
           for (let o = 0; this.state.indirect['atk'].length >= o; o++) {
             if (this.state.indirect['atk'] == []) {
               await this.setState({Order: { ...this.state.Order, [this.state.indirect['atk'][o]]: { ...this.state.Order[this.state.indirect['atk'][o]], ['IWin']: this.state.Order[this.state.indirect['atk'][o]]['IWin'] + 1 } } })
@@ -570,34 +547,22 @@ sort(countryList, Order, countryPast) {
     countryList.forEach(entry => {
       if (Order[x]['Loss'] > Order[entry]['Loss']) {
         x = entry
-        console.log(`76 x ${Order[x]['Loss']} > entry ${Order[entry]['Loss']} ${x}`)
       }
-
       else if (Order[x]['Loss'] == Order[entry]['Loss']) {
-        console.log(`80 x ${Order[x]['Loss']} == entry ${Order[entry]['Loss']} ${x}`)
         if (Order[x]['ILoss'] > Order[entry]['ILoss']) {
           x = entry
-          console.log(`83 x ${Order[x]['ILoss']} > entry ${Order[entry]['ILoss']} ${x}`)
         }
-
         else if (Order[x]['ILoss'] == Order[entry]['ILoss']) {
-          console.log(`87 x ${Order[x]['ILoss']} == entry ${Order[entry]['ILoss']} ${x}`)
           if (Order[x]['Win'] < Order[entry]['Win']) {
             x = entry
-			console.log(`90 x ${Order[x]['Win']} < entry ${Order[entry]['Win']} ${x}`)
           }
-
           else if (Order[x]['Win'] == Order[entry]['Win']) {
             if (Order[x]['IWin'] < Order[entry]['IWin']) {
               x = entry
-			  console.log(`96 x ${Order[x]['IWin']} < entry ${Order[entry]['IWin']} ${x}`)
             }
-
             else if (Order[x]['IWin'] == Order[entry]['IWin']) {
-				console.log(`100 x ${Order[x]['Win']} == entry ${Order[entry]['Win']} ${x}`)
               if (countryPast[x] > countryPast[entry]) {
                 x = entry
-                console.log(`103 x ${countryPast[x]} > entry ${countryPast[entry]} ${x}`)
               }
             }
           }
@@ -606,35 +571,22 @@ sort(countryList, Order, countryPast) {
       countryList.forEach (compare => {
         if (Order[x]['Loss'] > Order[compare]['Loss']) {
           x = compare
-          console.log(`112 x ${Order[x]['Loss']} > entry ${Order[compare]['Loss']} ${x}`)
         }
-
         else if (Order[x]['Loss'] == Order[compare]['Loss']) {
-          console.log(`116 x ${Order[x]['Loss']} == entry ${Order[compare]['Loss']} ${x}`)
           if (Order[x]['ILoss'] > Order[compare]['ILoss']) {
             x = compare
-            console.log(`119 x ${Order[x]['ILoss']} > entry ${Order[compare]['ILoss']} ${x}`)
           }
-
           else if (Order[x]['ILoss'] == Order[compare]['ILoss']) {
-			console.log(`123 x ${Order[x]['ILoss']} == entry ${Order[compare]['ILoss']} ${x}`)
-            if (Order[x]['Win'] > Order[compare]['Win']) {
+            if (Order[x]['Win'] < Order[compare]['Win']) {
               x = compare
-			  console.log(`126 x ${Order[x]['Win']} > entry ${Order[compare]['Win']} ${x}`)
             }
-
             else if (Order[x]['Win'] == Order[compare]['Win']) {
-				console.log(`130 x ${Order[x]['Win']} == entry ${Order[compare]['Win']} ${x}`)
-              if (Order[x]['IWin'] > Order[compare]['IWin']) {
+              if (Order[x]['IWin'] < Order[compare]['IWin']) {
                 x = compare
-				console.log(`133 x ${Order[x]['IWin']} > entry ${Order[compare]['IWin']} ${x}`)
               }
-
               else if (Order[x]['IWin'] == Order[compare]['IWin']) {
-				  console.log(`137 x ${Order[x]['IWin']} == entry ${Order[compare]['IWin']} ${x}`)
-                if (countryPast[x] < countryPast[compare]) {
+                if (countryPast[x] > countryPast[compare]) {
                   x = compare
-                  console.log(`140 x ${countryPast[x]} < entry ${countryPast[compare]} ${x}`)
                 }
               }
             }
@@ -647,17 +599,19 @@ sort(countryList, Order, countryPast) {
 
   organizationofWins = async (countryList) => {
     let rPosit = 1
-    countryList.forEach(() => {
+    const temp = countryList
+    console.log(temp.length)
+    temp.forEach(() => {
+      console.log(temp.length)
       const c = this.sort(countryList, this.state.Order, this.props.countryPast)
 
       this.setState({ rank : { ...this.state.rank, [rPosit]: c } })
+      console.log(c)
       console.log(this.state.rank)
 
       rPosit++
       countryList.splice(c, 1)
     })
-
-    await console.log(this.state.rank)
   }
 
   getResults = async () => {
@@ -675,8 +629,6 @@ sort(countryList, Order, countryPast) {
   }
 
   render() {
-    console.log(this.state.Order)
-    console.log(this.state.rank)
     return (
       <div>
         <NavBar/>
