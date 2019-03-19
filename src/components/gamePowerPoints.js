@@ -598,20 +598,27 @@ sort(countryList, Order, countryPast) {
 }
 
   organizationofWins = async (countryList) => {
-    let rPosit = 1
+    // let rPosit = 1
     const temp = countryList
-    console.log(temp.length)
-    temp.forEach(() => {
-      console.log(temp.length)
+
+    // .map(val, i) => {}  // const x = [...countryList]
+
+    // let rank = this.state.rank
+    //console.log(temp.length)
+    const ranker = temp.map(() => {
+      //console.log(temp.length)
       const c = this.sort(countryList, this.state.Order, this.props.countryPast)
-
-      this.setState({ rank : { ...this.state.rank, [rPosit]: c } })
-      console.log(c)
-      console.log(this.state.rank)
-
-      rPosit++
       countryList.splice(c, 1)
+      return c
+      // console.log(c)
+      // rank[rPosit] = c
+      // console.log(rank)
+
+      // rPosit++     
     })
+    console.log(ranker)
+    //this.setState({ rank : rank })
+
   }
 
   getResults = async () => {
