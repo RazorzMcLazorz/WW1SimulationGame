@@ -598,23 +598,27 @@ sort(countryList, Order, countryPast) {
 }
 
   organizationofWins = async (countryList) => {
-    // let rPosit = 1
+    /**
+     * Try setting temp like this:
+     * 
+     * const temp = [...countryList]
+     * 
+     * Right now, when you splice countryList, you are splicing temp also, because they are
+     * pointing to the same array. Mapping on an array that you are mutating
+     * is probably what is causing it to stop halfway through.
+     */
     const temp = countryList
 
-    // .map(val, i) => {}  // const x = [...countryList]
-
-    // let rank = this.state.rank
-    //console.log(temp.length)
+    /**
+     * Try mapping on countryList here instead of temp. We don't expect to mutate coutryList,
+     * so it's safe to map on.
+     */
     const ranker = temp.map(() => {
-      //console.log(temp.length)
       const c = this.sort(countryList, this.state.Order, this.props.countryPast)
+      // splice temp here instead, since we're okay with mutating temp
       countryList.splice(c, 1)
-      return c
-      // console.log(c)
-      // rank[rPosit] = c
-      // console.log(rank)
-
-      // rPosit++     
+      // We can use reduce to convert this to an object. I'd worry about that later though.
+      return c    
     })
     console.log(ranker)
     //this.setState({ rank : rank })
