@@ -614,12 +614,14 @@ sort(countryList, Order, countryPast) {
      * so it's safe to map on.
      */
     const ranker = temp.map(() => {
+      // pass temp to sort function instead of country list
       const c = this.sort(countryList, this.state.Order, this.props.countryPast)
       // splice temp here instead, since we're okay with mutating temp
       countryList.splice(c, 1)
       // We can use reduce to convert this to an object. I'd worry about that later though.
       return c    
     })
+
     console.log(ranker)
     //this.setState({ rank : rank })
 
