@@ -22,7 +22,7 @@ class Results extends Component {
     return (
       <div className="result">
         <div className="resultpos">
-          {pos}
+          {pos + 1}
         </div>
         <div className="resultTitle">
           {this.props.CountryName[this.props.countryOrder[pos]]}
@@ -49,6 +49,7 @@ class Results extends Component {
           <div id="roundNumber">
               End of Round {this.props.round}
           </div>
+              <div>{this.order(0)}</div>
               <div>{this.order(1)}</div>
               <div>{this.order(2)}</div>
               <div>{this.order(3)}</div>
@@ -57,7 +58,6 @@ class Results extends Component {
               <div>{this.order(6)}</div>
               <div>{this.order(7)}</div>
               <div>{this.order(8)}</div>
-              <div>{this.order(9)}</div>
           <div id='resultbottom'>
             <Link to="/game">
               {ContainedButtons('Next Round')}

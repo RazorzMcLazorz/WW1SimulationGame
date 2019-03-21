@@ -24,18 +24,7 @@ class GamePowerPoints extends Component {
       'def' : [],
     },
     rankPosit : 1, // sets what 
-    rank : { // orders the rank of each country
-      1 : null,
-      2 : null,
-      3 : null,
-      4 : null,
-      5 : null,
-      6 : null,
-      7 : null,
-      8 : null,
-      9 : null,
-    },
-
+    rank : [], // rank of the countrys
     Order : {
       'germany' : {
         'Win' : 0,
@@ -598,27 +587,16 @@ sort(countryList, Order, countryPast) {
 }
 
   organizationofWins = async (countryList) => {
-    // let rPosit = 1
-    const temp = countryList
+    // Makes a new copy of the array \/
+    let countryTempList = [...countryList]
 
-    // .map(val, i) => {}  // const x = [...countryList]
-
-    // let rank = this.state.rank
-    //console.log(temp.length)
-    const ranker = temp.map(() => {
-      //console.log(temp.length)
-      const c = this.sort(countryList, this.state.Order, this.props.countryPast)
-      countryList.splice(c, 1)
-      return c
-      // console.log(c)
-      // rank[rPosit] = c
-      // console.log(rank)
-
-      // rPosit++     
+    const ranker = countryList.map(() => {
+      const CountryRanked = this.sort(countryTempList, this.state.Order, this.props.countryPast)
+      countryTempList.splice(CountryRanked, 1)
+      return CountryRanked   
     })
-    console.log(ranker)
-    //this.setState({ rank : rank })
-
+    this.props.changeState({ countryOrder: ranker});
+    this.props.history.push('/results');
   }
 
   getResults = async () => {

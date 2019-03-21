@@ -23,17 +23,7 @@ const initialState = {
     'italy': 8,
     'serbia': 9,
   },
-countryOrder : {
-    1: 'germany',
-    2: 'russia',
-    3: 'britain',
-    4: 'france',
-    5: 'usa',
-    6: 'austria',
-    7: 'ottoman',
-    8: 'italy',
-    9: 'serbia',
-  },
+countryOrder : [],
   countrySetupOrder : {
     'germany': 1,
     'russia': 2,
