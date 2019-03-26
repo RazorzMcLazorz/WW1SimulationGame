@@ -534,53 +534,53 @@ class GamePowerPoints extends Component {
 sort(countryList, Order, countryPast) {
     let x = countryList[0]
     countryList.forEach(entry => {
-      if (Order[x]['Loss'] > Order[entry]['Loss']) {
-        x = entry
-      }
-      else if (Order[x]['Loss'] == Order[entry]['Loss']) {
-        if (Order[x]['ILoss'] > Order[entry]['ILoss']) {
+        if (Order[x]['Loss'] > Order[entry]['Loss']) {
           x = entry
         }
-        else if (Order[x]['ILoss'] == Order[entry]['ILoss']) {
-          if (Order[x]['Win'] < Order[entry]['Win']) {
+        else if (Order[x]['Loss'] == Order[entry]['Loss']) {
+          if (Order[x]['ILoss'] > Order[entry]['ILoss']) {
             x = entry
           }
-          else if (Order[x]['Win'] == Order[entry]['Win']) {
-            if (Order[x]['IWin'] < Order[entry]['IWin']) {
+          else if (Order[x]['ILoss'] == Order[entry]['ILoss']) {
+            if (Order[x]['Win'] < Order[entry]['Win']) {
               x = entry
             }
-            else if (Order[x]['IWin'] == Order[entry]['IWin']) {
-              if (countryPast[x] > countryPast[entry]) {
+            else if (Order[x]['Win'] == Order[entry]['Win']) {
+              if (Order[x]['IWin'] < Order[entry]['IWin']) {
                 x = entry
               }
-            }
-          }
-        }
-      }
-      countryList.forEach (compare => {
-        if (Order[x]['Loss'] > Order[compare]['Loss']) {
-          x = compare
-        }
-        else if (Order[x]['Loss'] == Order[compare]['Loss']) {
-          if (Order[x]['ILoss'] > Order[compare]['ILoss']) {
-            x = compare
-          }
-          else if (Order[x]['ILoss'] == Order[compare]['ILoss']) {
-            if (Order[x]['Win'] < Order[compare]['Win']) {
-              x = compare
-            }
-            else if (Order[x]['Win'] == Order[compare]['Win']) {
-              if (Order[x]['IWin'] < Order[compare]['IWin']) {
-                x = compare
-              }
-              else if (Order[x]['IWin'] == Order[compare]['IWin']) {
-                if (countryPast[x] > countryPast[compare]) {
-                  x = compare
+              else if (Order[x]['IWin'] == Order[entry]['IWin']) {
+                if (countryPast[x] > countryPast[entry]) {
+                  x = entry
                 }
               }
             }
           }
-        }
+      }
+      countryList.forEach (compare => {
+          if (Order[x]['Loss'] > Order[compare]['Loss']) {
+            x = compare
+          }
+          else if (Order[x]['Loss'] == Order[compare]['Loss']) {
+            if (Order[x]['ILoss'] > Order[compare]['ILoss']) {
+              x = compare
+            }
+            else if (Order[x]['ILoss'] == Order[compare]['ILoss']) {
+              if (Order[x]['Win'] < Order[compare]['Win']) {
+                x = compare
+              }
+              else if (Order[x]['Win'] == Order[compare]['Win']) {
+                if (Order[x]['IWin'] < Order[compare]['IWin']) {
+                  x = compare
+                }
+                else if (Order[x]['IWin'] == Order[compare]['IWin']) {
+                  if (countryPast[x] > countryPast[compare]) {
+                    x = compare
+                  }
+                }
+              }
+            }
+          }
       })
     })
 	return x
@@ -592,9 +592,11 @@ sort(countryList, Order, countryPast) {
 
     const ranker = countryList.map(() => {
       const CountryRanked = this.sort(countryTempList, this.state.Order, this.props.countryPast)
+      console.log(CountryRanked)
       countryTempList.splice(CountryRanked, 1)
       return CountryRanked   
     })
+    console.log(ranker)
     this.props.changeState({ countryOrder: ranker});
     this.props.history.push('/results');
   }
@@ -610,7 +612,7 @@ sort(countryList, Order, countryPast) {
     this.startOrg(await this.isitwar('italy'),   'italy')
     this.startOrg(await this.isitwar('serbia'),  'serbia') 
     
-    await this.organizationofWins(['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia'])
+    this.organizationofWins(['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia'])
   }
 
   render() {

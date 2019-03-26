@@ -23,7 +23,7 @@ class Login extends Component {
   }
 
   getProducts = async (username) => {
-    const res = await fetch(`${this.props.link}/user/single?username=${username}`)
+    const res = await fetch(`${this.props.link}/user/single?username=${username}`) // Use POST it hides all the data sent through
     const json = await res.json()
     // .then(response => response.json())
     // .then(response => this.setState({ mysqlDB : response.data }))

@@ -41,6 +41,17 @@ class Results extends Component {
     }
   }
 
+  NextRound = async () => {
+    this.props.countryPastArray.forEach((country, pos) => {
+      fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}&round=${this.props.round}`)
+    })
+
+    this.props.countryOrder.forEach((country, pos) => {
+      fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}&round=${this.props.round + 1}`)
+    })
+    this.props.history('/game')
+  }
+
   render() {
     return (
       <div>
@@ -59,9 +70,9 @@ class Results extends Component {
               <div>{this.order(7)}</div>
               <div>{this.order(8)}</div>
           <div id='resultbottom'>
-            <Link to="/game">
+            <div onClick={() => this.NextRound()}>
               {ContainedButtons('Next Round')}
-            </Link>
+            </div>
           </div>
         </div>
         <Footer/>
