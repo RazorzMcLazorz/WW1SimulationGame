@@ -586,20 +586,23 @@ sort(countryList, Order, countryPast) {
 	return x
 }
 
-  organizationofWins = async (countryList) => {
-    // Makes a new copy of the array \/
-    let countryTempList = [...countryList]
+organizationofWins (countryList) {
+  // Makes a new copy of the array \/
+  let countryTempList = [...countryList]
 
-    const ranker = countryList.map(() => {
-      const CountryRanked = this.sort(countryTempList, this.state.Order, this.props.countryPast)
-      console.log(CountryRanked)
-      countryTempList.splice(CountryRanked, 1)
-      return CountryRanked   
-    })
-    console.log(ranker)
-    this.props.changeState({ countryOrder: ranker});
-    this.props.history.push('/results');
-  }
+console.log(countryTempList)
+
+  const ranker = countryList.map(() => {
+    const CountryRanked = this.sort(countryTempList, this.state.Order, this.props.countryPast)
+    console.log(CountryRanked)
+  countryTempList = countryTempList.filter(word => word !== CountryRanked);
+  console.log(countryTempList)
+    return CountryRanked   
+  })
+  console.log(ranker)
+  this.props.changeState({ countryOrder: ranker});
+  this.props.history.push('/results');
+}
 
   getResults = async () => {
     this.startOrg(await this.isitwar('germany'), 'germany')
