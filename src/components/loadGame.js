@@ -30,6 +30,14 @@ class LoadGame extends Component {
     const cRound = await rres.json()
     const ores = await fetch(`${this.props.link}/save/games?username=${this.props.username}`)
     const cOrder = await ores.json()
+
+    let tempArray = this.props.countryOrder
+    cRound.data.forEach(array => {
+      tempArray.push(array['country_name'])
+    })
+    this.props.changeState({ countryOrder: tempArray });
+    console.log(this.props.countryOrder)
+
     await this.props.changeState({
       countrySetupOrder : {
         ...this.props.countrySetupOrder, ['germany'] : cOrder.data[num]['save_count']
