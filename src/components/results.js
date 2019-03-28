@@ -49,7 +49,17 @@ class Results extends Component {
     this.props.countryOrder.forEach((country, pos) => {
       fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}&round=${this.props.round + 1}`)
     })
-    this.props.history('/game')
+
+    this.props.countryOrder.forEach((country, pos) => {
+      this.props.changeState({
+        ...this.props.countrySetupOrder, [country] : pos + 1
+      })
+    })
+
+    this.props.changeState({ round : this.props.round + 1 })
+
+    // Moves on to the next Round
+    this.props.history.push('/game')
   }
 
   render() {
@@ -67,8 +77,8 @@ class Results extends Component {
               <div>{this.order(4)}</div>
               <div>{this.order(5)}</div>
               <div>{this.order(6)}</div>
-              <div>{this.order(7)}</div>
-              <div>{this.order(8)}</div>
+              {this.props.countryCount >= 8 ?<div>{this.order(7)}</div> : ''}
+              {this.props.countryCount >= 9 ?<div>{this.order(8)}</div> : ''}
           <div id='resultbottom'>
             <div onClick={() => this.NextRound()}>
               {ContainedButtons('Next Round')}

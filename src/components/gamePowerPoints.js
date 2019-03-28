@@ -615,7 +615,7 @@ console.log(countryTempList)
     this.startOrg(await this.isitwar('italy'),   'italy')
     this.startOrg(await this.isitwar('serbia'),  'serbia') 
     
-    this.organizationofWins(['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia'])
+    this.organizationofWins(this.props.countryCount === 9 ?['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia'] : this.props.countryCount === 8 ? ['germany', 'russia', 'britain', 'france', 'austria', 'ottoman', 'italy', 'serbia'] : this.props.countryCount === 7 ? ['germany', 'russia', 'britain', 'france', 'austria', 'ottoman', 'italy'] : [])
   }
 
   render() {

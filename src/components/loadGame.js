@@ -37,34 +37,34 @@ class LoadGame extends Component {
       round : cRound.data[0]['country_round'],
     })
     if (count >= 7) {
-       this.countryDataSetup('germany', cRound.data[0]['country_rank']);
-       this.countryDataSetup('russia', cRound.data[1]['country_rank']);
-       this.countryDataSetup('britain', cRound.data[2]['country_rank']);
-       this.countryDataSetup('france', cRound.data[3]['country_rank']);
-       this.countryDataSetup('austria', cRound.data[4]['country_rank']);
-       this.countryDataSetup('ottoman', cRound.data[5]['country_rank']);
-       this.countryDataSetup('italy', cRound.data[6]['country_rank']);
+       this.countryDataSetup(cRound.data[0]['country_name'], cRound.data[0]['country_rank']);
+       this.countryDataSetup(cRound.data[1]['country_name'], cRound.data[1]['country_rank']);
+       this.countryDataSetup(cRound.data[2]['country_name'], cRound.data[2]['country_rank']);
+       this.countryDataSetup(cRound.data[3]['country_name'], cRound.data[3]['country_rank']);
+       this.countryDataSetup(cRound.data[4]['country_name'], cRound.data[4]['country_rank']);
+       this.countryDataSetup(cRound.data[5]['country_name'], cRound.data[5]['country_rank']);
+       this.countryDataSetup(cRound.data[6]['country_name'], cRound.data[6]['country_rank']);
     }
     else if (count >= 8) {
-       this.countryDataSetup('germany', cRound.data[0]['country_rank']);
-       this.countryDataSetup('russia', cRound.data[1]['country_rank']);
-       this.countryDataSetup('britain', cRound.data[2]['country_rank']);
-       this.countryDataSetup('france', cRound.data[3]['country_rank']);
-       this.countryDataSetup('austria', cRound.data[4]['country_rank']);
-       this.countryDataSetup('ottoman', cRound.data[5]['country_rank']);
-       this.countryDataSetup('italy', cRound.data[6]['country_rank']);
-       this.countryDataSetup('serbia', cRound.data[7]['country_rank']);
+       this.countryDataSetup(cRound.data[0]['country_name'], cRound.data[0]['country_rank']);
+       this.countryDataSetup(cRound.data[1]['country_name'], cRound.data[1]['country_rank']);
+       this.countryDataSetup(cRound.data[2]['country_name'], cRound.data[2]['country_rank']);
+       this.countryDataSetup(cRound.data[3]['country_name'], cRound.data[3]['country_rank']);
+       this.countryDataSetup(cRound.data[4]['country_name'], cRound.data[4]['country_rank']);
+       this.countryDataSetup(cRound.data[5]['country_name'], cRound.data[5]['country_rank']);
+       this.countryDataSetup(cRound.data[6]['country_name'], cRound.data[6]['country_rank']);
+       this.countryDataSetup(cRound.data[7]['country_name'], cRound.data[7]['country_rank']);
     }
     else if (count >= 9) {
-       this.countryDataSetup('germany', cRound.data[0]['country_rank']);
-       this.countryDataSetup('russia', cRound.data[1]['country_rank']);
-       this.countryDataSetup('britain', cRound.data[2]['country_rank']);
-       this.countryDataSetup('france', cRound.data[3]['country_rank']);
-       this.countryDataSetup('usa', cRound.data[4]['country_rank']);
-       this.countryDataSetup('austria', cRound.data[5]['country_rank']);
-       this.countryDataSetup('ottoman', cRound.data[6]['country_rank']);
-       this.countryDataSetup('italy', cRound.data[7]['country_rank']);
-       this.countryDataSetup('serbia', cRound.data[8]['country_rank']);
+       this.countryDataSetup(cRound.data[0]['country_name'], cRound.data[0]['country_rank']);
+       this.countryDataSetup(cRound.data[1]['country_name'], cRound.data[1]['country_rank']);
+       this.countryDataSetup(cRound.data[2]['country_name'], cRound.data[2]['country_rank']);
+       this.countryDataSetup(cRound.data[3]['country_name'], cRound.data[3]['country_rank']);
+       this.countryDataSetup(cRound.data[4]['country_name'], cRound.data[4]['country_rank']);
+       this.countryDataSetup(cRound.data[5]['country_name'], cRound.data[5]['country_rank']);
+       this.countryDataSetup(cRound.data[6]['country_name'], cRound.data[6]['country_rank']);
+       this.countryDataSetup(cRound.data[7]['country_name'], cRound.data[7]['country_rank']);
+       this.countryDataSetup(cRound.data[8]['country_name'], cRound.data[8]['country_rank']);
     }
     else {
 

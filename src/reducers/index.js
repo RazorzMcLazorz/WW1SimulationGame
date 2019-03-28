@@ -3,8 +3,8 @@ import { ADD_ARTICLE, CHANGE_STATE } from "./constants/action-types";
 
 // Redux Store
 const initialState = {
-  link : 'https://ww1simdatabase.herokuapp.com',
-  // link : 'http://localhost:5000',
+  // link : 'https://ww1simdatabase.herokuapp.com',
+  link : 'http://localhost:5000',
   login : false,
   username : '',
   password : '',
@@ -24,7 +24,7 @@ const initialState = {
     'italy': 8,
     'serbia': 9,
   },
-countryOrder : [],
+  countryOrder : [],
   countrySetupOrder : {
     'germany': 1,
     'russia': 2,
