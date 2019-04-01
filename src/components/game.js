@@ -149,7 +149,7 @@ class Game extends Component {
       <div>
         <div className="countryTab">
           <div className="countryCount">{this.props.countrySetupOrder[country]}</div>
-          {/* {console.log(this.props.countrySetupOrder[country])} */}
+          
           <div className="countryName">{gamingName}</div>
           <div className="countryRadio"><WarPeace label={country}/></div>
           {/* <div onClick={() => this.attackCountry(country)}>{ContainedButtons('Attacking')}</div>
