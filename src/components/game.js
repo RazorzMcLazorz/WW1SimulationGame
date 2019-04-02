@@ -61,40 +61,6 @@ class Game extends Component {
     }
   }
 
-  // countryOrder
-
-  gameNaming(country) {
-    let x = '';
-    if (country == 'germany') {
-      x = 'Germany'
-    }
-    if (country == 'russia') {
-      x = 'Russia'
-    }
-    if (country == 'britain') {
-      x = 'Britain'
-    }
-    if (country == 'france') {
-      x = 'France'
-    }
-    if (country == 'usa') {
-      x = 'United States'
-    }
-    if (country == 'austria') {
-      x = 'Austria'
-    }
-    if (country == 'ottoman') {
-      x = 'Ottoman Empire'
-    }
-    if (country == 'italy') {
-      x = 'Italy'
-    }
-    if (country == 'serbia') {
-      x = 'Serbia'
-    }
-    return x;
-  }
-
   countryDefAlly(country){
     if (this.state.countryDef[country] === false) {
     this.setState({countryDef: { ...this.state.countryDef, [country]: true } })
@@ -144,18 +110,16 @@ class Game extends Component {
   }
 
   gameinterior(country) {
-    let gamingName = this.gameNaming(country)
     return(
       <div>
         <div className="countryTab">
+          {/* Country Rank */}
           <div className="countryCount">{this.props.countrySetupOrder[country]}</div>
-          
-          <div className="countryName">{gamingName}</div>
+          {/* Country Name */}
+          <div className="countryName">{this.props.CountryName[country]}</div>
+          {/* Country WarPeace Selection */}
           <div className="countryRadio"><WarPeace label={country}/></div>
-          {/* <div onClick={() => this.attackCountry(country)}>{ContainedButtons('Attacking')}</div>
-          <div onClick={() => this.countryAtkAlly(country)}>{ContainedButtons('Attack Alliance')}</div>
-          <div onClick={() => this.countryDefAlly(country)}>{ContainedButtons('Defence Alliance')}</div>
-          <div onClick={() => this.trading(country)}>{ContainedButtons('Trade')}</div> */}
+
           <div><CustomizedInputs label="Gold" ids={`${country}Gold`} value={this.props.countryGold[country]}/></div>
         </div>
         { this.state.countryAttacking[country]?
@@ -227,15 +191,12 @@ class Game extends Component {
             Round {this.props.round}
           </div>
           <div id="gameRender">
-            {this.gameinterior('germany')}
-            {this.gameinterior('russia')}
-            {this.gameinterior('britain')}
-            {this.gameinterior('france')}
-            {this.props.countryCount >= 9 ? this.gameinterior('usa'): ''}
-            {this.gameinterior('austria')}
-            {this.gameinterior('ottoman')}
-            {this.gameinterior('italy')}
-            {this.props.countryCount >= 8 ? this.gameinterior('serbia'): ''}
+            {
+              this.props.countryOrder.map((country) =>
+              <div>
+                {this.gameinterior(country)}
+              </div>)
+            }
           </div>
           <div id='gamebottom'>
             <div to="/powerpoints" onClick={() => this.saveAndContinue()}>
