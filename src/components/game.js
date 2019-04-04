@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../reducers/actions';
-import Footer from './parts/footer';
-import NavBar from './parts/navBar';
-import { Link } from 'react-router-dom';
-import ContainedButtons from './parts/button';
-import RadioButton from './parts/radioButton';
-import { Radio } from '@material-ui/core';
-import WarPeace from './parts/warPeaceSelect';
-import AttackCountry from './parts/AttackCountry';
-import Attacking from './parts/Attacking';
-import Dialog from './parts/Dialog';
-import CustomizedInputs from './parts/text';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../reducers/actions'
+import Footer from './parts/footer'
+import NavBar from './parts/navBar'
+import { Link } from 'react-router-dom'
+import ContainedButtons from './parts/button'
+import WarPeace from './parts/warPeaceSelect'
+import Attacking from './parts/Attacking'
+import CustomizedInputs from './parts/text'
 
 class Game extends Component {
   state = {
@@ -59,40 +55,6 @@ class Game extends Component {
       'italy' : true,
       'serbia' : true,
     }
-  }
-
-  // countryOrder
-
-  gameNaming(country) {
-    let x = '';
-    if (country == 'germany') {
-      x = 'Germany'
-    }
-    if (country == 'russia') {
-      x = 'Russia'
-    }
-    if (country == 'britain') {
-      x = 'Britain'
-    }
-    if (country == 'france') {
-      x = 'France'
-    }
-    if (country == 'usa') {
-      x = 'United States'
-    }
-    if (country == 'austria') {
-      x = 'Austria'
-    }
-    if (country == 'ottoman') {
-      x = 'Ottoman Empire'
-    }
-    if (country == 'italy') {
-      x = 'Italy'
-    }
-    if (country == 'serbia') {
-      x = 'Serbia'
-    }
-    return x;
   }
 
   countryDefAlly(country){
@@ -144,19 +106,17 @@ class Game extends Component {
   }
 
   gameinterior(country) {
-    let gamingName = this.gameNaming(country)
     return(
       <div>
         <div className="countryTab">
+          {/* Country Rank */}
           <div className="countryCount">{this.props.countrySetupOrder[country]}</div>
-          {/* {console.log(this.props.countrySetupOrder[country])} */}
-          <div className="countryName">{gamingName}</div>
+          {/* Country Name */}
+          <div className="countryName">{this.props.CountryName[country]}</div>
+          {/* Country WarPeace Selection */}
           <div className="countryRadio"><WarPeace label={country}/></div>
-          {/* <div onClick={() => this.attackCountry(country)}>{ContainedButtons('Attacking')}</div>
-          <div onClick={() => this.countryAtkAlly(country)}>{ContainedButtons('Attack Alliance')}</div>
-          <div onClick={() => this.countryDefAlly(country)}>{ContainedButtons('Defence Alliance')}</div>
-          <div onClick={() => this.trading(country)}>{ContainedButtons('Trade')}</div> */}
-          <div><CustomizedInputs label="Gold" ids={`${country}Gold`} value={this.props.countryGold[country]}/></div>
+          {document.getElementById(`${country}Gold`).defaultValue=this.props.countryGold[country]}
+          <div><CustomizedInputs label="Gold" ids={`${country}Gold`}/></div>
         </div>
         { this.state.countryAttacking[country]?
         <div className="additional">
@@ -191,7 +151,7 @@ class Game extends Component {
         </div>
         : ''}
       </div>
-      )
+    )
   }
 
   orderingGame() {
@@ -227,15 +187,13 @@ class Game extends Component {
             Round {this.props.round}
           </div>
           <div id="gameRender">
-            {this.gameinterior('germany')}
-            {this.gameinterior('russia')}
-            {this.gameinterior('britain')}
-            {this.gameinterior('france')}
-            {this.props.countryCount >= 9 ? this.gameinterior('usa'): ''}
-            {this.gameinterior('austria')}
-            {this.gameinterior('ottoman')}
-            {this.gameinterior('italy')}
-            {this.props.countryCount >= 8 ? this.gameinterior('serbia'): ''}
+            {
+              this.props.countryOrder.map((country) =>
+                <div>
+                  {this.gameinterior(country)}
+                </div>
+              )
+            }
           </div>
           <div id='gamebottom'>
             <div to="/powerpoints" onClick={() => this.saveAndContinue()}>

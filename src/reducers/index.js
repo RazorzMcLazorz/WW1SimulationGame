@@ -106,7 +106,7 @@ const initialState = {
     'austria' : 'Austria',
     'ottoman' : 'Ottoman Empire',
     'italy' : 'Italy',
-    'serbia' : 'Serbia',
+    'serbia' : 'Serbia'
   },
   countryGold : {
     'germany' : 20000,
@@ -117,7 +117,7 @@ const initialState = {
     'austria' : 20000,
     'ottoman' : 20000,
     'italy' : 20000,
-    'serbia' : 20000,
+    'serbia' : 20000
   },
   countryPowerPoints : {
     'germany' : 1800,
@@ -128,7 +128,7 @@ const initialState = {
     'austria' : 1000,
     'ottoman' : 800,
     'italy' : 700,
-    'serbia' : 600,
+    'serbia' : 600
   },
   // this one is to realign powerpoints
   PowerpointsRealign : {
@@ -143,7 +143,7 @@ const initialState = {
     4 : 1000,
     5 : 800,
     6 : 700,
-    7 : 400,
+    7 : 400
   },
   eightPowerPoints : {
     1 : 1600,
@@ -153,7 +153,7 @@ const initialState = {
     5 : 1000,
     6 : 800,
     7 : 700,
-    8 : 600,
+    8 : 600
   },
   ninePowerPoints : {
     1 : 1800,
@@ -164,7 +164,7 @@ const initialState = {
     6 : 1000,
     7 : 800,
     8 : 700,
-    9 : 600,
+    9 : 600
   },
 }
 

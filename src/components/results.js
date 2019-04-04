@@ -8,6 +8,65 @@ import ContainedButtons from './parts/button';
 import CustomizedInputs from './parts/text';
 import InputAdornments from './parts/passwordText';
 
+const powerPointsDupe = {
+  'attacking' : {
+    'germany' : false,
+    'russia' : false,
+    'britain' : false,
+    'france' : false,
+    'usa' : false,
+    'austria' : false,
+    'ottoman' : false,
+    'italy' : false,
+    'serbia' : false,
+  },
+  'attack' : {
+    'germany' : false,
+    'russia' : false,
+    'britain' : false,
+    'france' : false,
+    'usa' : false,
+    'austria' : false,
+    'ottoman' : false,
+    'italy' : false,
+    'serbia' : false,
+  },
+  'defence' : {
+    'germany' : false,
+    'russia' : false,
+    'britain' : false,
+    'france' : false,
+    'usa' : false,
+    'austria' : false,
+    'ottoman' : false,
+    'italy' : false,
+    'serbia' : false,
+  },
+  'trading' : {
+    'germany' : false,
+    'russia' : false,
+    'britain' : false,
+    'france' : false,
+    'usa' : false,
+    'austria' : false,
+    'ottoman' : false,
+    'italy' : false,
+    'serbia' : false,
+  },
+}
+
+const defaul = {
+  'germany' : {...powerPointsDupe},
+  'russia' : {...powerPointsDupe},
+  'britain' : {...powerPointsDupe},
+  'france' : {...powerPointsDupe},
+  'usa' : {...powerPointsDupe},
+  'austria' : {...powerPointsDupe},
+  'ottoman' : {...powerPointsDupe},
+  'italy' : {...powerPointsDupe},
+  'serbia' : {...powerPointsDupe}
+}
+
 class Results extends Component {
 
   state = {
@@ -57,6 +116,21 @@ class Results extends Component {
     })
 
     this.props.changeState({ round : this.props.round + 1 })
+
+    this.props.changeState({
+      PowerPoints : defaul
+    })
+    console.log(this.props.PowerPoints)
+
+    this.props.countryOrder.forEach( (country, pos) => {
+      const len = this.props.PowerpointsRealign[this.props.countryOrder.length]
+      this.props.changeState({ 
+        countryPowerPoints : [...this.props.countryPowerPoints], [country] : len[pos]
+      })
+      // PowerpointsRealign
+    })
+
+    console.log(this.props.countryPowerPoints)
 
     // Moves on to the next Round
     this.props.history.push('/game')

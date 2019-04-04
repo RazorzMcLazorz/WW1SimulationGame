@@ -465,167 +465,29 @@ organizationofWins (countryList) {
           <div id="roundNumber">
             Round {this.props.round}
           </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Germany</div>
-            <div className="countryPowerP">{this.state.Germany} Power Points Available</div>
-            <div>{this.defend('germany')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('germany', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('germany', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('germany', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Russia</div>
-            <div>{this.defend('russia')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('russia', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('russia', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('russia', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Britain</div>
-            <div>{this.defend('britain')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('britain', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('britain', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('britain', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">France</div>
-            <div>{this.defend('france')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('france', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('france', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('france', 'defence')}</div>
-          </div>
-
-          {this.props.countryCount >= 9 ?
-          <div>
-            <div className="countryPP">
-              <div className="countryTitle">United States</div>
-              <div>{this.defend('usa')}</div>
-            </div>
-            <div className="countryPPAttacking">
-              <div>Attacking</div>
-              <div>{this.attacking('usa', 'attacking')}</div>
-            </div>
-            <div className="countryPPAttackAlliance">
-              <div>Attack Alliance</div>
-              <div>{this.attacking('usa', 'attack')}</div>
-            </div>
-            <div className="countryPPDefenceAlliance">
-              <div>Defence Alliance</div>
-              <div>{this.attacking('usa', 'defence')}</div>
-            </div>
-          </div>: ''}
-
-          <div className="countryPP">
-            <div className="countryTitle">Austria</div>
-            <div>{this.defend('austria')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('austria', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('austria', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('austria', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Ottoman Empire</div>
-            <div>{this.defend('ottoman')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('ottoman', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('ottoman', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('ottoman', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Italy</div>
-            <div>{this.defend('italy')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('italy', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('italy', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('italy', 'defence')}</div>
-          </div>
-
-          {this.props.countryCount >= 8 ?
-          <div>
-            <div className="countryPP">
-              <div className="countryTitle">Serbia</div>
-              <div>{this.defend('serbia')}</div>
-            </div>
-            <div className="countryPPAttacking">
-              <div>Attacking</div>
-              <div>{this.attacking('serbia', 'attacking')}</div>
-            </div>
-            <div className="countryPPAttackAlliance">
-              <div>Attack Alliance</div>
-              <div>{this.attacking('serbia', 'attack')}</div>
-            </div>
-            <div className="countryPPDefenceAlliance">
-              <div>Defence Alliance</div>
-              <div>{this.attacking('serbia', 'defence')}</div>
-            </div>
-          </div>
-          : ''}
+          {
+            this.props.countryOrder.map((country) =>
+              <div className="mappedCountry">
+                <div className="countryPP">
+                  <div className="countryTitle">{this.props.CountryName[country]}</div>
+                  <div className="countryPowerP">{this.props.countryPowerPoints[country]} Power Points Available</div>
+                  <div>{this.defend(country)}</div>
+                </div>
+                <div className="countryPPAttacking">
+                  <div>Attacking</div>
+                  <div>{this.attacking(country, 'attacking')}</div>
+                </div>
+                <div className="countryPPAttackAlliance">
+                  <div>Attack Alliance</div>
+                  <div>{this.attacking(country, 'attack')}</div>
+                </div>
+                <div className="countryPPDefenceAlliance">
+                  <div>Defence Alliance</div>
+                  <div>{this.attacking(country, 'defence')}</div>
+                </div>
+              </div>
+            )
+          }
           <div id="resultsButton">
             <div to="/results" onClick={() => this.getResults()}>
                 {ContainedButtons('Results')}
