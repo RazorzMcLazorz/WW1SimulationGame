@@ -105,12 +105,12 @@ class Game extends Component {
     }
   }
 
-  gameinterior(country) {
+  gameinterior(country, pos) {
     return(
       <div>
         <div className="countryTab">
           {/* Country Rank */}
-          <div className="countryCount">{this.props.countrySetupOrder[country]}</div>
+          <div className="countryCount">{pos}</div>
           {/* Country Name */}
           <div className="countryName">{this.props.CountryName[country]}</div>
           {/* Country WarPeace Selection */}
@@ -204,7 +204,7 @@ class Game extends Component {
             {
               this.props.countryOrder.map((country, pos) =>
                 <div key={pos+1}>
-                  {this.gameinterior(country)}
+                  {this.gameinterior(country, pos+1)}
                 </div>
               )
             }
