@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../reducers/actions';
-import Footer from './parts/footer';
-import NavBar from './parts/navBar';
-import { Link } from 'react-router-dom';
-import ContainedButtons from './parts/button';
-import RadioButton from './parts/radioButton';
-import { Radio } from '@material-ui/core';
-import WarPeace from './parts/warPeaceSelect';
-import AttackCountry from './parts/AttackCountry';
-import Attacking from './parts/Attacking';
-import Dialog from './parts/Dialog';
-import CustomizedInputs from './parts/text';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../reducers/actions'
+import Footer from './parts/footer'
+import NavBar from './parts/navBar'
+import { Link } from 'react-router-dom'
+import ContainedButtons from './parts/button'
+import WarPeace from './parts/warPeaceSelect'
+import Attacking from './parts/Attacking'
+import CustomizedInputs from './parts/text'
 
 class Game extends Component {
   state = {
@@ -119,8 +115,8 @@ class Game extends Component {
           <div className="countryName">{this.props.CountryName[country]}</div>
           {/* Country WarPeace Selection */}
           <div className="countryRadio"><WarPeace label={country}/></div>
-
-          <div><CustomizedInputs label="Gold" ids={`${country}Gold`} value={this.props.countryGold[country]}/></div>
+          {document.getElementById(`${country}Gold`).defaultValue=this.props.countryGold[country]}
+          <div><CustomizedInputs label="Gold" ids={`${country}Gold`}/></div>
         </div>
         { this.state.countryAttacking[country]?
         <div className="additional">
@@ -155,7 +151,7 @@ class Game extends Component {
         </div>
         : ''}
       </div>
-      )
+    )
   }
 
   orderingGame() {
@@ -193,9 +189,10 @@ class Game extends Component {
           <div id="gameRender">
             {
               this.props.countryOrder.map((country) =>
-              <div>
-                {this.gameinterior(country)}
-              </div>)
+                <div>
+                  {this.gameinterior(country)}
+                </div>
+              )
             }
           </div>
           <div id='gamebottom'>
