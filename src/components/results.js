@@ -125,8 +125,9 @@ class Results extends Component {
     this.props.countryOrder.forEach( (country, pos) => {
       const len = this.props.PowerpointsRealign[this.props.countryOrder.length]
       this.props.changeState({ 
-        countryPowerPoints : [...this.props.countryPowerPoints], [country] : len[pos]
+        countryPowerPoints : [...this.props.countryPowerPoints], [country] : len[pos + 1]
       })
+      console.log(len)
       // PowerpointsRealign
     })
 
