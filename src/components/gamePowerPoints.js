@@ -466,8 +466,8 @@ organizationofWins (countryList) {
             Round {this.props.round}
           </div>
           {
-            this.props.countryOrder.map((country) =>
-              <div className="mappedCountry">
+            this.props.countryOrder.map((country, pos) =>
+              <div className="mappedCountry" key={pos+1}>
                 <div className="countryPP">
                   <div className="countryTitle">{this.props.CountryName[country]}</div>
                   <div className="countryPowerP">{this.props.countryPowerPoints[country]} Power Points Available</div>

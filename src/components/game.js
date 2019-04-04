@@ -115,8 +115,22 @@ class Game extends Component {
           <div className="countryName">{this.props.CountryName[country]}</div>
           {/* Country WarPeace Selection */}
           <div className="countryRadio"><WarPeace label={country}/></div>
-          {document.getElementById(`${country}Gold`).defaultValue=this.props.countryGold[country]}
-          <div><CustomizedInputs label="Gold" ids={`${country}Gold`}/></div>
+          {/* {document.getElementById(`${country}Gold`).defaultValue=this.props.countryGold[country]} */}
+          <div>
+            <CustomizedInputs
+              label="Gold"
+              ids={`${country}Gold`}
+              value={this.props.countryGold[country]}
+              onChange={ev => {
+                console.log(ev)
+                this.props.changeState({ 
+                  countryGold: {
+                    ...this.props.countryGold,
+                    [country]: ev.target.value
+                  }
+                })
+              }} />
+          </div>
         </div>
         { this.state.countryAttacking[country]?
         <div className="additional">
@@ -188,8 +202,8 @@ class Game extends Component {
           </div>
           <div id="gameRender">
             {
-              this.props.countryOrder.map((country) =>
-                <div>
+              this.props.countryOrder.map((country, pos) =>
+                <div key={pos+1}>
                   {this.gameinterior(country)}
                 </div>
               )
