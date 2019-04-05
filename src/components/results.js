@@ -98,7 +98,7 @@ class Results extends Component {
     }
   }
 
-  NextRound = async () => {
+  UpdateDB = async () => {
     // updates database pastArray
     this.props.countryOrder.forEach((country, pos) => {
       fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}&round=${this.props.round}`)
@@ -108,6 +108,11 @@ class Results extends Component {
       fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}&round=${this.props.round + 1}`)
     })
     // need to add a database update to the round system here
+  }
+
+  NextRound = async () => {
+
+    await this.UpdateDB()
 
     this.props.countryOrder.forEach((country, pos) => {
       this.props.changeState({
@@ -122,19 +127,34 @@ class Results extends Component {
       round : this.props.round + 1
     })
 
+    console.log(this.props.countryOrder)
     this.props.countryOrder.forEach( (country, pos) => {
       const len = this.props.PowerpointsRealign[this.props.countryOrder.length]
       this.props.changeState({ 
-        countryPowerPoints : [...this.props.countryPowerPoints], [country] : len[pos],
-        countryPast : [...this.props.countryPast], [country] : pos + 1,
+        ...this.props.countryPowerPoints, [country] : len[pos],
         countryPastArray : [...this.props.countryOrder]
       })
       console.log(len)
       console.log(this.props.countryPastArray)
-      console.log(this.props.countryPast)
+      
       // PowerpointsRealign
     })
     
+    const countrysort = {
+      'germany' : this.props.countryOrder.indexOf('germany') + 1,
+      'russia' : this.props.countryOrder.indexOf('russia') + 1,
+      'britain' : this.props.countryOrder.indexOf('britain') + 1,
+      'france' : this.props.countryOrder.indexOf('france') + 1,
+      'usa' : this.props.countryOrder.indexOf('usa') + 1,
+      'austria' : this.props.countryOrder.indexOf('austria') + 1,
+      'ottoman' : this.props.countryOrder.indexOf('ottoman') + 1,
+      'italy' : this.props.countryOrder.indexOf('italy') + 1,
+      'serbia' : this.props.countryOrder.indexOf('serbia') + 1
+    } 
+
+    this.props.changeState({countryPast : countrysort })
+
+    console.log(this.props.countryPast)
     console.log(this.props.PowerPoints)
     console.log(this.props.countryPowerPoints)
 
