@@ -436,7 +436,7 @@ organizationofWins (countryList) {
   let countryTempList = [...countryList]
   const ranker = countryList.map(() => {
     const CountryRanked = this.sort(countryTempList, this.state.Order, this.props.countryPast)
-  countryTempList = countryTempList.filter(word => word !== CountryRanked);
+  countryTempList = countryTempList.filter(word => word !== CountryRanked)
     return CountryRanked   
   })
   this.props.changeState({ countryOrder: ranker});

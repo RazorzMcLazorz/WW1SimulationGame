@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../reducers/actions';
-import Footer from './parts/footer';
-import NavBar from './parts/navBar';
-import { Link } from 'react-router-dom';
-import ContainedButtons from './parts/button';
-import CustomizedInputs from './parts/text';
-import InputAdornments from './parts/passwordText';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../reducers/actions'
+import Footer from './parts/footer'
+import NavBar from './parts/navBar'
+import { Link } from 'react-router-dom'
+import ContainedButtons from './parts/button'
 
 const powerPointsDupe = {
   'attacking' : {
@@ -101,26 +99,15 @@ class Results extends Component {
   }
 
   NextRound = async () => {
-
-    console.log(this.props.countryPast)
-    this.props.countryOrder.forEach((country, pos) =>{
-      this.props.changeState({
-        countryPast : [...this.props.countryPast], [country] : pos + 1
-      })
-      this.props.changeState({ 
-        countryPastArray : [...this.props.countryOrder]
-      })
-    })
-    console.log(this.props.countryPastArray)
-    console.log(this.props.countryPast)
-
-    this.props.countryPastArray.forEach((country, pos) => {
+    // updates database pastArray
+    this.props.countryOrder.forEach((country, pos) => {
       fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}&round=${this.props.round}`)
     })
-
+    // updates database currentArray
     this.props.countryOrder.forEach((country, pos) => {
       fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}&round=${this.props.round + 1}`)
     })
+    // need to add a database update to the round system here
 
     this.props.countryOrder.forEach((country, pos) => {
       this.props.changeState({
@@ -128,22 +115,27 @@ class Results extends Component {
       })
     })
 
-    this.props.changeState({ round : this.props.round + 1 })
-
     this.props.changeState({
-      PowerPoints : defaul
+      // resets the country boolean statements
+      PowerPoints : defaul,
+      // updates the round
+      round : this.props.round + 1
     })
-    console.log(this.props.PowerPoints)
 
     this.props.countryOrder.forEach( (country, pos) => {
       const len = this.props.PowerpointsRealign[this.props.countryOrder.length]
       this.props.changeState({ 
-        countryPowerPoints : [...this.props.countryPowerPoints], [country] : len[pos]
+        countryPowerPoints : [...this.props.countryPowerPoints], [country] : len[pos],
+        countryPast : [...this.props.countryPast], [country] : pos + 1,
+        countryPastArray : [...this.props.countryOrder]
       })
       console.log(len)
+      console.log(this.props.countryPastArray)
+      console.log(this.props.countryPast)
       // PowerpointsRealign
     })
     
+    console.log(this.props.PowerPoints)
     console.log(this.props.countryPowerPoints)
 
     // Moves on to the next Round
