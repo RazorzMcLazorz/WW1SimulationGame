@@ -470,7 +470,7 @@ organizationofWins (countryList) {
               <div className="mappedCountry" key={pos+1}>
                 <div className="countryPP">
                   <div className="countryTitle">{this.props.CountryName[country]}</div>
-                  <div className="countryPowerP">{this.props.countryPowerPoints[country]} Power Points Available</div>
+                  <div className="countryPowerP">{this.props.PowerpointsRealign[this.props.countryOrder.length][pos]} Power Points Available</div>
                   <div>{this.defend(country)}</div>
                 </div>
                 <div className="countryPPAttacking">

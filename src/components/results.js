@@ -87,7 +87,7 @@ class Results extends Component {
           {this.props.CountryName[this.props.countryOrder[pos]]}
         </div>
         <div className="resultPowerPoints">
-          {this.props.countryPowerPoints[this.props.countryOrder[pos]]} <div>Power Points</div>
+          {this.props.PowerpointsRealign[this.props.countryOrder.length][pos]} <div>Power Points</div>
         </div>
         <div className="resultGold">
           {this.props.countryGold[this.props.countryOrder[pos]]} <div>Gold</div>
@@ -101,6 +101,19 @@ class Results extends Component {
   }
 
   NextRound = async () => {
+
+    console.log(this.props.countryPast)
+    this.props.countryOrder.forEach((country, pos) =>{
+      this.props.changeState({
+        countryPast : [...this.props.countryPast], [country] : pos + 1
+      })
+      this.props.changeState({ 
+        countryPastArray : [...this.props.countryOrder]
+      })
+    })
+    console.log(this.props.countryPastArray)
+    console.log(this.props.countryPast)
+
     this.props.countryPastArray.forEach((country, pos) => {
       fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}&round=${this.props.round}`)
     })
@@ -125,12 +138,12 @@ class Results extends Component {
     this.props.countryOrder.forEach( (country, pos) => {
       const len = this.props.PowerpointsRealign[this.props.countryOrder.length]
       this.props.changeState({ 
-        countryPowerPoints : [...this.props.countryPowerPoints], [country] : len[pos + 1]
+        countryPowerPoints : [...this.props.countryPowerPoints], [country] : len[pos]
       })
       console.log(len)
       // PowerpointsRealign
     })
-
+    
     console.log(this.props.countryPowerPoints)
 
     // Moves on to the next Round
@@ -138,6 +151,8 @@ class Results extends Component {
   }
 
   render() {
+    console.log(this.props.countryPastArray)
+    console.log(this.props.countryPast)
     return (
       <div>
         <NavBar/>
@@ -145,15 +160,13 @@ class Results extends Component {
           <div id="roundNumber">
               End of Round {this.props.round}
           </div>
-              <div>{this.order(0)}</div>
-              <div>{this.order(1)}</div>
-              <div>{this.order(2)}</div>
-              <div>{this.order(3)}</div>
-              <div>{this.order(4)}</div>
-              <div>{this.order(5)}</div>
-              <div>{this.order(6)}</div>
-              {this.props.countryCount >= 8 ?<div>{this.order(7)}</div> : ''}
-              {this.props.countryCount >= 9 ?<div>{this.order(8)}</div> : ''}
+              {
+                this.props.countryOrder.map((country, pos) => 
+                  <div>
+                    {this.order(pos)}
+                  </div>
+                )
+              }
           <div id='resultbottom'>
             <div onClick={() => this.NextRound()}>
               {ContainedButtons('Next Round')}
