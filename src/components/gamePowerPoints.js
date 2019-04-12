@@ -436,7 +436,7 @@ organizationofWins (countryList) {
   let countryTempList = [...countryList]
   const ranker = countryList.map(() => {
     const CountryRanked = this.sort(countryTempList, this.state.Order, this.props.countryPast)
-  countryTempList = countryTempList.filter(word => word !== CountryRanked);
+  countryTempList = countryTempList.filter(word => word !== CountryRanked)
     return CountryRanked   
   })
   this.props.changeState({ countryOrder: ranker});
@@ -466,11 +466,11 @@ organizationofWins (countryList) {
             Round {this.props.round}
           </div>
           {
-            this.props.countryOrder.map((country) =>
-              <div className="mappedCountry">
+            this.props.countryOrder.map((country, pos) =>
+              <div className="mappedCountry" key={pos+1}>
                 <div className="countryPP">
                   <div className="countryTitle">{this.props.CountryName[country]}</div>
-                  <div className="countryPowerP">{this.props.countryPowerPoints[country]} Power Points Available</div>
+                  <div className="countryPowerP">{this.props.PowerpointsRealign[this.props.countryOrder.length][pos]} Power Points Available</div>
                   <div>{this.defend(country)}</div>
                 </div>
                 <div className="countryPPAttacking">

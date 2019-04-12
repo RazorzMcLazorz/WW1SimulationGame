@@ -78,6 +78,7 @@ function CustomizedInputs(props) {
             underline: classes.cssUnderline,
           }}
           value={props.value}
+          onChange={props.onChange}
         />
       </FormControl>
     </div>
@@ -89,6 +90,7 @@ CustomizedInputs.propTypes = {
   label: PropTypes.string.isRequired,
   ids: PropTypes.string.isRequired,
   value: PropTypes.number,
+  onChange: PropTypes.func
 };
 
 export default withStyles(styles)(CustomizedInputs);
