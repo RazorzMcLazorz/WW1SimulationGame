@@ -115,7 +115,7 @@ class Game extends Component {
           <div className="countryName">{this.props.CountryName[country]}</div>
           {/* Country WarPeace Selection */}
           <div className="countryRadio"><WarPeace label={country}/></div>
-          {/* {document.getElementById(`${country}Gold`).defaultValue=this.props.countryGold[country]} */}
+          {/* {document.getElementById(`${country}Gold`).defaultValue=this.props.countryGold[country]} */} 
           <div>
             <CustomizedInputs
               label="Gold"
