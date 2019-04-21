@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../reducers/actions';
-import Footer from './parts/footer';
-import NavBar from './parts/navBar';
-import { Link } from 'react-router-dom';
-import ContainedButtons from './parts/button';
-import CustomizedInputs from './parts/text';
-import InputAdornments from './parts/passwordText';
-import { isBoolean } from 'util';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../reducers/actions'
+import Footer from './parts/footer'
+import NavBar from './parts/navBar'
+import { Link } from 'react-router-dom'
+import ContainedButtons from './parts/button'
+import CustomizedInputs from './parts/text'
+import InputAdornments from './parts/passwordText'
+import { isBoolean } from 'util'
 
 class Login extends Component {
 

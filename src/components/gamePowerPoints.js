@@ -10,6 +10,12 @@ import InputAdornments from './parts/passwordText';
 import { isBoolean } from 'util';
 
 const countryListGlobal = ['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia']
+const countryValues = {
+	'Win' : 0,
+	'Loss' : 0,
+	'IWin' : 0,
+	'ILoss' : 0,
+}
 
 class GamePowerPoints extends Component {
 
@@ -25,60 +31,15 @@ class GamePowerPoints extends Component {
     rankPosit : 1, // sets what 
     rank : [], // rank of the countrys
     Order : {
-      'germany' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
-      'russia' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
-      'britain' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
-      'france' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
-      'usa' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
-      'austria' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
-      'ottoman' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
-      'italy' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
-      'serbia' : {
-        'Win' : 0,
-        'Loss' : 0,
-        'IWin' : 0,
-        'ILoss' : 0,
-      },
+      'germany' : {...countryValues},
+      'russia' : {...countryValues},
+      'britain' : {...countryValues},
+      'france' : {...countryValues},
+      'usa' : {...countryValues},
+      'austria' : {...countryValues},
+      'ottoman' : {...countryValues},
+      'italy' : {...countryValues},
+      'serbia' : {...countryValues},
     }
   }
 
@@ -144,56 +105,17 @@ class GamePowerPoints extends Component {
   }
 
   defend(country) {
-    let A = false;
-    let B = false;
-    let C = false;
-    let D = false;
-    let E = false;
-    let F = false;
-    let G = false;
-    let H = false;
-    let I = false;
-    if (this.props.PowerPoints['germany']['attacking'][country]) {
-      A = true;
-    }
-    if (this.props.PowerPoints['russia']['attacking'][country]) {
-      B = true;
-    }
-    if (this.props.PowerPoints['britain']['attacking'][country]) {
-      C = true;
-    }
-    if (this.props.PowerPoints['france']['attacking'][country]) {
-      D = true;
-    }
-    if (this.props.PowerPoints['usa']['attacking'][country]) {
-      E = true;
-    }
-    if (this.props.PowerPoints['austria']['attacking'][country]) {
-      F = true;
-    }
-    if (this.props.PowerPoints['ottoman']['attacking'][country]) {
-      G = true;
-    }
-    if (this.props.PowerPoints['italy']['attacking'][country]) {
-      H = true;
-    }
-    if (this.props.PowerPoints['serbia']['attacking'][country]) {
-      I = true;
-    }
-    
-
-
     return (
       <div className="DefencePoints">
-        {A?<CustomizedInputs label={'Germany Defence'} ids={`${country}Defendergermany`}/>: ''}
-        {B?<CustomizedInputs label={'Russia Defence'} ids={`${country}Defenderrussia`}/>: ''}
-        {C?<CustomizedInputs label={'Britain Defence'} ids={`${country}Defenderbritain`}/>: ''}
-        {D?<CustomizedInputs label={'Austria Defence'} ids={`${country}Defenderaustria`}/>: ''}
-        {E?<CustomizedInputs label={'France Defence'} ids={`${country}Defenderfrance`}/>: ''}
-        {F?<CustomizedInputs label={'USA Defence'} ids={`${country}Defenderusa`}/>: ''}
-        {G?<CustomizedInputs label={'Ottoman Defence'} ids={`${country}Defenderottoman`}/>: ''}
-        {H?<CustomizedInputs label={'Italy Defence'} ids={`${country}Defenderitaly`}/>: ''}
-        {I?<CustomizedInputs label={'Serbia Defence'} ids={`${country}Defenderserbia`}/>: ''}
+        {this.props.PowerPoints['germany']['attacking'][country] ?<CustomizedInputs label={'Germany Defence'} ids={`${country}Defendergermany`}/>: ''}
+        {this.props.PowerPoints['russia']['attacking'][country] ?<CustomizedInputs label={'Russia Defence'} ids={`${country}Defenderrussia`}/>: ''}
+        {this.props.PowerPoints['britain']['attacking'][country] ?<CustomizedInputs label={'Britain Defence'} ids={`${country}Defenderbritain`}/>: ''}
+        {this.props.PowerPoints['france']['attacking'][country] ?<CustomizedInputs label={'Austria Defence'} ids={`${country}Defenderaustria`}/>: ''}
+        {this.props.PowerPoints['usa']['attacking'][country] ?<CustomizedInputs label={'France Defence'} ids={`${country}Defenderfrance`}/>: ''}
+        {this.props.PowerPoints['austria']['attacking'][country] ?<CustomizedInputs label={'USA Defence'} ids={`${country}Defenderusa`}/>: ''}
+        {this.props.PowerPoints['ottoman']['attacking'][country] ?<CustomizedInputs label={'Ottoman Defence'} ids={`${country}Defenderottoman`}/>: ''}
+        {this.props.PowerPoints['italy']['attacking'][country] ?<CustomizedInputs label={'Italy Defence'} ids={`${country}Defenderitaly`}/>: ''}
+        {this.props.PowerPoints['serbia']['attacking'][country] ?<CustomizedInputs label={'Serbia Defence'} ids={`${country}Defenderserbia`}/>: ''}
       </div>
     );
   }
@@ -452,83 +374,6 @@ class GamePowerPoints extends Component {
       }
     }
   }
-  
-  // REMOVE NOLOSS  
-  noLoss = async () => {
-    let a = [];
-    let x = [];
-    if (this.state.Order['germany']['Loss'] == 0) {
-      a.push('germany');
-      x.push(this.state.Order['germany']['Win'])
-      console.log('g')
-    }
-    if (this.state.Order['russia']['Loss'] == 0) {
-      a.push('russia');
-      x.push(this.state.Order['russia']['Win'])
-      console.log('r')
-    }
-    if (this.state.Order['britain']['Loss'] == 0) {
-      a.push('britain');
-      x.push(this.state.Order['britain']['Win'])
-      console.log('b')
-    }
-    if (this.state.Order['france']['Loss'] == 0) {
-      a.push('france');
-      x.push(this.state.Order['france']['Win'])
-      console.log('f')
-    }
-    if (this.state.Order['usa']['Loss'] == 0) {
-      a.push('usa');
-      x.push(this.state.Order['usa']['Win'])
-      console.log('u')
-    }
-    if (this.state.Order['austria']['Loss'] == 0) {
-      a.push('austria');
-      x.push(this.state.Order['austria']['Win'])
-      console.log('a')
-    }
-    if (this.state.Order['ottoman']['Loss'] == 0) {
-      a.push('ottoman');
-      x.push(this.state.Order['ottoman']['Win'])
-      console.log('o')
-    }
-    if (this.state.Order['italy']['Loss'] == 0) {
-      a.push('italy');
-      x.push(this.state.Order['italy']['Win'])
-      console.log('i')
-    }
-    if (this.state.Order['serbia']['Loss'] == 0) {
-      a.push('serbia');
-      x.push(this.state.Order['serbia']['Win'])
-      console.log('s')
-    }
-    let tie = undefined;
-    let m = undefined;
-
-    for (let i = 0; a.length >= i; i++) {
-      try {
-      tie = a[i]
-      console.log(a)
-      console.log(tie)
-      console.log(x)
-      m = Math.max(...x)
-      console.log(m + " " + this.state.Order[tie]['Win'])
-      if (tie) {
-        if (this.state.Order[tie]['Win'] == m) {
-          console.log('first place' + tie)
-          await this.setState({rank: { ...this.state.rank, [this.state.posit]: tie } })
-          await this.setState({posit : this.state.posit + 1 })
-          console.log(tie + ' ' + m + ' ' + x)
-          x.splice( x.indexOf(m), 9 )
-          console.log(tie + ' ' + m + ' ' + x)
-        }
-      }
-      }
-      catch(err) {}
-    }
-    console.log(x)
-    console.log(this.state.Order)
-  }
 
 sort(countryList, Order, countryPast) {
     let x = countryList[0]
@@ -588,17 +433,11 @@ sort(countryList, Order, countryPast) {
 organizationofWins (countryList) {
   // Makes a new copy of the array \/
   let countryTempList = [...countryList]
-
-console.log(countryTempList)
-
   const ranker = countryList.map(() => {
     const CountryRanked = this.sort(countryTempList, this.state.Order, this.props.countryPast)
-    console.log(CountryRanked)
-  countryTempList = countryTempList.filter(word => word !== CountryRanked);
-  console.log(countryTempList)
+  countryTempList = countryTempList.filter(word => word !== CountryRanked)
     return CountryRanked   
   })
-  console.log(ranker)
   this.props.changeState({ countryOrder: ranker});
   this.props.history.push('/results');
 }
@@ -625,211 +464,29 @@ console.log(countryTempList)
           <div id="roundNumber">
             Round {this.props.round}
           </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Germany</div>
-            <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('germany') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('germany') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('germany') + 1]: 'Failed to collect '
-          } Power Points</div>
-            <div>{this.defend('germany')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('germany', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('germany', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('germany', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Russia</div>
-            <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('russia') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('russia') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('russia') + 1]: 'Failed to collect '
-          } Power Points</div>
-            <div>{this.defend('russia')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('russia', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('russia', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('russia', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Britain</div>
-            <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('britain') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('britain') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('britain') + 1]: 'Failed to collect '
-          } Power Points</div>
-            <div>{this.defend('britain')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('britain', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('britain', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('britain', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">France</div>
-            <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('france') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('france') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('france') + 1]: 'Failed to collect '
-          } Power Points</div>
-            <div>{this.defend('france')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('france', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('france', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('france', 'defence')}</div>
-          </div>
-
-          {this.props.countryCount >= 9 ?
-          <div>
-            <div className="countryPP">
-              <div className="countryTitle">United States</div>
-              <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('usa') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('usa') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('usa') + 1]: 'Failed to collect '
-          } Power Points</div>
-              <div>{this.defend('usa')}</div>
-            </div>
-            <div className="countryPPAttacking">
-              <div>Attacking</div>
-              <div>{this.attacking('usa', 'attacking')}</div>
-            </div>
-            <div className="countryPPAttackAlliance">
-              <div>Attack Alliance</div>
-              <div>{this.attacking('usa', 'attack')}</div>
-            </div>
-            <div className="countryPPDefenceAlliance">
-              <div>Defence Alliance</div>
-              <div>{this.attacking('usa', 'defence')}</div>
-            </div>
-          </div>: ''}
-
-          <div className="countryPP">
-            <div className="countryTitle">Austria</div>
-            <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('austria') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('austria') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('austria') + 1]: 'Failed to collect '
-          } Power Points</div>
-            <div>{this.defend('austria')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('austria', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('austria', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('austria', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Ottoman Empire</div>
-            <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('ottoman') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('ottoman') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('ottoman') + 1]: 'Failed to collect '
-          } Power Points</div>
-            <div>{this.defend('ottoman')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('ottoman', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('ottoman', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('ottoman', 'defence')}</div>
-          </div>
-
-          <div className="countryPP">
-            <div className="countryTitle">Italy</div>
-            <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('italy') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('italy') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('italy') + 1]: 'Failed to collect '
-          } Power Points</div>
-            <div>{this.defend('italy')}</div>
-          </div>
-          <div className="countryPPAttacking">
-            <div>Attacking</div>
-            <div>{this.attacking('italy', 'attacking')}</div>
-          </div>
-          <div className="countryPPAttackAlliance">
-            <div>Attack Alliance</div>
-            <div>{this.attacking('italy', 'attack')}</div>
-          </div>
-          <div className="countryPPDefenceAlliance">
-            <div>Defence Alliance</div>
-            <div>{this.attacking('italy', 'defence')}</div>
-          </div>
-
-          {this.props.countryCount >= 8 ?
-          <div>
-            <div className="countryPP">
-              <div className="countryTitle">Serbia</div>
-              <div className="countryPowerP">{
-            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('serbia') + 1]:
-            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('serbia') + 1]:
-            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('serbia') + 1]: 'Failed to collect '
-          } Power Points</div>
-              <div>{this.defend('serbia')}</div>
-            </div>
-            <div className="countryPPAttacking">
-              <div>Attacking</div>
-              <div>{this.attacking('serbia', 'attacking')}</div>
-            </div>
-            <div className="countryPPAttackAlliance">
-              <div>Attack Alliance</div>
-              <div>{this.attacking('serbia', 'attack')}</div>
-            </div>
-            <div className="countryPPDefenceAlliance">
-              <div>Defence Alliance</div>
-              <div>{this.attacking('serbia', 'defence')}</div>
-            </div>
-          </div>
-          : ''}
+          {
+            this.props.countryOrder.map((country, pos) =>
+              <div className="mappedCountry" key={pos+1}>
+                <div className="countryPP">
+                  <div className="countryTitle">{this.props.CountryName[country]}</div>
+                  <div className="countryPowerP">{this.props.PowerpointsRealign[this.props.countryOrder.length][pos]} Power Points Available</div>
+                  <div>{this.defend(country)}</div>
+                </div>
+                <div className="countryPPAttacking">
+                  <div>Attacking</div>
+                  <div>{this.attacking(country, 'attacking')}</div>
+                </div>
+                <div className="countryPPAttackAlliance">
+                  <div>Attack Alliance</div>
+                  <div>{this.attacking(country, 'attack')}</div>
+                </div>
+                <div className="countryPPDefenceAlliance">
+                  <div>Defence Alliance</div>
+                  <div>{this.attacking(country, 'defence')}</div>
+                </div>
+              </div>
+            )
+          }
           <div id="resultsButton">
             <div to="/results" onClick={() => this.getResults()}>
                 {ContainedButtons('Results')}

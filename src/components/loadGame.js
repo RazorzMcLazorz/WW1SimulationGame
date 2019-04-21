@@ -16,13 +16,18 @@ class LoadGame extends Component {
     await this.setState({games: json.data})
   }
 
-  countryDataSetup = async (name, rank) => {
-    await this.props.changeState({
-      countrySetupOrder: {
-        ...this.props.countrySetupOrder,
-        [name]: rank
-      }
-    });
+  countryDataSetup = async (countrys) => {
+
+    countrys.map((name, rank) =>
+      this.props.changeState({
+        countrySetupOrder: {
+          ...this.props.countrySetupOrder,
+          [name]: rank + 1
+        }
+      })
+    )
+    console.log('completed')
+    console.log(this.props.countrySetupOrder)
   }
 
   countrySetupOrderLoad = async (num, name, count) => {
@@ -30,67 +35,50 @@ class LoadGame extends Component {
     const cRound = await rres.json()
     const ores = await fetch(`${this.props.link}/save/games?username=${this.props.username}`)
     const cOrder = await ores.json()
+    const save = await fetch(`${this.props.link}/save/selectgame?username=${this.props.username}&name=${name}`)
+    const selectedGame = await save.json()
 
-    let tempArray = this.props.countryOrder
+    console.log(cRound.data[0].country_name)
+
+    console.log(cRound.data)
+    console.log(cOrder.data)
+    console.log(selectedGame.data)
+    // set global round
+    this.props.changeState({round : selectedGame.data[0].save_round})
+    // sets global game size
+    this.props.changeState({ countryCount : selectedGame.data[0].save_count })
+    
+    // countryOrder 
+    let tempArray = [...this.props.countryOrder]
+
     cRound.data.forEach(array => {
       tempArray.push(array['country_name'])
     })
-    this.props.changeState({ countryOrder: tempArray });
+
+    this.props.changeState({ countryOrder: tempArray })
     console.log(this.props.countryOrder)
 
-    await this.props.changeState({
-      countrySetupOrder : {
-        ...this.props.countrySetupOrder, ['germany'] : cOrder.data[num]['save_count']
-      },
-      round : cRound.data[0]['country_round'],
+    let countryL = []
+    cRound.data.forEach((x , numb) =>{
+      countryL.push(cRound.data[numb].country_name)
     })
-    if (count >= 7) {
-       this.countryDataSetup(cRound.data[0]['country_name'], cRound.data[0]['country_rank']);
-       this.countryDataSetup(cRound.data[1]['country_name'], cRound.data[1]['country_rank']);
-       this.countryDataSetup(cRound.data[2]['country_name'], cRound.data[2]['country_rank']);
-       this.countryDataSetup(cRound.data[3]['country_name'], cRound.data[3]['country_rank']);
-       this.countryDataSetup(cRound.data[4]['country_name'], cRound.data[4]['country_rank']);
-       this.countryDataSetup(cRound.data[5]['country_name'], cRound.data[5]['country_rank']);
-       this.countryDataSetup(cRound.data[6]['country_name'], cRound.data[6]['country_rank']);
-    }
-    else if (count >= 8) {
-       this.countryDataSetup(cRound.data[0]['country_name'], cRound.data[0]['country_rank']);
-       this.countryDataSetup(cRound.data[1]['country_name'], cRound.data[1]['country_rank']);
-       this.countryDataSetup(cRound.data[2]['country_name'], cRound.data[2]['country_rank']);
-       this.countryDataSetup(cRound.data[3]['country_name'], cRound.data[3]['country_rank']);
-       this.countryDataSetup(cRound.data[4]['country_name'], cRound.data[4]['country_rank']);
-       this.countryDataSetup(cRound.data[5]['country_name'], cRound.data[5]['country_rank']);
-       this.countryDataSetup(cRound.data[6]['country_name'], cRound.data[6]['country_rank']);
-       this.countryDataSetup(cRound.data[7]['country_name'], cRound.data[7]['country_rank']);
-    }
-    else if (count >= 9) {
-       this.countryDataSetup(cRound.data[0]['country_name'], cRound.data[0]['country_rank']);
-       this.countryDataSetup(cRound.data[1]['country_name'], cRound.data[1]['country_rank']);
-       this.countryDataSetup(cRound.data[2]['country_name'], cRound.data[2]['country_rank']);
-       this.countryDataSetup(cRound.data[3]['country_name'], cRound.data[3]['country_rank']);
-       this.countryDataSetup(cRound.data[4]['country_name'], cRound.data[4]['country_rank']);
-       this.countryDataSetup(cRound.data[5]['country_name'], cRound.data[5]['country_rank']);
-       this.countryDataSetup(cRound.data[6]['country_name'], cRound.data[6]['country_rank']);
-       this.countryDataSetup(cRound.data[7]['country_name'], cRound.data[7]['country_rank']);
-       this.countryDataSetup(cRound.data[8]['country_name'], cRound.data[8]['country_rank']);
-    }
-    else {
+    console.log(countryL)
 
-    }
+    this.countryDataSetup(countryL)
+
     // await console.log(cRound.data[0]['country_rank'], cRound.data[1]['country_rank'], cRound.data[3]['country_rank'], cRound.data[4]['country_rank'], cRound.data[5]['country_rank'], cRound.data[6]['country_rank'], cRound.data[7]['country_rank'])
-    await console.log(this.props.countrySetupOrder);
-    await console.log(cOrder.data[0]['save_count']);
-    await console.log(cRound.data[0]['country_round']);
-    await this.props.history.push("/game");
+    console.log(this.props.countrySetupOrder);
+
+    this.props.history.push("/game");
   }
 
   loadGame = async (name, count, num) => {
     
-    await this.props.changeState({
+    this.props.changeState({
       gameName : name,
       countryCount : count,
     });
-    await this.countrySetupOrderLoad(num, name, count);
+    this.countrySetupOrderLoad(num, name, count);
   }
 
   displayGameSave(name, count, num) {
