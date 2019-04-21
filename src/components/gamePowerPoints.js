@@ -14,7 +14,6 @@ const countryListGlobal = ['germany', 'russia', 'britain', 'france', 'usa', 'aus
 class GamePowerPoints extends Component {
 
   state = {
-    Germany : 20000,
     AttackOrder : [],
     posit : 1,
     sortTemp : undefined,
@@ -629,7 +628,11 @@ console.log(countryTempList)
 
           <div className="countryPP">
             <div className="countryTitle">Germany</div>
-            <div className="countryPowerP">{this.state.Germany} Power Points Available</div>
+            <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('germany') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('germany') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('germany') + 1]: 'Failed to collect '
+          } Power Points</div>
             <div>{this.defend('germany')}</div>
           </div>
           <div className="countryPPAttacking">
@@ -647,6 +650,11 @@ console.log(countryTempList)
 
           <div className="countryPP">
             <div className="countryTitle">Russia</div>
+            <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('russia') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('russia') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('russia') + 1]: 'Failed to collect '
+          } Power Points</div>
             <div>{this.defend('russia')}</div>
           </div>
           <div className="countryPPAttacking">
@@ -664,6 +672,11 @@ console.log(countryTempList)
 
           <div className="countryPP">
             <div className="countryTitle">Britain</div>
+            <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('britain') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('britain') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('britain') + 1]: 'Failed to collect '
+          } Power Points</div>
             <div>{this.defend('britain')}</div>
           </div>
           <div className="countryPPAttacking">
@@ -681,6 +694,11 @@ console.log(countryTempList)
 
           <div className="countryPP">
             <div className="countryTitle">France</div>
+            <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('france') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('france') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('france') + 1]: 'Failed to collect '
+          } Power Points</div>
             <div>{this.defend('france')}</div>
           </div>
           <div className="countryPPAttacking">
@@ -700,6 +718,11 @@ console.log(countryTempList)
           <div>
             <div className="countryPP">
               <div className="countryTitle">United States</div>
+              <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('usa') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('usa') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('usa') + 1]: 'Failed to collect '
+          } Power Points</div>
               <div>{this.defend('usa')}</div>
             </div>
             <div className="countryPPAttacking">
@@ -718,6 +741,11 @@ console.log(countryTempList)
 
           <div className="countryPP">
             <div className="countryTitle">Austria</div>
+            <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('austria') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('austria') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('austria') + 1]: 'Failed to collect '
+          } Power Points</div>
             <div>{this.defend('austria')}</div>
           </div>
           <div className="countryPPAttacking">
@@ -735,6 +763,11 @@ console.log(countryTempList)
 
           <div className="countryPP">
             <div className="countryTitle">Ottoman Empire</div>
+            <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('ottoman') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('ottoman') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('ottoman') + 1]: 'Failed to collect '
+          } Power Points</div>
             <div>{this.defend('ottoman')}</div>
           </div>
           <div className="countryPPAttacking">
@@ -752,6 +785,11 @@ console.log(countryTempList)
 
           <div className="countryPP">
             <div className="countryTitle">Italy</div>
+            <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('italy') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('italy') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('italy') + 1]: 'Failed to collect '
+          } Power Points</div>
             <div>{this.defend('italy')}</div>
           </div>
           <div className="countryPPAttacking">
@@ -771,6 +809,11 @@ console.log(countryTempList)
           <div>
             <div className="countryPP">
               <div className="countryTitle">Serbia</div>
+              <div className="countryPowerP">{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf('serbia') + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf('serbia') + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf('serbia') + 1]: 'Failed to collect '
+          } Power Points</div>
               <div>{this.defend('serbia')}</div>
             </div>
             <div className="countryPPAttacking">

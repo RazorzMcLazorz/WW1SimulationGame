@@ -41,7 +41,7 @@ class Results extends Component {
     }
   }
 
-  NextRound = async () => {
+  NextRound () {
     this.props.countryPastArray.forEach((country, pos) => {
       fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}&round=${this.props.round}`)
     })

@@ -157,6 +157,11 @@ class Game extends Component {
           <div onClick={() => this.countryDefAlly(country)}>{ContainedButtons('Defence Alliance')}</div>
           <div onClick={() => this.trading(country)}>{ContainedButtons('Trade')}</div> */}
           <div><CustomizedInputs label="Gold" ids={`${country}Gold`} value={this.props.countryGold[country]}/></div>
+          <div>{
+            this.props.countryOrder.length === 7 ? this.props.sevenPowerPoints[this.props.countryOrder.indexOf(country) + 1]:
+            this.props.countryOrder.length === 8 ? this.props.eightPowerPoints[this.props.countryOrder.indexOf(country) + 1]:
+            this.props.countryOrder.length === 9 ? this.props.ninePowerPoints[this.props.countryOrder.indexOf(country) + 1]: 'Failed to collect '
+          } PowerPoints</div>
         </div>
         { this.state.countryAttacking[country]?
         <div className="additional">
