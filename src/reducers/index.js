@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux';
-import { ADD_ARTICLE, CHANGE_STATE } from "./constants/action-types";
+import { ADD_ARTICLE, CHANGE_STATE } from "./constants/action-types"
 
 const powerPointsDupe = {
   'attacking' : {

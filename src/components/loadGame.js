@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../reducers/actions';
-import Footer from './parts/footer';
-import NavBar from './parts/navBar';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../reducers/actions'
+import Footer from './parts/footer'
+import NavBar from './parts/navBar'
 
 class LoadGame extends Component {
   state = {
