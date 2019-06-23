@@ -107,9 +107,9 @@ class GamePowerPoints extends Component {
         {this.props.PowerPoints['germany']['attacking'][country] ?<CustomizedInputs label={'Germany Defence'} ids={`${country}Defendergermany`}/>: ''}
         {this.props.PowerPoints['russia']['attacking'][country] ?<CustomizedInputs label={'Russia Defence'} ids={`${country}Defenderrussia`}/>: ''}
         {this.props.PowerPoints['britain']['attacking'][country] ?<CustomizedInputs label={'Britain Defence'} ids={`${country}Defenderbritain`}/>: ''}
-        {this.props.PowerPoints['france']['attacking'][country] ?<CustomizedInputs label={'Austria Defence'} ids={`${country}Defenderaustria`}/>: ''}
-        {this.props.PowerPoints['usa']['attacking'][country] ?<CustomizedInputs label={'France Defence'} ids={`${country}Defenderfrance`}/>: ''}
-        {this.props.PowerPoints['austria']['attacking'][country] ?<CustomizedInputs label={'USA Defence'} ids={`${country}Defenderusa`}/>: ''}
+        {this.props.PowerPoints['austria']['attacking'][country] ?<CustomizedInputs label={'Austria Defence'} ids={`${country}Defenderaustria`}/>: ''}
+        {this.props.PowerPoints['france']['attacking'][country] ?<CustomizedInputs label={'France Defence'} ids={`${country}Defenderfrance`}/>: ''}
+        {this.props.PowerPoints['usa']['attacking'][country] ?<CustomizedInputs label={'USA Defence'} ids={`${country}Defenderusa`}/>: ''}
         {this.props.PowerPoints['ottoman']['attacking'][country] ?<CustomizedInputs label={'Ottoman Defence'} ids={`${country}Defenderottoman`}/>: ''}
         {this.props.PowerPoints['italy']['attacking'][country] ?<CustomizedInputs label={'Italy Defence'} ids={`${country}Defenderitaly`}/>: ''}
         {this.props.PowerPoints['serbia']['attacking'][country] ?<CustomizedInputs label={'Serbia Defence'} ids={`${country}Defenderserbia`}/>: ''}
