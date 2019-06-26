@@ -31,8 +31,9 @@ class App extends Component {
         <NavBar/>
         <h2>Welcome to Mr. Harrison's</h2>
         <h1>WW1 Simulation Game</h1>
-        <p>A Bug concerning only Austria, Ottoman, Italy, Serbia, france is basically not able to sort its very weird to me but im lookin into the solution at the moment</p>
-        
+        <p>A Bug concerning only Austria, Ottoman, Italy, Serbia, france is basically not able to sort its very weird to me but im lookin into the solution at the moment.</p>
+        <p>I'm working on the game Delete Button, and Showing all users assigned to the conutrys but only after the bug is fixed.</p>
+
         {this.props.login ?
         <div>
             <Link to="/new" className="buttons" id="newGame" onClick={() => this.newGame()}>
