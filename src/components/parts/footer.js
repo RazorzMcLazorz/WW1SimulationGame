@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
 
 class Footer extends Component {
     render() {
@@ -10,7 +9,7 @@ class Footer extends Component {
                         powered by React.js
                     </div>
                     <div className="cb">
-                        created by Nathaniel Young and Justin Harrison
+                        created by Justin Harrison and Nathaniel Young
                     </div>
                 </div>
                 <div className="footRight">
@@ -22,4 +21,4 @@ class Footer extends Component {
         );
     }
 }
-export default Footer;
+export default Footer
