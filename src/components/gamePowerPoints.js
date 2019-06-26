@@ -199,12 +199,12 @@ class GamePowerPoints extends Component {
     await this.setState({indirect: { ...this.state.indirect, [n]: t} })
     console.log(this.state.indirect)
 
-    console.log(x);
-    return x;
+    console.log(x)
+    return x
   }
   whosDefending = async (pos) => {
-    let x = null;
-    let a = null;
+    let x = null
+    let a = null
     try {
       a = +document.getElementById(`${pos}Defendergermany`).value;
       x = x + a;

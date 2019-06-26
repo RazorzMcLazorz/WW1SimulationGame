@@ -31,6 +31,7 @@ class App extends Component {
         <NavBar/>
         <h2>Welcome to Mr. Harrison's</h2>
         <h1>WW1 Simulation Game</h1>
+        <p>A Bug concerning only Austria, Ottoman, Italy, Serbia, france is basically not able to sort its very weird to me but im lookin into the solution at the moment</p>
         
         {this.props.login ?
         <div>
