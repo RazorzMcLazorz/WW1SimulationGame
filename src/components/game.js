@@ -183,15 +183,15 @@ class Game extends Component {
           }
         }
       }
-    });
+    })
     await console.log('swap' + this.props.PowerPoints[country][label][country] + ' ' + document.getElementById(`${country}${ID}${pos}`).value);
   }
 
   saveAndContinue = async () => {
     // await this.swaptoPP('germany', 'attacking', 'russia', 'Attacking');
     // await this.swaptoPP('germany', 'attacking', 'britain',  'Attacking');
-    await console.log('Continue');
-    await this.props.history.push("/powerpoints");
+    await console.log('Continue')
+    await this.props.history.push("/powerpoints")
   }
 
   render() {
@@ -219,7 +219,7 @@ class Game extends Component {
         </div>
         <Footer />
       </div>
-    );
+    )
   }
 }
 
@@ -228,4 +228,4 @@ const mapStateToProps = (state) => {
 }
 
 Game = connect(mapStateToProps, actions)(Game);
-export default Game;
+export default Game
