@@ -92,7 +92,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedA}
               onChange={this.handleChange('checkedA')}
-              value={this.state.checkedA}
+              value={`${this.state.checkedA}`}
               color="primary"
               id={`${this.props.ids}germany`}
             />
@@ -105,7 +105,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedB}
               onChange={this.handleChange('checkedB')}
-              value={this.state.checkedB}
+              value={`${this.state.checkedB}`}
               color="primary"
               id={`${this.props.ids}russia`}
             />
@@ -118,7 +118,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedC}
               onChange={this.handleChange('checkedC')}
-              value={this.state.checkedC}
+              value={`${this.state.checkedC}`}
               color="primary"
               id={`${this.props.ids}britain`}
             />
@@ -131,7 +131,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedD}
               onChange={this.handleChange('checkedD')}
-              value={this.state.checkedD}
+              value={`${this.state.checkedD}`}
               color="primary"
               id={`${this.props.ids}france`}
             />
@@ -145,7 +145,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedE}
               onChange={this.handleChange('checkedE')}
-              value={this.state.checkedE}
+              value={`${this.state.checkedE}`}
               color="primary"
               id={`${this.props.ids}usa`}
             />
@@ -158,7 +158,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedF}
               onChange={this.handleChange('checkedF')}
-              value={this.state.checkedF}
+              value={`${this.state.checkedF}`}
               color="primary"
               id={`${this.props.ids}austria`}
             />
@@ -171,7 +171,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedG}
               onChange={this.handleChange('checkedG')}
-              value={this.state.checkedG}
+              value={`${this.state.checkedG}`}
               color="primary"
               id={`${this.props.ids}ottoman`}
             />
@@ -184,7 +184,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedH}
               onChange={this.handleChange('checkedH')}
-              value={this.state.checkedH}
+              value={`${this.state.checkedH}`}
               color="primary"
               id={`${this.props.ids}italy`}
             />
@@ -198,7 +198,7 @@ class Attacking extends React.Component {
             <Checkbox
               checked={this.state.checkedI}
               onChange={this.handleChange('checkedI')}
-              value={this.state.checkedI}
+              value={`${this.state.checkedI}`}
               color="primary"
               id={`${this.props.ids}serbia`}
             />
