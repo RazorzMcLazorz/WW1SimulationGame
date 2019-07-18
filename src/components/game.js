@@ -120,7 +120,7 @@ class Game extends Component {
               ids={`${country}Gold`}
               value={this.props.countryGold[country]}
               onChange={ev => {
-                console.log(ev)
+                // console.log(ev) // Dev use
                 this.props.changeState({ 
                   countryGold: {
                     ...this.props.countryGold,
@@ -174,23 +174,23 @@ class Game extends Component {
 
   }
 
-  swaptoPP = async (country, label, pos, ID) => {
-    await this.props.changeState({
-      PowerPoints : {
-        ...this.props.PowerPoints, [country] : {
-          ...this.props.PowerPoints[country], [label] : {
-            ...this.props.PowerPoints[country][label], [pos] : document.getElementById(`${country}${ID}${pos}`).value
-          }
-        }
-      }
-    })
-    await console.log('swap' + this.props.PowerPoints[country][label][country] + ' ' + document.getElementById(`${country}${ID}${pos}`).value);
-  }
+  // swaptoPP = async (country, label, pos, ID) => {
+  //   await this.props.changeState({
+  //     PowerPoints : {
+  //       ...this.props.PowerPoints, [country] : {
+  //         ...this.props.PowerPoints[country], [label] : {
+  //           ...this.props.PowerPoints[country][label], [pos] : document.getElementById(`${country}${ID}${pos}`).value
+  //         }
+  //       }
+  //     }
+  //   })
+  //   await console.log('swap' + this.props.PowerPoints[country][label][country] + ' ' + document.getElementById(`${country}${ID}${pos}`).value);
+  // }
 
   saveAndContinue = async () => {
     // await this.swaptoPP('germany', 'attacking', 'russia', 'Attacking');
     // await this.swaptoPP('germany', 'attacking', 'britain',  'Attacking');
-    await console.log('Continue')
+    console.log('Countries Checked Moving to Values')
     await this.props.history.push("/powerpoints")
   }
 

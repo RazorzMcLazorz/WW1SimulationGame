@@ -25,8 +25,8 @@ class LoadGame extends Component {
         }
       })
     )
-    console.log('completed')
-    console.log(this.props.countrySetupOrder)
+    console.log('All Countries Loaded')
+    console.log(['Countries Loaded', this.props.countrySetupOrder ])
   }
 
   countrySetupOrderLoad = async (num, name, count) => {
@@ -37,11 +37,11 @@ class LoadGame extends Component {
     const save = await fetch(`${this.props.link}/save/selectgame?username=${this.props.username}&name=${name}`)
     const selectedGame = await save.json()
 
-    console.log(cRound.data[0].country_name)
+    console.log('Game Country starting on ' + cRound.data[0].country_name)
 
-    console.log(cRound.data)
-    console.log(cOrder.data)
-    console.log(selectedGame.data)
+    // console.log(cRound.data) // Dev Database Retrieval
+    // console.log(cOrder.data) // Dev Game Database Retrieval
+    // console.log(selectedGame.data) // Dev Selected Game Retrieval
     // set global round
     this.props.changeState({round : selectedGame.data[0].save_round})
     // sets global game size
@@ -55,18 +55,16 @@ class LoadGame extends Component {
     })
 
     this.props.changeState({ countryOrder: tempArray })
-    console.log(this.props.countryOrder)
 
     let countryL = []
     cRound.data.forEach((x , numb) =>{
       countryL.push(cRound.data[numb].country_name)
     })
-    console.log(countryL)
+    // console.log(countryL) // Dev Country Modable Array
 
     this.countryDataSetup(countryL)
 
     // await console.log(cRound.data[0]['country_rank'], cRound.data[1]['country_rank'], cRound.data[3]['country_rank'], cRound.data[4]['country_rank'], cRound.data[5]['country_rank'], cRound.data[6]['country_rank'], cRound.data[7]['country_rank'])
-    console.log(this.props.countrySetupOrder);
 
     this.props.history.push("/game");
   }

@@ -15,14 +15,13 @@ class App extends Component {
   }
 
   newGame() {
-    console.log('new');
+    console.log('Creating a New Game');
   }
 
   loadGame = async () => {
     const x = await this.userSavedGames(this.props.username);
     await this.props.changeState({loadGames : x})
-    await console.log(this.props.loadGames)
-    console.log('load')
+    console.log('Loading an Existing Game')
   }
 
   render() {

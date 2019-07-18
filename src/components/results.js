@@ -173,7 +173,7 @@ class Results extends Component {
           </div>
               {
                 this.props.countryOrder.map((country, pos) => 
-                  <div>
+                  <div key={country + pos}>
                     {this.order(pos)}
                   </div>
                 )

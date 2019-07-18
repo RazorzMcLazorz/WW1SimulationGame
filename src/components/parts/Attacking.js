@@ -73,8 +73,8 @@ class Attacking extends React.Component {
       });
       
       }
-    console.log(this.props.PowerPoints[country]['attacking'])
-    console.log('Material UI' + this.props.username)
+    console.log([`${country} Atk,Ally,Trade Who?`,this.props.PowerPoints[country]['attacking']])
+    // console.log('Material UI' + this.props.username) // Dev Database whos modifying
   }
 
   handleChange = name => event => {

@@ -314,8 +314,7 @@ class GamePowerPoints extends Component {
     for (let i = 0; list.length >= i; i++) {
       let Atk = list[i];
       if (Atk) {
-        console.log(country)
-        console.log(Atk)
+        console.log(country + ' Attacked ' + Atk)
         let x = await this.whosAttacking('attack', country)
         x = x + await this.Attacker(country, Atk)
         let d = await this.whosAttacking('defence', Atk)
