@@ -110,7 +110,7 @@ class Results extends Component {
   }
 
   NextRound () {
-
+     // This Moves the Game onto the next round
      this.UpdateDB()
 
     this.props.countryOrder.forEach((country, pos) => {
@@ -126,15 +126,15 @@ class Results extends Component {
       round : this.props.round + 1
     })
 
-    console.log(this.props.countryOrder)
+    console.log(['Country Order', this.props.countryOrder])
     this.props.countryOrder.forEach( (country, pos) => {
       const len = this.props.PowerpointsRealign[this.props.countryOrder.length]
       this.props.changeState({ 
         ...this.props.countryPowerPoints, [country] : len[pos],
         countryPastArray : [...this.props.countryOrder]
       })
-      console.log(len)
-      console.log(this.props.countryPastArray)
+      console.log(len) // Dev Country Powerpoint return
+      // console.log(this.props.countryPastArray)
       
       // PowerpointsRealign
     })
@@ -153,17 +153,17 @@ class Results extends Component {
 
     this.props.changeState({countryPast : countrysort })
 
-    console.log(this.props.countryPast)
-    console.log(this.props.PowerPoints)
-    console.log(this.props.countryPowerPoints)
+    // console.log(this.props.countryPast) // Dev Country Position in the Array
+    // console.log(this.props.PowerPoints) // Dev Displays a List of Country Boolean Values after the reset
+    // console.log(this.props.countryPowerPoints) // Dev Each Country Powerpoint assigned to them
 
     // Moves on to the next Round
     this.props.history.push('/game')
   }
 
   render() {
-    console.log(this.props.countryPastArray)
-    console.log(this.props.countryPast)
+    console.log(['Past Country List', this.props.countryPastArray]) // Dev Previous Country Order
+    console.log(['New Country List', this.props.countryPast]) // Dev New Country Order
     return (
       <div>
         <NavBar/>
