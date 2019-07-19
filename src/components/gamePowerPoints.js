@@ -339,7 +339,11 @@ class GamePowerPoints extends Component {
           }
         }
         else if (d == x) {
+
+// ISSUE FOUND ___________________________________________________________________________________________________________________________________
+
           console.log('Tie')
+          console.log('Tie Results: ' + this.props.countryPast[country] + ' ' + this.props.countryPast[Atk])
           if (this.props.countryPast[country] < this.props.countryPast[Atk]) {
             console.log('Attacking win')
             await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
@@ -351,7 +355,7 @@ class GamePowerPoints extends Component {
             }
           }
           else if (this.props.countryPast[country] > this.props.countryPast[Atk]) {
-            console.log('defence win')
+            console.log('Defence win')
             await this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Win']: this.state.Order[Atk]['Win'] + 1 } } })
             console.log(this.state.Order[Atk]['Win'])
             await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Loss']: this.state.Order[country]['Loss'] + 1 } } })
