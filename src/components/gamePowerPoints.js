@@ -117,7 +117,7 @@ class GamePowerPoints extends Component {
     );
   }
 
-  pos = async (country, label, pos) => {
+  pos = (country, label, pos) => {
     try {
     let x = document.getElementById(`${country}${label}PPShare${pos}`).value
     return x
@@ -303,33 +303,33 @@ class GamePowerPoints extends Component {
     return x
   }
 
-  startOrg = async (list, country) => {
+  startOrg = (list, country) => {
     for (let i = 0; list.length >= i; i++) {
       let Atk = list[i];
       if (Atk) {
         console.log(country + ' Attacked ' + Atk)
-        let x = await this.whosAttacking('attack', country)
-        x = x + await this.Attacker(country, Atk)
-        let d = await this.whosAttacking('defence', Atk)
-        d = d + await this.whosDefending(Atk)
+        let x = this.whosAttacking('attack', country)
+        x = x + this.Attacker(country, Atk)
+        let d = this.whosAttacking('defence', Atk)
+        d = d + this.whosDefending(Atk)
         console.log(x + ' ' + d)
         if (x > d) {
-          await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
-          await this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Loss']: this.state.Order[Atk]['Loss'] + 1 } } })
+          this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
+          this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Loss']: this.state.Order[Atk]['Loss'] + 1 } } })
           for (let o = 0; this.state.indirect['atk'].length >= o; o++) {
             if (this.state.indirect['atk'] == []) {
-              await this.setState({Order: { ...this.state.Order, [this.state.indirect['atk'][o]]: { ...this.state.Order[this.state.indirect['atk'][o]], ['IWin']: this.state.Order[this.state.indirect['atk'][o]]['IWin'] + 1 } } })
+              this.setState({Order: { ...this.state.Order, [this.state.indirect['atk'][o]]: { ...this.state.Order[this.state.indirect['atk'][o]], ['IWin']: this.state.Order[this.state.indirect['atk'][o]]['IWin'] + 1 } } })
             }
           }
         }
         else if (d > x) {
           console.log('Defence win')
-          await this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Win']: this.state.Order[Atk]['Win'] + 1 } } })
+          this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Win']: this.state.Order[Atk]['Win'] + 1 } } })
           console.log(this.state.Order[Atk]['Win'])
-          await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Loss']: this.state.Order[country]['Loss'] + 1 } } })
+          this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Loss']: this.state.Order[country]['Loss'] + 1 } } })
           console.log(this.state.Order[country]['Loss'])
           if (this.state.indirect['def'] == []) {
-          await this.setState({Order: { ...this.state.Order, [this.state.indirect['def'][i]]: { ...this.state.Order[this.state.indirect['def'][i]], ['ILoss']: this.state.Order[this.state.indirect['atk'][i]]['ILoss'] + 1 } } })
+          this.setState({Order: { ...this.state.Order, [this.state.indirect['def'][i]]: { ...this.state.Order[this.state.indirect['def'][i]], ['ILoss']: this.state.Order[this.state.indirect['atk'][i]]['ILoss'] + 1 } } })
           }
         }
         else if (d == x) {
@@ -342,22 +342,22 @@ class GamePowerPoints extends Component {
           console.log(this.props.countryPast)
           if (this.props.countryPast[country] < this.props.countryPast[Atk]) {
             console.log('Attacking win')
-            await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
+            this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
             console.log(this.state.Order[country]['Win'])
-            await this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Loss']: this.state.Order[Atk]['Loss'] + 1 } } })
+            this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Loss']: this.state.Order[Atk]['Loss'] + 1 } } })
             console.log(this.state.Order[Atk]['Loss'])
             if (this.state.indirect['atk'] == []) {
-            await this.setState({Order: { ...this.state.Order, [this.state.indirect['atk'][i]]: { ...this.state.Order[this.state.indirect['atk'][i]], ['IWin']: this.state.Order[this.state.indirect['atk'][i]]['IWin'] + 1 } } })
+            this.setState({Order: { ...this.state.Order, [this.state.indirect['atk'][i]]: { ...this.state.Order[this.state.indirect['atk'][i]], ['IWin']: this.state.Order[this.state.indirect['atk'][i]]['IWin'] + 1 } } })
             }
           }
           else if (this.props.countryPast[country] > this.props.countryPast[Atk]) {
             console.log('Defence win')
-            await this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Win']: this.state.Order[Atk]['Win'] + 1 } } })
+            this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Win']: this.state.Order[Atk]['Win'] + 1 } } })
             console.log(this.state.Order[Atk]['Win'])
-            await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Loss']: this.state.Order[country]['Loss'] + 1 } } })
+            this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Loss']: this.state.Order[country]['Loss'] + 1 } } })
             console.log(this.state.Order[country]['Loss'])
             if (this.state.indirect['def'] == []) {
-              await this.setState({Order: { ...this.state.Order, [this.state.indirect['def'][i]]: { ...this.state.Order[this.state.indirect['def'][i]], ['ILoss']: this.state.Order[this.state.indirect['atk'][i]]['ILoss'] + 1 } } })
+              this.setState({Order: { ...this.state.Order, [this.state.indirect['def'][i]]: { ...this.state.Order[this.state.indirect['def'][i]], ['ILoss']: this.state.Order[this.state.indirect['atk'][i]]['ILoss'] + 1 } } })
             }
           }
           else {
