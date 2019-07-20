@@ -198,12 +198,8 @@ class GamePowerPoints extends Component {
     }
     catch(err) {}
 
-    // console.log(n + ' indirect')
-
     this.setState({indirect: { ...this.state.indirect, [n]: t} })
-    // console.log(this.state.indirect)
-
-    // console.log(x)
+    
     return x
   }
   whosDefending = (pos) => {
@@ -333,8 +329,6 @@ class GamePowerPoints extends Component {
           }
         }
         else if (d == x) {
-
-// ISSUE FOUND ____________________________________________________________________________________________________________________________________
 
           console.log('Tie')
           console.log(d + ' ' + x)
