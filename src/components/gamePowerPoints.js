@@ -127,82 +127,86 @@ class GamePowerPoints extends Component {
     }
   }
 
-  whosAttacking = async (label, pos) => {
-    let x = 0;
-    let a = 0;
-    let n = null;
+  whosAttacking = (label, pos) => {
+    let x = 0
+    let a = 0
+    let n = null
     if (label == 'attack') {
       n = 'atk'
+      label = 'attacking'
     }
     else if (label == 'defence') {
       n = 'def'
     }
     let t = this.state.indirect[n];
-
+    console.log(label)
+    console.log(pos)
     try {
       a = +document.getElementById(`germany${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('germany')
+      t.push('germany')
+      console.log(a)
     }
     catch(err) {}
     try {
       a = +document.getElementById(`russia${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('russia')
+      t.push('russia')
     }
     catch(err) {}
     try {
       a = +document.getElementById(`britain${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('britain')
+      t.push('britain')
     }
     catch(err) {}
     try {
       a = +document.getElementById(`france${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('france')
+      t.push('france')
     }
     catch(err) {}
     try {
       a = +document.getElementById(`usa${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('usa')
+      t.push('usa')
     }
     catch(err) {}
     try {
       a = +document.getElementById(`austria${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('austria')
+      t.push('austria')
     }
     catch(err) {}
     try {
       a = +document.getElementById(`ottoman${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('ottoman')
+      t.push('ottoman')
     }
     catch(err) {}
     try {
       a = +document.getElementById(`italy${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('italy')
+      t.push('italy')
     }
     catch(err) {}
     try {
       a = +document.getElementById(`serbia${label}PPShare${pos}`).value;
       x = x + a;
-      await t.push('serbia')
+      t.push('serbia')
+      console.log(a)
     }
     catch(err) {}
 
     // console.log(n + ' indirect')
 
-    await this.setState({indirect: { ...this.state.indirect, [n]: t} })
+    this.setState({indirect: { ...this.state.indirect, [n]: t} })
     // console.log(this.state.indirect)
 
     // console.log(x)
     return x
   }
-  whosDefending = async (pos) => {
+  whosDefending = (pos) => {
     let x = null
     let a = null
     try {
@@ -289,25 +293,14 @@ class GamePowerPoints extends Component {
     return a
   }
 
-  battle = async (country1, country2) => {
-    const x = await this.whosAttacking('attack', country1);
-    const a = await this.whosAttacking('defence', country2)
-    await this.props.history.push("/results");
-  }
-
   Attacker (country, attacking) {
     let x = 0
     try {
     let a = +document.getElementById(`${country}attackingPPShare${attacking}`).value
-    x = x + a;
+    x = x + a
     }
     catch(err) {}
     return x
-  }
-
-  warfinalbattle (country) {
-    let a = this.isitwar(country);
-    this.battle(country, 'russia')
   }
 
   startOrg = async (list, country) => {
@@ -319,6 +312,7 @@ class GamePowerPoints extends Component {
         x = x + await this.Attacker(country, Atk)
         let d = await this.whosAttacking('defence', Atk)
         d = d + await this.whosDefending(Atk)
+        console.log(x + ' ' + d)
         if (x > d) {
           await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
           await this.setState({Order: { ...this.state.Order, [Atk]: { ...this.state.Order[Atk], ['Loss']: this.state.Order[Atk]['Loss'] + 1 } } })
@@ -340,10 +334,12 @@ class GamePowerPoints extends Component {
         }
         else if (d == x) {
 
-// ISSUE FOUND ___________________________________________________________________________________________________________________________________
+// ISSUE FOUND ____________________________________________________________________________________________________________________________________
 
           console.log('Tie')
-          console.log('Tie Results: ' + this.props.countryPast[country] + ' ' + this.props.countryPast[Atk])
+          console.log(d + ' ' + x)
+          console.log('Tie Results: ' + this.props.countryPast[country] + ' ' + this.props.countryPast[Atk]) // country Positions
+          console.log(this.props.countryPast)
           if (this.props.countryPast[country] < this.props.countryPast[Atk]) {
             console.log('Attacking win')
             await this.setState({Order: { ...this.state.Order, [country]: { ...this.state.Order[country], ['Win']: this.state.Order[country]['Win'] + 1 } } })
@@ -438,8 +434,8 @@ organizationofWins (countryList) {
   countryTempList = countryTempList.filter(word => word !== CountryRanked)
     return CountryRanked   
   })
-  this.props.changeState({ countryOrder: ranker});
-  this.props.history.push('/results');
+  this.props.changeState({ countryOrder: ranker})
+  this.props.history.push('/results')
 }
 
   getResults = async () => {
