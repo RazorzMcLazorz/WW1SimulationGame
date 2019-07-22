@@ -88,39 +88,16 @@ class LoadGame extends Component {
   }
 
   loadGames() {
+    let mapper = []
+    for (let i = 0; i < this.props.loadGames.length; i++) {
+      mapper.push(i)
+    }
     return (<div>
-      {this.props.loadGames.length >= 1 ?
-      <div>
-        {this.displayGameSave(this.props.loadGames[0]['save_name'], this.props.loadGames[0]['save_count'], 0)}
-      </div>: ''}
-      {this.props.loadGames.length >= 2 ?
-      <div>
-        {this.displayGameSave(this.props.loadGames[1]['save_name'], this.props.loadGames[1]['save_count'], 1)}
-      </div>: ''}
-      {this.props.loadGames.length >= 3 ?
-      <div>
-        {this.displayGameSave(this.props.loadGames[2]['save_name'], this.props.loadGames[2]['save_count'], 2)}
-      </div>: ''}
-      {this.props.loadGames.length >= 4 ?
-      <div>
-        {this.displayGameSave(this.props.loadGames[3]['save_name'], this.props.loadGames[3]['save_count'], 3)}
-      </div>: ''}
-      {this.props.loadGames.length >= 5 ?
-      <div>
-        {this.displayGameSave(this.props.loadGames[4]['save_name'], this.props.loadGames[4]['save_count'], 4)}
-      </div>: ''}
-      {this.props.loadGames.length >= 6 ?
-      <div>
-        {this.displayGameSave(this.props.loadGames[5]['save_name'], this.props.loadGames[5]['save_count'], 5)}
-      </div>: ''}
-      {this.props.loadGames.length >= 7 ?
-      <div>
-        {this.displayGameSave(this.props.loadGames[6]['save_name'], this.props.loadGames[6]['save_count'], 6)}
-      </div>: ''}
-      {this.props.loadGames.length >= 8 ?
-      <div>
-        {this.displayGameSave(this.props.loadGames[7]['save_name'], this.props.loadGames[7]['save_count'], 7)}
-      </div>: ''}
+      {mapper.map((game, pos) =>
+      <div key={pos}>
+        {this.displayGameSave(this.props.loadGames[game]['save_name'], this.props.loadGames[game]['save_count'], game)}
+      </div>)
+      }
     </div>)
   }
 
