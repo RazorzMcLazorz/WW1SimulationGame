@@ -1,23 +1,10 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { WithStyles, createStyles } from '@material-ui/core';
-
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-    color: '#2a5aa8'
-  },
-  input: {
-    display: 'none',
-  },
-});
+import * as React from 'react'
+import Button from '@material-ui/core/Button'
 
 export default function ContainedButtons(str) {
   return (
     <Button variant="contained" color="primary">
       {str}
     </Button>
-  );
-};
+  )
+}

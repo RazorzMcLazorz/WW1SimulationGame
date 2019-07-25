@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as actions from '../reducers/actions'
 import Footer from './parts/footer'
 import NavBar from './parts/navBar'
+import Delete from './parts/delete'
 
 class LoadGame extends Component {
   state = {
@@ -78,14 +79,24 @@ class LoadGame extends Component {
     this.countrySetupOrderLoad(num, name, count);
   }
 
+  deleteGame = async (user, game) => {
+    await fetch(`${this.props.link}/save/delete?user=${user}&save=${game}`)
+    // have to set this function to auto update the entire page
+  }
+
   displayGameSave(name, count, num) {
     return (
-      <div to="/game" className={`load`} onClick={() => this.loadGame(name, count, num)}>
-        <div className="loadTitle">{name}</div>
-        <div className="loadCount">{count}</div>
+      <div id='gameload'>
+        <div to="/game" className={`load`} onClick={() => this.loadGame(name, count, num)}>
+          <div className="loadTitle">{name}</div>
+          <div className="loadCount">{count}</div>
+        </div>
+        <div onClick={() => this.deleteGame(this.props.username, name)}>
+          <Delete/>
+        </div>
       </div>
-    )
-  }
+    );
+  };
 
   loadGames() {
     let mapper = []
@@ -95,7 +106,9 @@ class LoadGame extends Component {
     return (<div>
       {mapper.map((game, pos) =>
       <div key={pos}>
+        <div>
         {this.displayGameSave(this.props.loadGames[game]['save_name'], this.props.loadGames[game]['save_count'], game)}
+        </div>
       </div>)
       }
     </div>)

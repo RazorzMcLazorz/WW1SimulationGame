@@ -3,26 +3,30 @@
       
   }
 }
-
-.load {
+#gameload {
   display: flex;
-  align-items: center;
-  width: 40vw;
-  height: 40px;
-  color: #ffffff;
-  background-color: #3d51b5;
-  border-color: #3F51B5;
-  margin-left: 15px;
-  border-radius: 4px;
-  margin-bottom: 3px;
-  .loadTitle {
+  flex-direction: row;
+  width: 100vw;
+  .load {
     display: flex;
-    margin-left: 5px;
-    width: 350px;
-  }
-  .loadCount {
-    display: flex;
-    width: 250px;
+    align-items: center;
+    width: 40vw;
+    height: 40px;
+    color: #ffffff;
+    background-color: #3d51b5;
+    border-color: #3F51B5;
+    margin-left: 15px;
+    border-radius: 4px;
+    margin-bottom: 3px;
+    .loadTitle {
+      display: flex;
+      margin-left: 5px;
+      width: 350px;
+    }
+    .loadCount {
+      display: flex;
+      width: 250px;
+    }
   }
 }
 .load:hover {
