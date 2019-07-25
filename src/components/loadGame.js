@@ -4,6 +4,7 @@ import * as actions from '../reducers/actions'
 import Footer from './parts/footer'
 import NavBar from './parts/navBar'
 import Delete from './parts/delete'
+import { Link } from 'react-router-dom'
 
 class LoadGame extends Component {
   state = {
@@ -81,7 +82,10 @@ class LoadGame extends Component {
 
   deleteGame = async (user, game) => {
     await fetch(`${this.props.link}/save/delete?user=${user}&save=${game}`)
-    // have to set this function to auto update the entire page
+    const res = await fetch(`${this.props.link}/save/games?username=${user}`)
+    const json = await res.json()
+    this.props.changeState({loadGames : json})
+    this.props.history.push('/')
   }
 
   displayGameSave(name, count, num) {
