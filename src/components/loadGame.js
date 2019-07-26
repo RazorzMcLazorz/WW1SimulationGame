@@ -98,6 +98,11 @@ class LoadGame extends Component {
         <div onClick={() => this.deleteGame(this.props.username, name)}>
           <Delete/>
         </div>
+        <Link to='/players'>
+          <IconButton>
+            <people_outline/>
+          </IconButton>
+        </Link>
       </div>
     );
   };
