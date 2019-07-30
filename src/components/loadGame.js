@@ -5,6 +5,7 @@ import Footer from './parts/footer'
 import NavBar from './parts/navBar'
 import Delete from './parts/delete'
 import { Link } from 'react-router-dom'
+import ContainedButtons from './parts/button'
 
 class LoadGame extends Component {
   state = {
@@ -68,7 +69,7 @@ class LoadGame extends Component {
 
     // await console.log(cRound.data[0]['country_rank'], cRound.data[1]['country_rank'], cRound.data[3]['country_rank'], cRound.data[4]['country_rank'], cRound.data[5]['country_rank'], cRound.data[6]['country_rank'], cRound.data[7]['country_rank'])
 
-    this.props.history.push("/game");
+    this.props.history.push('/game');
   }
 
   loadGame = async (name, count, num) => {
@@ -90,22 +91,20 @@ class LoadGame extends Component {
 
   displayGameSave(name, count, num) {
     return (
-      <div id='gameload'>
-        <div to="/game" className={`load`} onClick={() => this.loadGame(name, count, num)}>
-          <div className="loadTitle">{name}</div>
-          <div className="loadCount">{count}</div>
+      <div className='gameload'>
+        <div to='/game' className='load' onClick={() => this.loadGame(name, count, num)}>
+          <div className='loadTitle'>{name}</div>
+          <div className='loadCount'>{count}</div>
         </div>
-        <div onClick={() => this.deleteGame(this.props.username, name)}>
+        <Link to='/players' className='loadGameButtons'>
+          {ContainedButtons('Players')}
+        </Link>
+        <div onClick={() => this.deleteGame(this.props.username, name)} className='loadGameButtons'>
           <Delete/>
         </div>
-        <Link to='/players'>
-          <IconButton>
-            <people_outline/>
-          </IconButton>
-        </Link>
       </div>
-    );
-  };
+    )
+  }
 
   loadGames() {
     let mapper = []
@@ -127,7 +126,7 @@ class LoadGame extends Component {
     return (
       <div className='loadGame'>
         <NavBar/>
-        <div id="loadBody">
+        <div id='loadBody'>
           {this.loadGames()}
         </div>
         <Footer/>

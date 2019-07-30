@@ -1,12 +1,10 @@
-.loadGame {
-  #loadBody {
-      
-  }
-}
-#gameload {
+.gameload {
   display: flex;
   flex-direction: row;
   width: 100vw;
+  .loadGameButtons {
+    margin-left: 15px;
+  }
   .load {
     display: flex;
     align-items: center;
