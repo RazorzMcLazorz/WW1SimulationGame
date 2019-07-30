@@ -165,6 +165,7 @@ const initialState = {
     8 : 700,
     9 : 600
   },
+  countrySelected : '', // used for displaying players
 }
 
 const rootReducer = (state = initialState, action) => {

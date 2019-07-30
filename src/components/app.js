@@ -30,7 +30,7 @@ class App extends Component {
         <NavBar/>
         <h2>Welcome to Mr. Harrison's</h2>
         <h1>WW1 Simulation Game</h1>
-        <p>I'm working on the game Delete Button, and Showing all users assigned to the countries.</p>
+        <p>I'm working on Showing all users assigned to the countries.</p>
 
         {this.props.login ?
         <div>

@@ -96,7 +96,7 @@ class LoadGame extends Component {
           <div className='loadTitle'>{name}</div>
           <div className='loadCount'>{count}</div>
         </div>
-        <Link to='/players' className='loadGameButtons'>
+        <Link to='/players' className='loadGameButtons' onClick={() => this.props.changeState({countrySelected : name})}>
           {ContainedButtons('Players')}
         </Link>
         <div onClick={() => this.deleteGame(this.props.username, name)} className='loadGameButtons'>
