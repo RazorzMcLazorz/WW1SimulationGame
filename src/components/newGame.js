@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import * as actions from '../reducers/actions'
 import Footer from './parts/footer'
 import NavBar from './parts/navBar'
-import { Link } from 'react-router-dom'
 import CustomizedInputs from './parts/text'
 import ContainedButtons from './parts/button'
 import IconButtons from './parts/playerAddButton'
@@ -289,7 +288,7 @@ class New extends Component {
     if (this.props.login === true) {
       const gn = document.getElementById("gameName").value
       const cc = document.getElementById("countryCount").value
-      const g = await this.saveGameNameNotSame(gn, this.props.username)
+      const g = this.saveGameNameNotSame(gn, this.props.username)
       console.log(g)
       try {
         console.log(g[0]['save_username'])
@@ -301,11 +300,11 @@ class New extends Component {
         if (x) {
           this.setState({countryCounting: false})
           
-          await this.setState({
+          this.setState({
             gameName: gn,
             gameSize: cc,
           })
-          await this.props.changeState({
+          this.props.changeState({
             countryCount: cc,
             gameName: gn,
           })
@@ -365,8 +364,7 @@ class New extends Component {
     await fetch(`${this.props.link}/past/add?user=${this.props.username}&save=${save}&name=${name}&rank=${rank}&gold=${gold}&pp=${pp}`)
 
     // ?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}&round=${this.props.round}
-
-    await this.props.changeState({
+this.props.changeState({
       countryOrder: {
         ...this.props.countryOrder,
         [name]: rank
@@ -425,14 +423,14 @@ class New extends Component {
         const oc = this.state.gamePlayers['ottoman'].length
         const ic = this.state.gamePlayers['italy'  ].length
         const sc = this.state.gamePlayers['serbia' ].length
-        await this.savePlayers('germany')
-        await this.savePlayers('britain')
-        await this.savePlayers('france')
-        await this.savePlayers('usa')
-        await this.savePlayers('austria')
-        await this.savePlayers('ottoman')
-        await this.savePlayers('italy')
-        await this.savePlayers('serbia')
+        this.savePlayers('germany')
+        this.savePlayers('britain')
+        this.savePlayers('france')
+        this.savePlayers('usa')
+        this.savePlayers('austria')
+        this.savePlayers('ottoman')
+        this.savePlayers('italy')
+        this.savePlayers('serbia')
         // Gathers data for the new game and saves it just incase so that it has defaults to load
         await this.gatherDataSetup( this.state.gameName)
         this.props.changeState({round : 1})
