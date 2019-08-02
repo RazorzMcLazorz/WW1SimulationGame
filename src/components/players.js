@@ -15,6 +15,8 @@ class Players extends Component {
       <div className='players'>
         <NavBar/>
 
+          Work in progress feature
+          
           {this.players(this.props.countrySelected)}
 
         <Footer />
