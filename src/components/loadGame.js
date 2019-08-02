@@ -59,6 +59,8 @@ class LoadGame extends Component {
 
     this.props.changeState({ countryOrder: tempArray })
 
+    if (this.props.countryOrder.length > 9){this.props.history('/'); this.props.changeState({ countryOrder: [] })}
+
     let countryL = []
     cRound.data.forEach((x , numb) =>{
       countryL.push(cRound.data[numb].country_name)
