@@ -79,6 +79,37 @@ export const gameSize9 = {
   }
 }
 
+const countryNumber9 = {
+  1 : 'germany',
+  2 : 'russia',
+  3 : 'britain',
+  4 : 'france',
+  5 : 'usa',
+  6 : 'austria',
+  7 : 'ottoman',
+  8 : 'italy',
+  9 : 'serbia'
+}
+const countryNumber8 = {
+  1 : 'germany',
+  2 : 'russia',
+  3 : 'britain',
+  4 : 'france',
+  5 : 'austria',
+  6 : 'ottoman',
+  7 : 'italy',
+  8 : 'serbia'
+}
+const countryNumber7 = {
+  1 : 'germany',
+  2 : 'russia',
+  3 : 'britain',
+  4 : 'france',
+  5 : 'austria',
+  6 : 'ottoman',
+  7 : 'italy'
+}
+
 class New extends Component {
 
   state = {
@@ -106,7 +137,7 @@ class New extends Component {
   }
 
   saveGameID = async (save_name, save_count, save_username, round) => {
-    const res = await fetch(`${this.props.link}/save/add?save_name=${save_name}&save_count=${save_count}&save_username=${save_username}&round=${round}`)
+    await fetch(`${this.props.link}/save/add?save_name=${save_name}&save_count=${save_count}&save_username=${save_username}&round=${round}`)
   }
 
   add(country) {
@@ -286,10 +317,9 @@ class New extends Component {
 
   gameSettings = async () => {
     if (this.props.login === true) {
-      const gn = document.getElementById("gameName").value
-      const cc = document.getElementById("countryCount").value
-      const g = this.saveGameNameNotSame(gn, this.props.username)
-      console.log(g)
+      const gn = document.getElementById("gameName").value // Grabs User GameName
+      const cc = document.getElementById("countryCount").value // Grabs User selected country
+      const g = this.saveGameNameNotSame(gn, this.props.username) 
       try {
         console.log(g[0]['save_username'])
         this.props.history.push("/new")
@@ -308,7 +338,7 @@ class New extends Component {
             countryCount: cc,
             gameName: gn,
           })
-          console.log(this.props.countryCount)
+
           this.saveGameID(gn, cc, this.props.username, 1)
         }
       }
@@ -360,6 +390,7 @@ class New extends Component {
     console.log(this.state.gamePlayers)
   }
   countryDataSetup = async (save, name, rank, gold, pp) => {
+    console.log(save, name, rank, gold, pp)
     await fetch(`${this.props.link}/current/add?user=${this.props.username}&save=${save}&name=${name}&rank=${rank}&gold=${gold}&pp=${pp}`)
     await fetch(`${this.props.link}/past/add?user=${this.props.username}&save=${save}&name=${name}&rank=${rank}&gold=${gold}&pp=${pp}`)
 
@@ -374,38 +405,29 @@ this.props.changeState({
   // connecting save with data
   gatherDataSetup = async (savename) => {
     if (this.props.countryCount == 7) {
-    await this.countryDataSetup(`${savename}`, 'germany', 1, 20000, this.props.sevenPowerPoints[1])
-    await this.countryDataSetup(`${savename}`, 'russia', 2, 20000, this.props.sevenPowerPoints[2])
-    await this.countryDataSetup(`${savename}`, 'britain', 3, 20000, this.props.sevenPowerPoints[3])
-    await this.countryDataSetup(`${savename}`, 'france', 4, 20000, this.props.sevenPowerPoints[4])
-    await this.countryDataSetup(`${savename}`, 'austria', 5, 20000, this.props.sevenPowerPoints[5])
-    await this.countryDataSetup(`${savename}`, 'ottoman', 6, 20000, this.props.sevenPowerPoints[6])
-    await this.countryDataSetup(`${savename}`, 'italy', 7, 20000, this.props.sevenPowerPoints[7])
-    this.props.changeState({countryOrder : ['germany', 'russia', 'britain', 'france', 'austria', 'ottoman', 'italy']})
+      console.log('7')
+      for (let x = 0; x <= 7; x++) {
+        await this.countryDataSetup(`${savename}`, countryNumber7[x], x, 20000, this.props.sevenPowerPoints[x])
+      }
+    await this.props.changeState({countryOrder : ['germany', 'russia', 'britain', 'france', 'austria', 'ottoman', 'italy']})
     }
+
     else if (this.props.countryCount == 8) {
-      await this.countryDataSetup(`${savename}`, 'germany', 1, 20000, this.props.eightPowerPoints[1])
-      await this.countryDataSetup(`${savename}`, 'russia', 2, 20000, this.props.eightPowerPoints[2])
-      await this.countryDataSetup(`${savename}`, 'britain', 3, 20000, this.props.eightPowerPoints[3])
-      await this.countryDataSetup(`${savename}`, 'france', 4, 20000, this.props.eightPowerPoints[4])
-      await this.countryDataSetup(`${savename}`, 'austria', 5, 20000, this.props.eightPowerPoints[5])
-      await this.countryDataSetup(`${savename}`, 'ottoman', 6, 20000, this.props.eightPowerPoints[6])
-      await this.countryDataSetup(`${savename}`, 'italy', 7, 20000, this.props.eightPowerPoints[7])
-      await this.countryDataSetup(`${savename}`, 'serbia', 8, 20000, this.props.eightPowerPoints[8])
-      this.props.changeState({countryOrder : ['germany', 'russia', 'britain', 'france', 'austria', 'ottoman', 'italy', 'serbia']})
+      console.log('8')
+      for (let x = 0; x <= 8; x++) {
+        await this.countryDataSetup(`${savename}`, countryNumber8[x], x, 20000, this.props.eightPowerPoints[x])
+      }
+      await this.props.changeState({countryOrder : ['germany', 'russia', 'britain', 'france', 'austria', 'ottoman', 'italy', 'serbia']})
     }
+
     else if (this.props.countryCount == 9) {
-      await this.countryDataSetup(`${savename}`, 'germany', 1, 20000, this.props.ninePowerPoints[1])
-      await this.countryDataSetup(`${savename}`, 'russia', 2, 20000, this.props.ninePowerPoints[2])
-      await this.countryDataSetup(`${savename}`, 'britain', 3, 20000, this.props.ninePowerPoints[3])
-      await this.countryDataSetup(`${savename}`, 'france', 4, 20000, this.props.ninePowerPoints[4])
-      await this.countryDataSetup(`${savename}`, 'usa', 5, 20000, this.props.ninePowerPoints[5])
-      await this.countryDataSetup(`${savename}`, 'austria', 6, 20000, this.props.ninePowerPoints[6])
-      await this.countryDataSetup(`${savename}`, 'ottoman', 7, 20000, this.props.ninePowerPoints[7])
-      await this.countryDataSetup(`${savename}`, 'italy', 8, 20000, this.props.ninePowerPoints[8])
-      await this.countryDataSetup(`${savename}`, 'serbia', 9, 20000, this.props.ninePowerPoints[9])
-      this.props.changeState({countryOrder : ['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia']})
+      console.log('9')
+      for (let x = 0; x <= 9; x++) {
+        await this.countryDataSetup(`${savename}`, countryNumber9[x], x, 20000, this.props.ninePowerPoints[x])
+      }
+      await this.props.changeState({countryOrder : ['germany', 'russia', 'britain', 'france', 'usa', 'austria', 'ottoman', 'italy', 'serbia']})
     }
+
     else {
       console.log('Failed to Save')
     }
@@ -415,14 +437,6 @@ this.props.changeState({
     if (this.props.login === true) {
       const g = confirm(`By accepting this you will have created a new game with the settings you set.`)
       if(g) {
-        const rc = this.state.gamePlayers['russia' ].length
-        const bc = this.state.gamePlayers['britain'].length
-        const fc = this.state.gamePlayers['france' ].length
-        const uc = this.state.gamePlayers['usa'    ].length
-        const ac = this.state.gamePlayers['austria'].length
-        const oc = this.state.gamePlayers['ottoman'].length
-        const ic = this.state.gamePlayers['italy'  ].length
-        const sc = this.state.gamePlayers['serbia' ].length
         this.savePlayers('germany')
         this.savePlayers('britain')
         this.savePlayers('france')
@@ -435,7 +449,7 @@ this.props.changeState({
         await this.gatherDataSetup( this.state.gameName)
         this.props.changeState({round : 1})
 
-        this.props.history.push("/game")
+        this.props.history.push("/") // moves user to Home so the user can run the game
         // /players/add?user=Razorz&save=Game%20Test&country=germany&count=2&p1=nate&p2=kit&p3=logi&p4=&p5=&p6=&p7=&p8=&p9=&p10=
       }
     }

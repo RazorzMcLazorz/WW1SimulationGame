@@ -51,7 +51,7 @@ class LoadGame extends Component {
     this.props.changeState({ countryCount : selectedGame.data[0].save_count })
     
     // countryOrder 
-    let tempArray = [...this.props.countryOrder]
+    let tempArray = []
 
     cRound.data.forEach(array => {
       tempArray.push(array['country_name'])
@@ -67,13 +67,10 @@ class LoadGame extends Component {
 
     this.countryDataSetup(countryL)
 
-    // await console.log(cRound.data[0]['country_rank'], cRound.data[1]['country_rank'], cRound.data[3]['country_rank'], cRound.data[4]['country_rank'], cRound.data[5]['country_rank'], cRound.data[6]['country_rank'], cRound.data[7]['country_rank'])
-
     this.props.history.push('/game');
   }
 
   loadGame = async (name, count, num) => {
-    
     this.props.changeState({
       gameName : name,
       countryCount : count,
@@ -108,7 +105,7 @@ class LoadGame extends Component {
 
   loadGames() {
     let mapper = []
-    for (let i = 0; i < this.props.loadGames.length; i++) {
+    for (let i = 0; i < this.props.loadGames.length;  i++) {
       mapper.push(i)
     }
     return (<div>

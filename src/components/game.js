@@ -195,6 +195,7 @@ class Game extends Component {
   }
 
   render() {
+    console.log(this.props.countryOrder)
     return (
       <div>
         <NavBar />

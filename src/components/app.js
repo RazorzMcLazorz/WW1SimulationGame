@@ -20,7 +20,7 @@ class App extends Component {
 
   loadGame = async () => {
     const x = await this.userSavedGames(this.props.username);
-    await this.props.changeState({loadGames : x})
+    await this.props.changeState({loadGames : x, countryOrder : []})
     console.log('Loading an Existing Game')
   }
 
