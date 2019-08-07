@@ -100,24 +100,23 @@ class Results extends Component {
   UpdateDB() {
     // updates database pastArray
 
-    fetch(`${this.props.link}/round/update?user=${this.props.username}&save=${this.props.gameName}&round=${this.props.round + 1}`)
+    fetch(`${this.props.link}/round/update?user=${this.props.username}&save=${this.props.gameName}&round=${this.props.round}`)
 
     this.props.countryOrder.forEach((country, pos) => {
       console.log(country, pos)
-      fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}`)
+      fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos]}`)
     })
     // updates database currentArray
     this.props.countryOrder.forEach((country, pos) => {
       console.log(country, pos)
-      fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
+      fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
     })
     // need to add a database update to the round system here
   }
 
   NextRound () {
      // This Moves the Game onto the next round
-     this.UpdateDB()
-
+     
     this.props.countryOrder.forEach((country, pos) => {
       this.props.changeState({
         ...this.props.countrySetupOrder, [country] : pos + 1
@@ -142,6 +141,8 @@ class Results extends Component {
       // console.log(this.props.countryPastArray)
       
       // PowerpointsRealign
+
+      this.UpdateDB()
     })
     
     const countrysort = {
