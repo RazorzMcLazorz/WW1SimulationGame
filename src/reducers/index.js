@@ -49,8 +49,8 @@ const powerPointsDupe = {
 
 // Redux Store
 const initialState = {
-  // link : 'https://ww1simdatabase.herokuapp.com',
-  link : 'http://localhost:5000',
+  link : 'https://ww1simdatabase.herokuapp.com',
+  // link : 'http://localhost:5000',
   login : false,
   username : '',
   password : '',
