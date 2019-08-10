@@ -101,25 +101,22 @@ class Results extends Component {
     // updates database pastArray
     
     console.log(`${this.props.link}/round/update?user=${this.props.username}&save=${this.props.gameName}&round=${this.props.round}`)
-    const roundChec = await fetch(`${this.props.link}/round/update?user=${this.props.username}&save=${this.props.gameName}&round=${this.props.round}`)
-    const roundCheck = await roundChec.json()
-    roundCheck == tru ?
+    const roundCheck = await fetch(`${this.props.link}/round/update?user=${this.props.username}&save=${this.props.gameName}&round=${this.props.round}`)
+    roundCheck == true ?
     console.log('round updated') :
     console.log(' round failed to update')
 
-    this.props.countryOrder.forEach((country, pos) => {
+    await this.props.countryOrder.forEach((country, pos) => {
       console.log(country, pos)
-      console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos]}`)
-      const checkcurren = await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos]}`)
-      const checkcurrent = await checkcurren.json()
+      console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos]}`)
+      const checkcurrent = fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos]}`)
       checkcurrent == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
     })
     // updates database currentArray
-    this.props.countryOrder.forEach((country, pos) => {
+    await this.props.countryOrder.forEach((country, pos) => {
       console.log(country, pos)
-      console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
-      const checkpas = await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName},&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
-      const checkpast = await checkpas.json()
+      console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
+      const checkpast = fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
       checkpast == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
     })
     // need to add a database update to the round system here
@@ -153,7 +150,7 @@ class Results extends Component {
       
       // PowerpointsRealign
 
-      await this.UpdateDB()
+      this.UpdateDB()
     })
     
     const countrysort = {
