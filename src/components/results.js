@@ -106,23 +106,37 @@ class Results extends Component {
     console.log('round updated') :
     console.log(' round failed to update')
     if (this.props.countryOrder.length == 7) {
+      
+      await this.props.countryOrder.forEach((country, pos) => {
+        console.log(country, pos)
+        console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.sevenPowerPoints[pos + 1]}`)
+        const checkcurrent = fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.sevenPowerPoints[pos + 1]}`)
+        checkcurrent == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
+      })
+      // updates database currentArray
+      await this.props.countryOrder.forEach((country, pos) => {
+        console.log(country, pos)
+        console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
+        const checkpast = fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
+        checkpast == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
+      })
 
       // current
-      await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[0]}&rank=${1}&gold=${this.props.countryGold[this.props.countryOrder[0]]}&pp=${this.props.sevenPowerPoints[1]}`)
-      await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[1]}&rank=${2}&gold=${this.props.countryGold[this.props.countryOrder[1]]}&pp=${this.props.sevenPowerPoints[2]}`)
-      await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[2]}&rank=${3}&gold=${this.props.countryGold[this.props.countryOrder[2]]}&pp=${this.props.sevenPowerPoints[3]}`)
-      await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[3]}&rank=${4}&gold=${this.props.countryGold[this.props.countryOrder[3]]}&pp=${this.props.sevenPowerPoints[4]}`)
-      await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[4]}&rank=${5}&gold=${this.props.countryGold[this.props.countryOrder[4]]}&pp=${this.props.sevenPowerPoints[5]}`)
-      await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[5]}&rank=${6}&gold=${this.props.countryGold[this.props.countryOrder[5]]}&pp=${this.props.sevenPowerPoints[6]}`)
-      await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[6]}&rank=${7}&gold=${this.props.countryGold[this.props.countryOrder[6]]}&pp=${this.props.sevenPowerPoints[7]}`)
+      // await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[0]}&rank=${1}&gold=${this.props.countryGold[this.props.countryOrder[0]]}&pp=${this.props.sevenPowerPoints[1]}`)
+      // await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[1]}&rank=${2}&gold=${this.props.countryGold[this.props.countryOrder[1]]}&pp=${this.props.sevenPowerPoints[2]}`)
+      // await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[2]}&rank=${3}&gold=${this.props.countryGold[this.props.countryOrder[2]]}&pp=${this.props.sevenPowerPoints[3]}`)
+      // await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[3]}&rank=${4}&gold=${this.props.countryGold[this.props.countryOrder[3]]}&pp=${this.props.sevenPowerPoints[4]}`)
+      // await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[4]}&rank=${5}&gold=${this.props.countryGold[this.props.countryOrder[4]]}&pp=${this.props.sevenPowerPoints[5]}`)
+      // await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[5]}&rank=${6}&gold=${this.props.countryGold[this.props.countryOrder[5]]}&pp=${this.props.sevenPowerPoints[6]}`)
+      // await fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[6]}&rank=${7}&gold=${this.props.countryGold[this.props.countryOrder[6]]}&pp=${this.props.sevenPowerPoints[7]}`)
 
-      await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[0]}&rank=${1}&gold=${this.props.countryGold[this.props.countryOrder[0]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[0]]}`)
-      await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[1]}&rank=${2}&gold=${this.props.countryGold[this.props.countryOrder[1]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[1]]}`)
-      await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[2]}&rank=${3}&gold=${this.props.countryGold[this.props.countryOrder[2]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[2]]}`)
-      await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[3]}&rank=${4}&gold=${this.props.countryGold[this.props.countryOrder[3]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[3]]}`)
-      await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[4]}&rank=${5}&gold=${this.props.countryGold[this.props.countryOrder[4]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[4]]}`)
-      await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[5]}&rank=${6}&gold=${this.props.countryGold[this.props.countryOrder[5]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[5]]}`)
-      await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[6]}&rank=${7}&gold=${this.props.countryGold[this.props.countryOrder[6]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[6]]}`)
+      // await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[0]}&rank=${1}&gold=${this.props.countryGold[this.props.countryOrder[0]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[0]]}`)
+      // await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[1]}&rank=${2}&gold=${this.props.countryGold[this.props.countryOrder[1]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[1]]}`)
+      // await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[2]}&rank=${3}&gold=${this.props.countryGold[this.props.countryOrder[2]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[2]]}`)
+      // await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[3]}&rank=${4}&gold=${this.props.countryGold[this.props.countryOrder[3]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[3]]}`)
+      // await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[4]}&rank=${5}&gold=${this.props.countryGold[this.props.countryOrder[4]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[4]]}`)
+      // await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[5]}&rank=${6}&gold=${this.props.countryGold[this.props.countryOrder[5]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[5]]}`)
+      // await fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${this.props.countryOrder[6]}&rank=${7}&gold=${this.props.countryGold[this.props.countryOrder[6]]}&pp=${this.props.countryPowerPoints[this.props.countryOrder[6]]}`)
     }
     else if (this.props.countryOrder.length == 8) {
       await this.props.countryOrder.forEach((country, pos) => {
