@@ -53,6 +53,13 @@ class LoadGame extends Component {
     // countryOrder 
     let tempArray = []
 
+    cRound.data.sort((a, b) => {
+      if (a.country_rank < b.country_rank) return -1;
+      if (a.country_rank > b.country_rank) return 1;
+      return 0;
+    })
+    console.log(cRound.data)
+
     cRound.data.forEach(array => {
       tempArray.push(array['country_name'])
     })
