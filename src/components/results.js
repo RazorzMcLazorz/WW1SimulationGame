@@ -105,51 +105,68 @@ class Results extends Component {
     roundCheck == true ?
     console.log('round updated') :
     console.log(' round failed to update')
-    if (this.props.countryOrder.length == 7) {
-      await this.props.countryOrder.forEach((country, pos) => {
-        console.log(country, pos)
-        console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.sevenPowerPoints[pos + 1]}`)
-        const checkcurrent = fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.sevenPowerPoints[pos + 1]}`)
-        checkcurrent == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
-      })
-      // updates database currentArray
-      await this.props.countryOrder.forEach((country, pos) => {
-        console.log(country, pos)
-        console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
-        const checkpast = fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
-        checkpast == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
-      })
-    }
-    else if (this.props.countryOrder.length == 8) {
-      await this.props.countryOrder.forEach((country, pos) => {
-        console.log(country, pos)
-        console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.eightPowerPoints[pos + 1]}`)
-        const checkcurrent = fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.eightPowerPoints[pos + 1]}`)
-        checkcurrent == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
-      })
-      // updates database currentArray
-      await this.props.countryOrder.forEach((country, pos) => {
-        console.log(country, pos)
-        console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
-        const checkpast = fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
-        checkpast == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
-      })
-    }
-    else if (this.props.countryOrder.length == 9) {
-      await this.props.countryOrder.forEach((country, pos) => {
-        console.log(country, pos)
-        console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}`)
-        const checkcurrent = fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}`)
-        checkcurrent == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
-      })
-      // updates database currentArray
-      await this.props.countryOrder.forEach((country, pos) => {
-        console.log(country, pos)
-        console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
-        const checkpast = fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&name=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.countryPowerPoints[country]}`)
-        checkpast == true ? `country ${country} updated in pos ${pos}` : `country ${country} failed to update pos ${pos}`
-      })
-    }
+
+    // http://localhost:5000/current/update?user=Razorz&save=Fgchu&country=Germany&gold=22&rank=4
+if (this.props.countryOrder.length == 7) {
+    await this.props.countryOrder.forEach((country, pos) => {
+      console.log(country, pos)
+      console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.sevenPowerPoints[pos + 1]}`)
+      
+      const checkcurrent = fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.sevenPowerPoints[pos + 1]}`)
+      console.log(checkcurrent)
+    })
+
+    // http://localhost:5000/past/update?user=Razorz&save=test&country=Germany&gold=22&rank=4
+
+    // updates database currentArray
+    await this.props.countryOrder.forEach((country, pos) => {
+      console.log(country, pos)
+      console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.sevenPowerPoints[pos + 1]}`)
+      const checkpast = fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.sevenPowerPoints[pos + 1]}`)
+      console.log(checkpast)
+    })
+  }
+  else if (this.props.countryOrder.length == 8) {
+    await this.props.countryOrder.forEach((country, pos) => {
+      console.log(country, pos)
+      console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.eightPowerPoints[pos + 1]}`)
+      
+      const checkcurrent = fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.eightPowerPoints[pos + 1]}`)
+      console.log(checkcurrent)
+    })
+
+    // http://localhost:5000/past/update?user=Razorz&save=test&country=Germany&gold=22&rank=4
+
+    // updates database currentArray
+    await this.props.countryOrder.forEach((country, pos) => {
+      console.log(country, pos)
+      console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.eightPowerPoints[pos + 1]}`)
+      const checkpast = fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.eightPowerPoints[pos + 1]}`)
+      console.log(checkpast)
+    })
+  }
+  else if (this.props.countryOrder.length == 9) {
+    await this.props.countryOrder.forEach((country, pos) => {
+      console.log(country, pos)
+      console.log(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.ninePowerPoints[pos + 1]}`)
+      
+      const checkcurrent = fetch(`${this.props.link}/current/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.ninePowerPoints[pos + 1]}`)
+      console.log(checkcurrent)
+    })
+
+    // http://localhost:5000/past/update?user=Razorz&save=test&country=Germany&gold=22&rank=4
+
+    // updates database currentArray
+    await this.props.countryOrder.forEach((country, pos) => {
+      console.log(country, pos)
+      console.log(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&gold=${this.props.countryGold[country]}&rank=${pos + 1}&pp=${this.props.ninePowerPoints[pos + 1]}`)
+      const checkpast = fetch(`${this.props.link}/past/update?user=${this.props.username}&save=${this.props.gameName}&country=${country}&rank=${pos + 1}&gold=${this.props.countryGold[country]}&pp=${this.props.ninePowerPoints[pos + 1]}`)
+      console.log(checkpast)
+    })
+  }
+  else {console.log('FAIL')}
+
+
     // need to add a database update to the round system here
   }
 
