@@ -35,6 +35,8 @@ class LoadGame extends Component {
   countrySetupOrderLoad = async (num, name, count) => {
     const rres = await fetch(`${this.props.link}/current/grab?user=${this.props.username}&name=${name}`)
     const cRound = await rres.json()
+    // const pres = await fetch(`${this.props.link}/past/grab?user=${this.props.username}&name=${name}`)
+    // const pRound = await pres.json()
     const ores = await fetch(`${this.props.link}/save/games?username=${this.props.username}`)
     const cOrder = await ores.json()
     const save = await fetch(`${this.props.link}/save/selectgame?username=${this.props.username}&name=${name}`)
@@ -52,6 +54,13 @@ class LoadGame extends Component {
     
     // countryOrder 
     let tempArray = []
+
+    // pRound.data.sort((a, b) => {
+    //   if (a.country_rank < b.country_rank) return -1;
+    //   if (a.country_rank > b.country_rank) return 1;
+    //   return 0;
+    // })
+    // console.log(pRound.data)
 
     cRound.data.sort((a, b) => {
       if (a.country_rank < b.country_rank) return -1;
