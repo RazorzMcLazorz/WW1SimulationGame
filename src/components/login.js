@@ -83,7 +83,19 @@ class Login extends Component {
         {this.state.loginSuccess === false ?
         <div>
           Error Logging in Please Retry
-        </div> : '' }
+        </div> : null }
+        <div>
+          If you are wanting to check how this works use this login info
+        </div>
+        <div>
+          UserName: test
+        </div>
+        <div>
+          Password: test
+        </div>
+        <div>
+          this may take a minute to login as im using a seperate server to ping to mysql database and it has to boot up if it hasnt been used in like the last 30 min same wiht this server also
+        </div>
       <Footer />
       </div>
     );
