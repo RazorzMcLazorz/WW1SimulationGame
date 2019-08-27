@@ -127,6 +127,9 @@ class LoadGame extends Component {
       mapper.push(i)
     }
     return (<div>
+    {
+      mapper.length > 0 ?
+    <div>
       {mapper.map((game, pos) =>
       <div key={pos}>
         <div>
@@ -134,6 +137,11 @@ class LoadGame extends Component {
         </div>
       </div>)
       }
+    </div> :
+    <div>
+      No Games loaded please click your name in the top right of the page to return to main menu and create a new game
+    </div>
+    }
     </div>)
   }
 

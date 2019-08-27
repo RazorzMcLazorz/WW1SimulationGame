@@ -26,7 +26,7 @@ class NavBar extends Component {
             {ContainedButtons(`${this.props.lname}`)}
           </Link> :
           <Link to='/login' className="buttons" id="accountButton">
-            {ContainedButtons('Guest')}
+            {ContainedButtons('Login')}
           </Link>}
       </div>
     );
