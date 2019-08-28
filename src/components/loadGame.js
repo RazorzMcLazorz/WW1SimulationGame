@@ -54,6 +54,7 @@ class LoadGame extends Component {
     
     // countryOrder 
     let tempArray = []
+    let pasttempArray = []
 
     pRound.data.sort((a, b) => {
       if (a.country_rank < b.country_rank) return -1;
@@ -61,6 +62,10 @@ class LoadGame extends Component {
       return 0;
     })
     console.log(pRound.data)
+
+    pRound.data.forEach(array => {
+      pasttempArray.push(array['country_name'])
+    })
 
     cRound.data.sort((a, b) => {
       if (a.country_rank < b.country_rank) return -1;
@@ -72,8 +77,21 @@ class LoadGame extends Component {
     cRound.data.forEach(array => {
       tempArray.push(array['country_name'])
     })
-
+    console.log(pasttempArray)
+    
     this.props.changeState({ countryOrder: tempArray })
+    this.props.changeState({ countryPastArray: pasttempArray })
+
+    let tempCountryPast = this.props.countryPastArray
+
+    pasttempArray.forEach((array, pos) => {
+      tempCountryPast[array] = pos + 1
+    })
+
+    this.props.changeState({ countryPast: tempCountryPast })
+
+    console.log(this.props.countryPast)
+    console.log(this.props.countryPastArray)
 
     if (this.props.countryOrder.length > 9){this.props.history('/'); this.props.changeState({ countryOrder: [] })}
 
